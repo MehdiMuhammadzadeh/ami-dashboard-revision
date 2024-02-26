@@ -40,10 +40,10 @@ const Login = () => {
           justifyContent={'space-around'}
         >
           <Grid item sx={{fontSize:{xs:'0.8rem',sm:'1rem'}}}>
-            <Link style={{ textDecoration:'none', color:'#1d6ee9'}}>Dont have an account!</Link>
+            <Link to='/signup' style={{ textDecoration:'none', color:'#1d6ee9'}}>Dont have an account!</Link>
           </Grid>
           <Grid item sx={{fontSize:{xs:'0.8rem',sm:'1rem'}}}>
-            <Link style={{ textDecoration:'none', color:'#1d6ee9'}}>Forget Password!</Link> 
+            <Link to='/forget-password' style={{ textDecoration:'none', color:'#1d6ee9'}}>Forget Password!</Link> 
           </Grid>
         </Grid> 
       </RegisterContainer>

@@ -4,6 +4,7 @@ import NotFound from '../pages/NotFound';
 import Login from '../pages/Login';
 import Signup from '../pages/Signup';
 import Home from '../pages/Home';
+import ForgetPassword from '../pages/ForgetPassword';
 
 const Router = () => {
   return (
@@ -15,6 +16,7 @@ const Router = () => {
 
         <Route path='/login' element={<Login/>} />
         <Route path='/signup' element={<Signup/>} />
+        <Route path='/forget-password' element={<ForgetPassword/>} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

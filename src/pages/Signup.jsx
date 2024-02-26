@@ -52,7 +52,7 @@ const Signup = () => {
         >
             <SignupIcons />
           <Grid item sx={{ fontSize: { xs: "0.8rem", sm: "1rem" } }} xs={12}>
-            <Link style={{ textDecoration: "none", color: "#1d6ee9" }}>
+            <Link to='/login' style={{ textDecoration: "none", color: "#1d6ee9" }}>
               Already have an account!
             </Link>
           </Grid>
