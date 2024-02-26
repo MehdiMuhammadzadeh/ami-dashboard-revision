@@ -5,6 +5,7 @@ import { Grid, Typography } from '@mui/material'
 import { StyledButton } from '../components/button/Button.styles'
 import { StyledInput } from '../components/input/Input.styles'
 import { Link } from 'react-router-dom'
+import { StyledLink } from '../components/link/Link.styles'
 
 const ForgetPassword = () => {
   return (
@@ -27,7 +28,7 @@ const ForgetPassword = () => {
         </Grid>
       </Grid>
       <Grid item xs={11} sx={{ marginTop: { xs: 2, md: 3 } }}>
-        <StyledButton style={{ borderRadius: 3 }}>Update Password</StyledButton>
+        <StyledButton variant="radius">Update Password</StyledButton>
       </Grid>
       <Grid
         item
@@ -37,7 +38,7 @@ const ForgetPassword = () => {
         justifyContent={'space-around'}
       >
         <Grid item sx={{fontSize:{xs:'0.8rem',sm:'1rem'}}}>
-          <Link to={'/login'} style={{ textDecoration:'none', color:'#1d6ee9'}}>Back to Login!</Link>
+          <StyledLink to='/login' variant="linkhover">Back to Login!</StyledLink>
         </Grid>
       </Grid> 
     </RegisterContainer>

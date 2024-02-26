@@ -5,11 +5,17 @@ import RegisterContainer from "../components/registerContainer/RegisterContainer
 import { StyledInput } from "../components/input/Input.styles";
 import { StyledButton } from "../components/button/Button.styles";
 import { Link } from "react-router-dom";
+import { StyledLink } from "../components/link/Link.styles";
 
 const Login = () => {
   return (
     <Wrapper alignContent={"center"} justifyContent={"center"}>
-      <RegisterContainer sx={{ width: {xs:320, sm:350, md: 380 }, height: {xs:360,sm:390, md: 430 } }}>
+      <RegisterContainer
+        sx={{
+          width: { xs: 320, sm: 350, md: 380 },
+          height: { xs: 360, sm: 390, md: 430 },
+        }}
+      >
         <Grid item sx={{ marginTop: { xs: 2, sm: 3, md: 5 } }}>
           <Typography variant="h4" component={"h1"} style={{ color: "#fff" }}>
             Login
@@ -30,22 +36,26 @@ const Login = () => {
           </Grid>
         </Grid>
         <Grid item xs={11} sx={{ marginTop: { xs: 3, sm: 4, md: 5 } }}>
-          <StyledButton style={{ borderRadius: 3 }}>Login</StyledButton>
+          <StyledButton variant="radius">Login</StyledButton>
         </Grid>
         <Grid
           item
           container
-          sx={{marginTop: { xs: 2, sm: 3, md: 4 } }}
+          sx={{ marginTop: { xs: 2, sm: 3, md: 4 } }}
           spacing={1}
-          justifyContent={'space-around'}
+          justifyContent={"space-around"}
         >
-          <Grid item sx={{fontSize:{xs:'0.8rem',sm:'1rem'}}}>
-            <Link to='/signup' style={{ textDecoration:'none', color:'#1d6ee9'}}>Dont have an account!</Link>
+          <Grid item sx={{ fontSize: { xs: "0.8rem", sm: "1rem" } }}>
+            <StyledLink to="/signup" variant="linkhover">
+              Dont have an account!
+            </StyledLink>
           </Grid>
-          <Grid item sx={{fontSize:{xs:'0.8rem',sm:'1rem'}}}>
-            <Link to='/forget-password' style={{ textDecoration:'none', color:'#1d6ee9'}}>Forget Password!</Link> 
+          <Grid item sx={{ fontSize: { xs: "0.8rem", sm: "1rem" } }}>
+            <StyledLink to="/forget-password" variant="linkhover">
+              Forget Password!
+            </StyledLink>
           </Grid>
-        </Grid> 
+        </Grid>
       </RegisterContainer>
     </Wrapper>
   );

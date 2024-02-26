@@ -2,9 +2,14 @@ import { Box, Grid, Paper, Typography } from "@mui/material";
 import React from "react";
 import StyledButton from "../components/button/Button";
 import Wrapper from "../components/wrapper/Wrapper";
+import { useNavigate } from "react-router-dom";
+import { StyledLink } from "../components/link/StyledLink";
 // import StyledBox from "../components/boxContainer/StyledBox";
 
 const Home = () => {
+
+  const navigate = useNavigate();
+
   return (
 
     <Wrapper justifyItems={'center'} alignItems={"center"} alignContent={'flex-start'} justifyContent={'center'}>
@@ -13,10 +18,12 @@ const Home = () => {
       </Grid>
       <Grid item container alignContent={'center'}  justifyContent={'center'} spacing={1.2}>
         <Grid item sx={{ backgroundColor:'transparent'}} xs={10} sm={8} md={3} lg={2}>
-          <StyledButton sx={{width:{xs:"35px"}}}>Login</StyledButton>
+          <StyledButton onClick={()=>{navigate('/login')}} variant='register' sx={{width:{xs:"35px"}}}>Login</StyledButton>
         </Grid>
         <Grid item sx={{ backgroundColor:'transparent'}} xs={10} sm={8} md={3} lg={2}>
-        <StyledButton>Signup</StyledButton>
+        <StyledButton onClick={()=>{navigate('/signup')}} variant='register'>Signup</StyledButton>
+        </Grid>
+        <Grid item>
         </Grid>
       </Grid>
     </Wrapper>

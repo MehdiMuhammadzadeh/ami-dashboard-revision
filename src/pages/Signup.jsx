@@ -6,6 +6,7 @@ import Wrapper from "../components/wrapper/Wrapper";
 import { StyledButton } from "../components/button/Button.styles";
 import { Link } from "react-router-dom";
 import SignupIcons from "../components/icons/SignupIcons";
+import { StyledLink } from "../components/link/Link.styles";
 
 
 const Signup = () => {
@@ -40,7 +41,7 @@ const Signup = () => {
           </Grid>
         </Grid>
         <Grid item xs={11} sx={{ marginTop: { xs: 3, sm: 4, md: 5 } }}>
-          <StyledButton style={{ borderRadius: 3 }}>Signup</StyledButton>
+          <StyledButton variant="radius">Signup</StyledButton>
         </Grid>
         <Grid
           item
@@ -52,9 +53,7 @@ const Signup = () => {
         >
             <SignupIcons />
           <Grid item sx={{ fontSize: { xs: "0.8rem", sm: "1rem" } }} xs={12}>
-            <Link to='/login' style={{ textDecoration: "none", color: "#1d6ee9" }}>
-              Already have an account!
-            </Link>
+            <StyledLink to='/login' variant="linkhover">Already have an account!</StyledLink>
           </Grid>
         </Grid>
       </RegisterContainer>
