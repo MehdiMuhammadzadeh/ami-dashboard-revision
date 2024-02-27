@@ -13,7 +13,9 @@ export const StyledButton = styled.button`
   cursor: pointer;
   transition: all 0.5s ease-out;
   &:hover {
-  background-color: ${(props)=> props.variant === 'radius' ? ' #474790' : '#fff'};
-  color: ${(props)=> props.variant === 'radius' ? ' #fff' : '#000'};
+  /* background-color: ${(props)=> (props.variant === 'radius') ? ' #474790' : '#fff'};
+  color: ${(props)=> props.variant === 'radius' ? ' #fff' : '#000'}; */
+  background-color: ${(props)=>props.buttons ==="buttons" ? "#474790" : "#fff"};
+  color: ${(props)=> props.buttons === 'buttons' ?"#fff" : "#000"}; 
   }
 `;

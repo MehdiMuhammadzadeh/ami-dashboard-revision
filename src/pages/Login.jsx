@@ -36,7 +36,7 @@ const Login = () => {
           </Grid>
         </Grid>
         <Grid item xs={11} sx={{ marginTop: { xs: 3, sm: 4, md: 5 } }}>
-          <StyledButton variant="radius">Login</StyledButton>
+          <StyledButton variant="radius" buttons="buttons">Login</StyledButton>
         </Grid>
         <Grid
           item

@@ -28,7 +28,7 @@ const ForgetPassword = () => {
         </Grid>
       </Grid>
       <Grid item xs={11} sx={{ marginTop: { xs: 2, md: 3 } }}>
-        <StyledButton variant="radius">Update Password</StyledButton>
+        <StyledButton variant="radius" buttons="buttons">Update Password</StyledButton>
       </Grid>
       <Grid
         item

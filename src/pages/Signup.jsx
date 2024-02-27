@@ -41,7 +41,7 @@ const Signup = () => {
           </Grid>
         </Grid>
         <Grid item xs={11} sx={{ marginTop: { xs: 3, sm: 4, md: 5 } }}>
-          <StyledButton variant="radius">Signup</StyledButton>
+          <StyledButton variant="radius" buttons="buttons">Signup</StyledButton>
         </Grid>
         <Grid
           item
