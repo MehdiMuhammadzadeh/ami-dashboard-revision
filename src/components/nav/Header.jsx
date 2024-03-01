@@ -28,7 +28,7 @@ const Header = () => {
           style={{ color: "#fff", cursor: "pointer" }}
           onClick={() => navigate("/")}
         >
-          Dashboard
+          Home
         </Typography>
       </Grid>
       <Grid item>

@@ -1,8 +1,12 @@
+import { Grid } from '@mui/material'
 import React from 'react'
+import Wrapper from '../components/wrapper/Wrapper'
 
 const Dashboard = () => {
   return (
-    <div>Dashboard</div>
+    <Grid container sx={{height:'', backgroundColor:'lightgrey'}}>
+
+    </Grid>
   )
 }
 
