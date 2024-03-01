@@ -4,10 +4,13 @@ import { Grid, Paper, Typography } from "@mui/material";
 import RegisterContainer from "../components/registerContainer/RegisterContainer";
 import { StyledInput } from "../components/input/Input.styles";
 import { StyledButton } from "../components/button/Button.styles";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { StyledLink } from "../components/link/Link.styles";
 
 const Login = () => {
+
+  const navigate = useNavigate()
+
   return (
     <Wrapper alignContent={"center"} justifyContent={"center"}>
       <RegisterContainer
@@ -36,7 +39,7 @@ const Login = () => {
           </Grid>
         </Grid>
         <Grid item xs={11} sx={{ marginTop: { xs: 3, sm: 4, md: 5 } }}>
-          <StyledButton variant="radius" buttons="buttons">Login</StyledButton>
+          <StyledButton  onClick={()=>{navigate('/dashboard')}} variant="radius" buttons="buttons">Login</StyledButton>
         </Grid>
         <Grid
           item
