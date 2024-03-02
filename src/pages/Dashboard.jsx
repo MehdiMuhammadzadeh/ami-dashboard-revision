@@ -10,16 +10,15 @@ const Dashboard = () => {
 
   return (
     <Grid container sx={{height:'', backgroundColor:'#353455'}}>
-    <Grid container spacing={1} overflowY="auto" flex={1} height="100%">
-      {arr.map((item) => {
+    <Grid container spacing={1} flex={1} height="100%">
+      {arr.map((item, index) => {
         return (
-          <>
-            <Grid item xs={12} md={6} lg={3}>
+         
+            <Grid key={index} item xs={12} md={6} lg={3}>
               <Box bgcolor="#353455" width="100%" height="250px">
                 
               </Box>
             </Grid>
-          </>
         );
       })}
     </Grid>

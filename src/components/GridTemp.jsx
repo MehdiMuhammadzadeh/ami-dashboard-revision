@@ -6,7 +6,7 @@ export const GridTemp = () => {
   ];
 
   return (
-    <Grid container spacing={1} overflowY="auto" flex={1} height="100%">
+    <Grid container spacing={1} flex={1} height="100%">
       {arr.map((item) => {
         return (
           <>
