@@ -7,9 +7,6 @@ import NotFound from "../pages/NotFound";
 import Signup from "../pages/Signup";
 import Login from "../pages/Login";
 import ForgetPassword from "../pages/ForgetPassword";
-import Gooz from "../pages/Gooz";
-import Test1 from "../pages/Test1";
-
 const Router = () => {
   return (
     <>
