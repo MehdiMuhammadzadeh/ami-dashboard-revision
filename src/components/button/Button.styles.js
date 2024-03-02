@@ -15,7 +15,9 @@ export const StyledButton = styled.button`
   &:hover {
   /* background-color: ${(props)=> (props.variant === 'radius') ? ' #474790' : '#fff'};
   color: ${(props)=> props.variant === 'radius' ? ' #fff' : '#000'}; */
-  background-color: ${(props)=>props.buttons ==="buttons" ? "#474790" : "#fff"};
+  background-color: ${(props)=>props.buttons ==="buttons" ? "#353455" : "#fff"};
   color: ${(props)=> props.buttons === 'buttons' ?"#fff" : "#000"}; 
   }
 `;
+
+// background-color: #353455;
