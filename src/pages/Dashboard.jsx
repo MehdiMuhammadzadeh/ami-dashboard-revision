@@ -21,7 +21,7 @@ const Dashboard = () => {
 
   return (
     <Grid container sx={{ height: "", backgroundColor: "#353455" }}>
-      <Grid container spacing={1} flex={1} height="100%">
+      <Grid container spacing={4} flex={1} height="100%">
         {arr.map((item, index) => {
           return (
             <Grid key={index} item xs={12} md={6} lg={3}>

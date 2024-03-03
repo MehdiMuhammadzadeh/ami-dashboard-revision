@@ -1,21 +1,19 @@
 import React from "react";
 import { Grid } from "@mui/material";
 import Note from "./Note";
+import Container from "../common/Container";
+
 
 const MyNotes = () => {
   const notes = [1, 2, 3, 4, 5];
   return (
-    <Grid
-      component={"div"}
-      container 
-      gap={2}
-      sx={{ padding: "10px" }}
-    >
+    <Container>
       {notes.map((note, index) => {
         return <Note key={index} />;
       })}
-    </Grid>
+    </Container>
   );
 };
 
 export default MyNotes;
+
