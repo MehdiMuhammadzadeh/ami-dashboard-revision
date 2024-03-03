@@ -1,6 +1,7 @@
 import { Grid } from "@mui/material";
 import React from "react";
 import { StyledText } from "../text/Text.styles";
+import SubContainer from "../common/SubContainer";
 
 const Note = () => {
   return (
@@ -8,18 +9,7 @@ const Note = () => {
       <Grid item xs={12} sx={{ marginBottom: 1 }}>
         <StyledText>02/10/2023</StyledText>
       </Grid>
-      <Grid
-        item
-        container
-        xs={12}
-        sx={{
-          backgroundColor: "#1c2d3a",
-          color: "#fff",
-          borderRadius: 2,
-          padding: 2,
-          wordBreak: "break-all",
-        }}
-      >
+      <SubContainer>
         <Grid item component={"div"} xs={12}>
           <StyledText variant="textTitle">Note:</StyledText>
         </Grid>
@@ -80,7 +70,7 @@ const Note = () => {
             similique est libero modi facere magnam eius nostrum.
           </StyledText>
         </Grid>
-      </Grid>
+      </SubContainer>
     </Grid>
   );
 };

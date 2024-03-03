@@ -41,7 +41,7 @@ const Layout = () => {
   const drawer = (
     <div>
       <Toolbar style={{ backgroundColor: "#182631" }}>
-        <StyledText variant="link" onClick={() => navigate("/")}>
+        <StyledText variant="textTitle" onClick={() => navigate("/")}>
           AMI Dashboard
         </StyledText>
       </Toolbar>

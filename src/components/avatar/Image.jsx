@@ -6,8 +6,8 @@ const Image = ({src}) => {
     <Box
     component="img"
     sx={{
-      height: 75,
-      width: 75,
+      height: 60,
+      width: 60,
       maxHeight: { xs: 75, md: 167 },
       maxWidth: { xs: 75, md: 250 },
       borderRadius: "50%",
