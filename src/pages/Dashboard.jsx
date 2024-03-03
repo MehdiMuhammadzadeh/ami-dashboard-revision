@@ -1,8 +1,10 @@
 import React from "react";
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import Divider from "@mui/material/Divider";
 import DeleteIcon from "@mui/icons-material/Delete";
 import NewspaperSharpIcon from "@mui/icons-material/NewspaperSharp";
+import { StyledText } from "../components/text/Text.styles";
+import Image from "../components/avatar/Image";
 const Dashboard = () => {
   const arr = [
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,
@@ -34,31 +36,12 @@ const Dashboard = () => {
                     }}
                   >
                     <Grid item sx={{ marginRight: 1 }}>
-                      <Box
-                        component="img"
-                        sx={{
-                          height: 75,
-                          width: 75,
-                          maxHeight: { xs: 75, md: 167 },
-                          maxWidth: { xs: 75, md: 250 },
-                          borderRadius: "50%",
-                          boxShadow: "1px 2px 3px rgba(19, 19, 19, 0.5)",
-                        }}
-                        alt="user avatar"
-                        src="https://lh3.googleusercontent.com/a/ACg8ocLQrFGxSD3dqAXlVef8xr70Tb3dIcXE8iCJuhe0l-rR6Q=s317-c-no"
-                      />
+                      <Image src={'https://lh3.googleusercontent.com/a/ACg8ocLQrFGxSD3dqAXlVef8xr70Tb3dIcXE8iCJuhe0l-rR6Q=s317-c-no'}/>
                     </Grid>
                     <Grid item>
-                      <Typography
-                        sx={{
-                          fontSize: { xs: "1rem", md: "1rem" },
-                          fontWeight: { md: "bold" },
-                          color: "#fff",
-                        }}
-                        component={"h1"}
-                      >
-                        Mehdi Mohammadzadeh
-                      </Typography>
+                      <StyledText variant="textTitle">
+                      Mehdi Mohammadzadeh
+                      </StyledText>
                       <Grid
                         item
                         sx={{
@@ -66,10 +49,11 @@ const Dashboard = () => {
                           justifyContent: "space-between",
                         }}
                       >
-                        <Box component={"div"} style={{ color: "#bbbbbb" }}>
+                        {/* <Box component={"div"} style={{ color: "#bbbbbb" }}>
                           Last Entry:
-                        </Box>
-                        <Box component={"div"} style={{ color: "#f5b869" }}>
+                        </Box> */}
+                        <StyledText>Last Entry:</StyledText>
+                        <Box component={"div"} style={{ color:"#fff" }}>
                           22/02/2024
                         </Box>
                       </Grid>
@@ -82,7 +66,7 @@ const Dashboard = () => {
                       margin: "auto",
                     }}
                   />
-                  <Grid item xs={7} sm={8} md={8.5} sx={{ paddingBlock: "0.8rem" }}>
+                  <Grid item xs={7} sm={8} md={9} sx={{ paddingBlock: "0.8rem" }}>
                     <Grid
                       item
                       sx={{

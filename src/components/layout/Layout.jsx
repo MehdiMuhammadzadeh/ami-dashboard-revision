@@ -14,11 +14,12 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import MailIcon from "@mui/icons-material/Mail";
 import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
 import { Collapse, Grid } from "@mui/material";
 import StyledLink from "../link/StyledLink";
 import HomeSharpIcon from "@mui/icons-material/HomeSharp";
 import LogoutSharpIcon from "@mui/icons-material/LogoutSharp";
+import { StyledText } from "../text/Text.styles";
+import Image from "../avatar/Image";
 
 const drawerWidth = 250;
 
@@ -40,15 +41,9 @@ const Layout = () => {
   const drawer = (
     <div>
       <Toolbar style={{ backgroundColor: "#182631" }}>
-        <Typography
-          style={{ cursor: "pointer" }}
-          variant="h6"
-          noWrap
-          component="div"
-          onClick={() => navigate("/")}
-        >
+        <StyledText variant="link" onClick={() => navigate("/")}>
           AMI Dashboard
-        </Typography>
+        </StyledText>
       </Toolbar>
       <Divider />
       <Grid
@@ -61,17 +56,10 @@ const Layout = () => {
           xs={12}
           sx={{ display: "flex", paddingTop: 1, paddingLeft: "10px" }}
         >
-          <Box
-            component="img"
-            sx={{
-              height: 75,
-              width: 75,
-              maxHeight: { xs: 75, md: 167 },
-              maxWidth: { xs: 75, md: 250 },
-              borderRadius: "50%",
-            }}
-            alt="user avatar"
-            src="https://lh3.googleusercontent.com/a/ACg8ocLQrFGxSD3dqAXlVef8xr70Tb3dIcXE8iCJuhe0l-rR6Q=s317-c-no"
+          <Image
+            src={
+              "https://lh3.googleusercontent.com/a/ACg8ocLQrFGxSD3dqAXlVef8xr70Tb3dIcXE8iCJuhe0l-rR6Q=s317-c-no"
+            }
           />
         </Grid>
         <Grid
@@ -79,12 +67,8 @@ const Layout = () => {
           xs={12}
           sx={{ textAlign: "left", paddingLeft: "10px", paddingBottom: "5px" }}
         >
-          <Typography variant="h6" component={"h1"}>
-            Mehdi Mohammadzadeh
-          </Typography>
-          <Typography style={{ fontSize: "0.8rem" }} component={"h1"}>
-            mehdi.mrpr93@gmail.com
-          </Typography>
+          <StyledText variant="textTitle">Mehdi Mohammadzadeh</StyledText>
+          <StyledText component={"p"}>mehdi.mrpr93@gmail.com</StyledText>
         </Grid>
       </Grid>
       <Divider style={{ backgroundColor: "#fff" }} />
@@ -104,16 +88,7 @@ const Layout = () => {
         </ListItem>
       </List>
       <Collapse in={isNavActive} paddingLeft={5}>
-        <List
-          sx={
-            {
-              // position: "absolute",
-              // top: 0,
-              // border: "2px solid blue",
-              // left: "100%",
-            }
-          }
-        >
+        <List>
           <ListItem>
             <ListItemButton>
               <ListItemText primary={"Statistics"} />
