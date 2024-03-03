@@ -1,12 +1,13 @@
 import { Grid } from '@mui/material'
 import React from 'react'
 
-const SubContainer = ({children}) => {
+const SubContainer = ({children, xs,gap}) => {
   return (
     <Grid
+    gap={gap}
     item
     container
-    xs={12}
+    xs={xs}
     sx={{
       backgroundColor: "#1c2d3a",
       color: "#fff",

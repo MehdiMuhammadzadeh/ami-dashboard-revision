@@ -9,7 +9,7 @@ const Note = () => {
       <Grid item xs={12} sx={{ marginBottom: 1 }}>
         <StyledText>02/10/2023</StyledText>
       </Grid>
-      <SubContainer>
+      <SubContainer xs={12}>
         <Grid item component={"div"} xs={12}>
           <StyledText variant="textTitle">Note:</StyledText>
         </Grid>
