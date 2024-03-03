@@ -7,6 +7,7 @@ import NotFound from "../pages/NotFound";
 import Signup from "../pages/Signup";
 import Login from "../pages/Login";
 import ForgetPassword from "../pages/ForgetPassword";
+import MyNotes from "../components/myNotes/MyNotes";
 const Router = () => {
   return (
     <>
@@ -16,6 +17,7 @@ const Router = () => {
        <Route path="/" element={<Layout />}>
         <Route path="users" element={<span>gkldfjgkldjgfkl</span>} />
         <Route path="dashboard" element={<Dashboard />} />
+        <Route path="my-notes" element={<MyNotes />} />
 
        </Route>
 
