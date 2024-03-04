@@ -81,13 +81,10 @@ const Layout = () => {
         onClick={() => setIsNavActive(!isNavActive)}
       >
         <ListItem>
-          <ListItemButton>
-            <ListItemIcon></ListItemIcon>
-            <ListItemText primary={"Patients"} />
-          </ListItemButton>
+            <ListItemText primary={"Patients"}  />
         </ListItem>
       </List>
-      <Collapse in={isNavActive} paddingLeft={5}>
+      <Collapse in={isNavActive}>
         <List>
           <ListItem>
             <ListItemButton>
@@ -109,21 +106,21 @@ const Layout = () => {
           </ListItem>
         </List>
       </Collapse>
+      {/* "Tickets", "Home", "Logout" */}
       <List>
-        {["Tickets", "Home", "Logout"].map((text, index) => (
+        {[{title: 'Tickets' , to:'tickets'},{title: 'Home' , to:'/dashboard'},{title: 'Logout' , to:''},].map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton>
-              <ListItemIcon>
+              {/* <ListItemIcon>
                 {index % 2 === 0 ? <LogoutSharpIcon /> : <HomeSharpIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
+              </ListItemIcon> */}
+              <ListItemText primary={text.title} onClick={()=> navigate(text.to)}/>
             </ListItemButton>
           </ListItem>
         ))}
       </List>
     </div>
   );
-
   // Remove this const when copying and pasting into your project.
   //   const container = window !== undefined ? () => window().document.body : undefined;
 
