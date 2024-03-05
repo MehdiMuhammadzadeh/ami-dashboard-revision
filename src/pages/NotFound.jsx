@@ -1,9 +1,8 @@
-import React from 'react'
+import React from "react";
+import Container from "../components/common/Container";
 
 const NotFound = () => {
-  return (
-    <div>NotFound</div>
-  )
-}
+  return <>Not Found</>;
+};
 
-export default NotFound
+export default NotFound;

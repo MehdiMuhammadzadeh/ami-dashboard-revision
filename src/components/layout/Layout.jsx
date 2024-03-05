@@ -28,11 +28,11 @@ const Layout = () => {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [isClosing, setIsClosing] = React.useState(false);
   const [isNavActive, setIsNavActive] = React.useState(false);
-  const [test, isTest] = React.useState([
-    { title: "Statistics", to: "statistics", isSelected: false },
-    {title: "PatientDiary",to: "patient-diary",isSelected: false},
-    { title: "My Notes", to: "my-notes", isSelected: false },
-  ]);
+  const test= [
+    { title: "Statistics", to: "statistics"},
+    {title: "PatientDiary",to: "patient-diary"},
+    { title: "My Notes", to: "my-notes"},
+  ];
   const navigate = useNavigate();
 
   const handleDrawerClose = () => {
