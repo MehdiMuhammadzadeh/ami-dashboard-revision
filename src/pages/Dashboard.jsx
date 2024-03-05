@@ -5,17 +5,10 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import NewspaperSharpIcon from "@mui/icons-material/NewspaperSharp";
 import { StyledText } from "../components/text/Text.styles";
 import Image from "../components/avatar/Image";
+import { Scale } from "@mui/icons-material";
 const Dashboard = () => {
   const arr = [
-    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,
-    13,
-    14,
-    15,
-    16,
-    17,
-    18,
-    19,
-    20,
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
   ];
 
   return (
@@ -25,7 +18,7 @@ const Dashboard = () => {
           return (
             <Grid key={index} item xs={12} md={6} lg={3}>
               <Box bgcolor="#353455" width="100%" height="250px">
-                <Grid item container sx={{ backgroundColor: "", padding: 2 }}>
+                <Grid item container sx={{ padding: 2 }}>
                   <Grid
                     item
                     container
@@ -35,11 +28,15 @@ const Dashboard = () => {
                     }}
                   >
                     <Grid item sx={{ marginRight: 1 }}>
-                      <Image src={'https://lh3.googleusercontent.com/a/ACg8ocLQrFGxSD3dqAXlVef8xr70Tb3dIcXE8iCJuhe0l-rR6Q=s317-c-no'}/>
+                      <Image
+                        src={
+                          "https://lh3.googleusercontent.com/a/ACg8ocLQrFGxSD3dqAXlVef8xr70Tb3dIcXE8iCJuhe0l-rR6Q=s317-c-no"
+                        }
+                      />
                     </Grid>
                     <Grid item>
                       <StyledText variant="textTitle">
-                      Mehdi Mohammadzadeh
+                        Mehdi Mohammadzadeh
                       </StyledText>
                       <Grid
                         item
@@ -52,7 +49,7 @@ const Dashboard = () => {
                           Last Entry:
                         </Box> */}
                         <StyledText>Last Entry:</StyledText>
-                        <Box component={"div"} style={{ color:"#fff" }}>
+                        <Box component={"div"} style={{ color: "#fff" }}>
                           22/02/2024
                         </Box>
                       </Grid>
@@ -65,7 +62,13 @@ const Dashboard = () => {
                       margin: "auto",
                     }}
                   />
-                  <Grid item xs={7} sm={8} md={9} sx={{ paddingBlock: "0.8rem" }}>
+                  <Grid
+                    item
+                    xs={7}
+                    sm={8}
+                    md={9}
+                    sx={{ paddingBlock: "0.8rem" }}
+                  >
                     <Grid
                       item
                       sx={{
@@ -74,7 +77,7 @@ const Dashboard = () => {
                         marginBottom: "5px",
                       }}
                     >
-                      <Box component={"div"} style={{ color: "#aaaaaa",  }}>
+                      <Box component={"div"} style={{ color: "#aaaaaa" }}>
                         Last Session:
                       </Box>
                       <Box component={"div"} style={{ color: "#ffffff" }}>
@@ -112,10 +115,32 @@ const Dashboard = () => {
                     }}
                   >
                     <Grid item component={"div"}>
-                      <DeleteIcon style={{ color: "crimson",fontSize:'1.5rem' }} />
+                      <DeleteIcon
+                        sx={{
+                          color: "crimson",
+                          fontSize: "1.5rem",
+                          cursor: "pointer",
+                          "&:hover": {
+                            color: "#ff002f",
+                            transition: "all 1s ease",
+                            transform: 'scale(1.1)'
+                          },
+                        }}
+                      />
                     </Grid>
                     <Grid item component={"div"}>
-                      <NewspaperSharpIcon style={{ color: "#28bbff",fontSize:'1.5rem' }} />
+                      <NewspaperSharpIcon
+                        sx={{
+                          color: "#28bbff",
+                          fontSize: "1.5rem",
+                          cursor: "pointer",
+                          "&:hover": {
+                            color: "#0069f3",
+                            transition: "all 1s ease",
+                            transform: 'scale(1.1)'
+                          },
+                        }}
+                      />
                     </Grid>
                   </Grid>
                 </Grid>

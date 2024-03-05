@@ -20,6 +20,7 @@ import HomeSharpIcon from "@mui/icons-material/HomeSharp";
 import LogoutSharpIcon from "@mui/icons-material/LogoutSharp";
 import { StyledText } from "../text/Text.styles";
 import Image from "../avatar/Image";
+import { StyledNavLink } from "../navLink/NavLink.styles";
 
 const drawerWidth = 250;
 
@@ -27,6 +28,11 @@ const Layout = () => {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [isClosing, setIsClosing] = React.useState(false);
   const [isNavActive, setIsNavActive] = React.useState(false);
+  const [test, isTest] = React.useState([
+    { title: "Statistics", to: "statistics", isSelected: false },
+    {title: "PatientDiary",to: "patient-diary",isSelected: false},
+    { title: "My Notes", to: "my-notes", isSelected: false },
+  ]);
   const navigate = useNavigate();
 
   const handleDrawerClose = () => {
@@ -41,7 +47,7 @@ const Layout = () => {
   const drawer = (
     <div>
       <Toolbar style={{ backgroundColor: "#182631" }}>
-        <StyledText variant="textTitle" onClick={() => navigate("/")}>
+        <StyledText variant="textTitle" style={{cursor:'pointer'}} onClick={() => navigate("/")}>
           AMI Dashboard
         </StyledText>
       </Toolbar>
@@ -80,41 +86,59 @@ const Layout = () => {
         // onMouseOut={() => setIsNavActive(false)}
         onClick={() => setIsNavActive(!isNavActive)}
       >
-        <ListItem>
-            <ListItemText primary={"Patients"}  />
+        <ListItem sx={{ paddingBottom: 0, margin: 0 }}>
+          <ListItemText
+            primary={"Patients"}
+            // color: isNavActive ? "#f5b869" : "#fff"
+            sx={{ cursor: "pointer", padding: 0, margin: 0}}
+          /> 
+   
         </ListItem>
       </List>
-      <Collapse in={isNavActive}>
+      <Collapse
+        in={isNavActive}
+        sx={{ backgroundColor: "#25343f", paddingLeft: 3 }}
+      >
         <List>
-          <ListItem>
-            <ListItemButton>
-              <ListItemText primary={"Statistics"} />
-            </ListItemButton>
-            {/* <StyledLink>Statistics</StyledLink> */}
-          </ListItem>
-          <ListItem>
-            <ListItemButton>
-              <ListItemText primary={"Patient Diary "} />
-            </ListItemButton>
-            {/* <StyledLink>Statistics</StyledLink> */}
-          </ListItem>
-          <ListItem>
-            <ListItemButton>
-              <ListItemText primary={"My Notes"} />
-            </ListItemButton>
-            {/* <StyledLink>Statistics</StyledLink> */}
-          </ListItem>
+          {test.map((item, index) => {
+            return (
+              <ListItem key={index} disablePadding>
+                <ListItemButton>
+                  {/* <ListItemIcon>
+                {index % 2 === 0 ? <LogoutSharpIcon /> : <HomeSharpIcon />}
+              </ListItemIcon> */}
+                  {/* <ListItemText
+                    primary={item.title}
+                    onClick={() => {
+                      navigate(item.to);
+                      
+                    }}
+                    sx={{color:item.isSelected ? 'red' : 'blue'}}
+                  /> */}
+                  <StyledNavLink to={item.to}>{item.title}</StyledNavLink>
+                </ListItemButton>
+              </ListItem>
+            );
+          })}
         </List>
       </Collapse>
       {/* "Tickets", "Home", "Logout" */}
       <List>
-        {[{title: 'Tickets' , to:'tickets'},{title: 'Home' , to:'/dashboard'},{title: 'Logout' , to:''},].map((text, index) => (
-          <ListItem key={text} disablePadding>
+        {[
+          { title: "Tickets", to: "tickets" },
+          { title: "Home", to: "/dashboard" },
+          { title: "Logout", to: "/" },
+        ].map((item, index) => (
+          <ListItem key={index} disablePadding>
             <ListItemButton>
               {/* <ListItemIcon>
                 {index % 2 === 0 ? <LogoutSharpIcon /> : <HomeSharpIcon />}
               </ListItemIcon> */}
-              <ListItemText primary={text.title} onClick={()=> navigate(text.to)}/>
+              {/* <ListItemText
+                primary={item.title}
+                onClick={() => navigate(item.to)}
+              /> */}
+              <StyledNavLink to={item.to}>{item.title}</StyledNavLink>
             </ListItemButton>
           </ListItem>
         ))}

@@ -75,6 +75,12 @@ const Ticket = () => {
                 right: 20,
                 color: "#f5b869",
                 cursor: "pointer",
+                "&:hover": {
+                  color: "#f19720",
+                  transition: "all 1s ease",
+                  transform: 'scale(1.1)'
+
+                }
               }}
             />
           </Grid>

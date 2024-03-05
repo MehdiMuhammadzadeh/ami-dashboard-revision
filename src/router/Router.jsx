@@ -10,6 +10,7 @@ import ForgetPassword from "../pages/ForgetPassword";
 import MyNotes from "../components/myNotes/MyNotes";
 import Tickets from "../components/tickets/Tickets";
 import PatientDiary from "../components/patientDiary/PatientDiary";
+import Statistics from "../components/statistics/Statistics";
 const Router = () => {
   return (
     <>
@@ -22,6 +23,7 @@ const Router = () => {
         <Route path="my-notes" element={<MyNotes />} />
         <Route path="tickets" element={<Tickets />} />
         <Route path="patient-diary" element={<PatientDiary />} />
+        <Route path="statistics" element={<Statistics />} />
 
        </Route>
 

@@ -34,11 +34,11 @@ const PatientDiary = () => {
             </Grid>
           </Grid>
 
-              <Grid item container gap={1}>
-              {patientRecords.map((record, index) => {
-            return <PatientRecords key={index} />;
-          })}
-              </Grid>
+          <Grid item container gap={1}>
+            {patientRecords.map((record, index) => {
+              return <PatientRecords key={index} />;
+            })}
+          </Grid>
         </Grid>
         <Grid item component={"div"}>
           <Divider
