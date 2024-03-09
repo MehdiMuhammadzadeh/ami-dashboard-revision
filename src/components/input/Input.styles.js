@@ -9,4 +9,12 @@ export const StyledInput = styled.input`
   padding-left: 10px;
   color: #fff;
   font-size: 1.2rem;
+  outline: none;
+
+  &:focus {
+        outline: none;
+        box-shadow: 1px 1px 3px 2px rgba(255,255,255,0.5);
+        transition: all 0.5s ease;
+    }
+
 `;
