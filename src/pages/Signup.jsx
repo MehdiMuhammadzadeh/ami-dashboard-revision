@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyledInput } from "../components/input/Input.styles";
 import { Grid, Typography } from "@mui/material";
 import RegisterContainer from "../components/registerContainer/RegisterContainer";
@@ -8,8 +8,53 @@ import { Link } from "react-router-dom";
 import SignupIcons from "../components/icons/SignupIcons";
 import { StyledLink } from "../components/link/Link.styles";
 
-
 const Signup = () => {
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
+  // const [rePassword, setRePassword] = useState("")
+
+  const [emailBorderColor, setEmailBorderColor] = useState(true);
+  const [passwordBorderColor, setPasswordBorderColor] = useState(true);
+  const [confirmpassBorderColor, setConfirmpassBorderColor] = useState(true);
+
+  const email_pattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,6}$/;
+  const password_pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]{8,}$/;
+  const confirmPassword_pattern =
+    /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]{8,}$/;
+
+  const [values, setValues] = useState({
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const handleInput = (event) => {
+    const newObject = { ...values, [event.target.name]: event.target.value };
+    setValues(newObject);
+  };
+
+  const hanldeSubmit = () => {
+    console.log("Signup Clicked!");
+    if (values.email === "" && !email_pattern.test(values.email)) {
+      setEmailBorderColor(false);
+    } else {
+      setEmailBorderColor(true);
+    }
+    if (values.password === "" && !password_pattern.test(values.password)) {
+      setPasswordBorderColor(false);
+    } else {
+      setPasswordBorderColor(true);
+    }
+    if (
+      values.confirmPassword === "" &&
+      !confirmPassword_pattern.test(values.confirmPassword)
+    ) {
+      setConfirmpassBorderColor(false);
+    } else {
+      setConfirmpassBorderColor(true);
+    }
+  };
+
   return (
     <Wrapper alignContent={"center"} justifyContent={"center"}>
       <RegisterContainer
@@ -31,17 +76,56 @@ const Signup = () => {
           sx={{ marginTop: { xs: 3, sm: 4, md: 5 }, textAlign: "center" }}
         >
           <Grid item xs={12}>
-            <StyledInput placeholder="Email" type="email"></StyledInput>
+            <StyledInput
+              onChange={handleInput}
+              value={values.email}
+              placeholder="Email"
+              type="email"
+              name="email"
+              style={
+                emailBorderColor
+                  ? { border: "1px solid #dddddd" }
+                  : { border: "1px solid red" }
+              }
+            ></StyledInput>
           </Grid>
           <Grid item xs={12}>
-            <StyledInput placeholder="Password" type="password"></StyledInput>
+            <StyledInput
+              onChange={handleInput}
+              value={values.password}
+              placeholder="Password"
+              type="password"
+              name="password"
+              style={
+                passwordBorderColor
+                  ? { border: "1px solid #dddddd" }
+                  : { border: "1px solid red" }
+              }
+            ></StyledInput>
           </Grid>
           <Grid item xs={12}>
-            <StyledInput placeholder="Password" type="password"></StyledInput>
+            <StyledInput
+              onChange={handleInput}
+              value={values.confirmPassword}
+              placeholder="Password"
+              type="password"
+              name="confirmPassword"
+              style={
+                confirmpassBorderColor
+                  ? { border: "1px solid #dddddd" }
+                  : { border: "1px solid red" }
+              }
+            ></StyledInput>
           </Grid>
         </Grid>
         <Grid item xs={11} sx={{ marginTop: { xs: 3, sm: 4, md: 5 } }}>
-          <StyledButton variant="radius" buttons="buttons">Signup</StyledButton>
+          <StyledButton
+            onClick={hanldeSubmit}
+            variant="radius"
+            buttons="buttons"
+          >
+            Signup
+          </StyledButton>
         </Grid>
         <Grid
           item
@@ -51,9 +135,11 @@ const Signup = () => {
           textAlign={"center"}
           // marginBotto  m={10}
         >
-            <SignupIcons />
+          <SignupIcons />
           <Grid item sx={{ fontSize: { xs: "0.8rem", sm: "1rem" } }} xs={12}>
-            <StyledLink to='/login' variant="linkhover">Already have an account!</StyledLink>
+            <StyledLink to="/login" variant="linkhover">
+              Already have an account!
+            </StyledLink>
           </Grid>
         </Grid>
       </RegisterContainer>

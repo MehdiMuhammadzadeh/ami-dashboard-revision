@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Wrapper from "../components/wrapper/Wrapper";
 import { Grid, Paper, Typography } from "@mui/material";
 import RegisterContainer from "../components/registerContainer/RegisterContainer";
@@ -8,8 +8,36 @@ import { Link, useNavigate } from "react-router-dom";
 import { StyledLink } from "../components/link/Link.styles";
 
 const Login = () => {
+  const [emailBorderColor, setEmailBorderColor] = useState(true);
+  const [passwordBorderColor, setPasswordBorderColor] = useState(true);
+  const email_pattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,6}$/;
+  const password_pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]{8,}$/;
 
-  const navigate = useNavigate()
+  const [values, setValues] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleInput = (event) => {
+    const newObject = { ...values, [event.target.name]: event.target.value };
+    setValues(newObject);
+  };
+
+  const navigate = useNavigate();
+  const handleSubmit = () => {
+    console.log('Login Form Submitted!')
+    if (values.email === "" && !email_pattern.test(values.email)) {
+      setEmailBorderColor(false);
+    } else {
+      setEmailBorderColor(true);
+    }
+
+    if (values.password === "" && !password_pattern.test(values.password)) {
+      setPasswordBorderColor(false);
+    } else {
+      setPasswordBorderColor(true);
+    }
+  };
 
   return (
     <Wrapper alignContent={"center"} justifyContent={"center"}>
@@ -24,23 +52,54 @@ const Login = () => {
             Login
           </Typography>
         </Grid>
-        <Grid
-          item
-          container
-          alignContent={"center"}
-          spacing={2}
-          sx={{ marginTop: { xs: 3, sm: 4, md: 5 }, textAlign: "center" }}
-        >
-          <Grid item xs={12}>
-            <StyledInput placeholder="Email" type="email"></StyledInput>
+          <Grid
+            item
+            container
+            alignContent={"center"}
+            spacing={2}
+            sx={{ marginTop: { xs: 3, sm: 4, md: 5 }, textAlign: "center" }}
+          >
+            <Grid item xs={12}>
+              <StyledInput
+                // onChange={(e) => setEmail(e.target.value)}
+                style={
+                  emailBorderColor
+                    ? { border: "1px solid #dddddd" }
+                    : { border: "1px solid red" }
+                }
+                onChange={handleInput}
+                placeholder="Email"
+                value={values.email}
+                type="email"
+                name="email"
+              ></StyledInput>
+            </Grid>
+            <Grid item xs={12}>
+              <StyledInput
+                // onChange={(e) => setPassword(e.target.value)}
+                style={
+                  passwordBorderColor
+                    ? { border: "1px solid #dddddd" }
+                    : { border: "1px solid red" }
+                }
+                onChange={handleInput}
+                placeholder="Password"
+                value={values.password}
+                type="password"
+                name="password"
+              ></StyledInput>
+            </Grid>
           </Grid>
-          <Grid item xs={12}>
-            <StyledInput placeholder="Password" type="password"></StyledInput>
+          <Grid item xs={11} sx={{ marginTop: { xs: 3, sm: 4, md: 5 }, textAlign:'center' }}>
+            <StyledButton
+              type="submit"
+              onClick={handleSubmit}
+              variant="radius"
+              buttons="buttons"
+            >
+              Login
+            </StyledButton>
           </Grid>
-        </Grid>
-        <Grid item xs={11} sx={{ marginTop: { xs: 3, sm: 4, md: 5 } }}>
-          <StyledButton  onClick={()=>{navigate('/dashboard')}} variant="radius" buttons="buttons">Login</StyledButton>
-        </Grid>
         <Grid
           item
           container
