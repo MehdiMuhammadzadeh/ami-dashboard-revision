@@ -40,7 +40,7 @@ const PatientGalary = () => {
             }}
             alt="The house from the offer."
             src={
-              "https://media.licdn.com/dms/image/D4E03AQFYbx3WpXj1cw/profile-displayphoto-shrink_800_800/0/1687338327098?e=1715212800&v=beta&t=0WXkM-bcphCs7wztlpPKHcBLovUxuijZL0D1oOB06ms"
+              "https://picsum.photos/200"
             }
           />
 
@@ -55,7 +55,7 @@ const PatientGalary = () => {
             }}
             alt="The house from the offer."
             src={
-              "https://media.licdn.com/dms/image/D4E03AQFYbx3WpXj1cw/profile-displayphoto-shrink_800_800/0/1687338327098?e=1715212800&v=beta&t=0WXkM-bcphCs7wztlpPKHcBLovUxuijZL0D1oOB06ms"
+              "https://picsum.photos/200"
             }
           />
           <Box
@@ -69,7 +69,7 @@ const PatientGalary = () => {
             }}
             alt="The house from the offer."
             src={
-              "https://media.licdn.com/dms/image/D4E03AQFYbx3WpXj1cw/profile-displayphoto-shrink_800_800/0/1687338327098?e=1715212800&v=beta&t=0WXkM-bcphCs7wztlpPKHcBLovUxuijZL0D1oOB06ms"
+              "https://picsum.photos/200"
             }
           />
         </Grid>
@@ -97,7 +97,7 @@ const PatientGalary = () => {
             }}
             alt="The house from the offer."
             src={
-              "https://media.licdn.com/dms/image/D4E03AQFYbx3WpXj1cw/profile-displayphoto-shrink_800_800/0/1687338327098?e=1715212800&v=beta&t=0WXkM-bcphCs7wztlpPKHcBLovUxuijZL0D1oOB06ms"
+              "https://picsum.photos/200"
             }
           />
           <Box
@@ -111,7 +111,7 @@ const PatientGalary = () => {
             }}
             alt="The house from the offer."
             src={
-              "https://media.licdn.com/dms/image/D4E03AQFYbx3WpXj1cw/profile-displayphoto-shrink_800_800/0/1687338327098?e=1715212800&v=beta&t=0WXkM-bcphCs7wztlpPKHcBLovUxuijZL0D1oOB06ms"
+              "https://picsum.photos/200"
             }
           />
           <Box
@@ -125,7 +125,7 @@ const PatientGalary = () => {
             }}
             alt="The house from the offer."
             src={
-              "https://media.licdn.com/dms/image/D4E03AQFYbx3WpXj1cw/profile-displayphoto-shrink_800_800/0/1687338327098?e=1715212800&v=beta&t=0WXkM-bcphCs7wztlpPKHcBLovUxuijZL0D1oOB06ms"
+              "https://picsum.photos/200"
             }
           />
         </Grid>

@@ -77,7 +77,7 @@ const PatientRecords = () => {
         >
           <Image
             src={
-              "https://lh3.googleusercontent.com/a/ACg8ocLQrFGxSD3dqAXlVef8xr70Tb3dIcXE8iCJuhe0l-rR6Q=s317-c-no"
+              "https://picsum.photos/200"
             }
           />
         </Grid>

@@ -5,19 +5,12 @@ import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
-import IconButton from "@mui/material/IconButton";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import MailIcon from "@mui/icons-material/Mail";
 import Toolbar from "@mui/material/Toolbar";
 import { Collapse, Grid } from "@mui/material";
-import StyledLink from "../link/StyledLink";
-import HomeSharpIcon from "@mui/icons-material/HomeSharp";
-import LogoutSharpIcon from "@mui/icons-material/LogoutSharp";
 import { StyledText } from "../text/Text.styles";
 import Image from "../avatar/Image";
 import { StyledNavLink } from "../navLink/NavLink.styles";
@@ -64,7 +57,7 @@ const Layout = () => {
         >
           <Image
             src={
-              "https://lh3.googleusercontent.com/a/ACg8ocLQrFGxSD3dqAXlVef8xr70Tb3dIcXE8iCJuhe0l-rR6Q=s317-c-no"
+              "https://picsum.photos/200"
             }
           />
         </Grid>
@@ -73,8 +66,8 @@ const Layout = () => {
           xs={12}
           sx={{ textAlign: "left", paddingLeft: "10px", paddingBottom: "5px" }}
         >
-          <StyledText variant="textTitle">Mehdi Mohammadzadeh</StyledText>
-          <StyledText component={"p"}>mehdi.mrpr93@gmail.com</StyledText>
+          <StyledText variant="textTitle">John Dou</StyledText>
+          <StyledText component={"p"}>john.dou@gmail.com</StyledText>
         </Grid>
       </Grid>
       <Divider style={{ backgroundColor: "#fff" }} />
