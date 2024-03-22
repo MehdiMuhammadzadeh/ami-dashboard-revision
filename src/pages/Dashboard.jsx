@@ -32,13 +32,13 @@ const Dashboard = () => {
                     <Grid item sx={{ marginRight: 1 }}>
                       <Image
                         src={
-                          "https://lh3.googleusercontent.com/a/ACg8ocLQrFGxSD3dqAXlVef8xr70Tb3dIcXE8iCJuhe0l-rR6Q=s317-c-no"
+                          "https://picsum.photos/200"
                         }
                       />
                     </Grid>
                     <Grid item>
                       <StyledText variant="textTitle">
-                        Mehdi Mohammadzadeh
+                        John Dou
                       </StyledText>
                       <Grid
                         item
