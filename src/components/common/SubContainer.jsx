@@ -1,9 +1,11 @@
 import { Grid } from "@mui/material";
 import React from "react";
 
-const SubContainer = ({ children, xs, gap, spacing }) => {
+const SubContainer = ({ children, xs, gap, spacing, boxShadow, onclick,cursor }) => {
   return (
     <Grid
+      onClick={onclick}
+      boxShadow={boxShadow}
       spacing={spacing}
       gap={gap}
       item

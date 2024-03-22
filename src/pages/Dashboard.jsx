@@ -17,7 +17,9 @@ const Dashboard = () => {
         {arr.map((item, index) => {
           return (
             <Grid key={index} item xs={12} md={6} lg={3}>
-              <Box bgcolor="#353455" width="100%" height="250px">
+              <Box bgcolor="#353455" width="100%" height="250px" borderRadius={2} 
+                sx={{boxShadow:'2px 2px 5px rgba(0,0,0,0.5)'}}
+              >
                 <Grid item container sx={{ padding: 2 }}>
                   <Grid
                     item

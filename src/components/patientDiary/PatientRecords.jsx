@@ -12,7 +12,7 @@ import RollerSkatingSharpIcon from "@mui/icons-material/RollerSkatingSharp";
 
 const PatientRecords = () => {
   return (
-    <Grid item container component={'div'}>
+    <Grid item container component={'div'} >
       <Grid item component={"div"} xs={12} marginBlock={1}>
         <Grid
           item
@@ -28,13 +28,13 @@ const PatientRecords = () => {
           </Box>
         </Grid>
       </Grid>
-      <SubContainer>
+      <SubContainer boxShadow={'2px 4px 4px rgba(0,0,0,0.5)'} onclick={()=>console.log('clicked')}>
         <Grid
           item
           container
           component={"div"}
           xs={12}
-          sx={{ justifyContent: "space-between", alignItems: "center" }}
+          sx={{ justifyContent: "space-between", alignItems: "center", cursor:'pointer' }}
         >
           <Grid item component={"div"}>
             <TagFacesSharpIcon style={{color:'#98a86a'}}/>

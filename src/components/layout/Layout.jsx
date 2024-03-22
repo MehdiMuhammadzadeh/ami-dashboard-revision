@@ -193,6 +193,7 @@ const Layout = () => {
             PaperProps={{
               sx: {
                 backgroundColor: "#101920",
+                boxShadow:'3px 10px 5px rgba(0,0,0,0.3)',
                 color: "#fff",
               },
             }}
