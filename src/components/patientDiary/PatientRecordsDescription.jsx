@@ -51,7 +51,8 @@ const PatientRecordsDescription = () => {
           item
           component={"div"}
           xs={6}
-          md={1.5}
+          md={2}
+          lg={1.5}
           sx={{ display: "flex", justifyContent: "space-between" }}
         >
           <Box>

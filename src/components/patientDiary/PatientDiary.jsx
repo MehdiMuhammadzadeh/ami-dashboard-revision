@@ -50,7 +50,7 @@ const PatientDiary = () => {
             }}
           />
         </Grid>
-        <Grid item component={"div"} xs={12} md={8.7}>
+        <Grid item component={"div"} xs={12} md={7} lg={8.7}>
           <SubContainer>
             <PatientRecordsDescription />
           </SubContainer>

@@ -1,7 +1,7 @@
 import { Grid } from "@mui/material";
 import React from "react";
 
-const SubContainer = ({ children, xs, gap, spacing, boxShadow, onclick,cursor }) => {
+const SubContainer = ({ children, xs, gap, spacing, boxShadow, onclick, style}) => {
   return (
     <Grid
       onClick={onclick}
@@ -17,7 +17,11 @@ const SubContainer = ({ children, xs, gap, spacing, boxShadow, onclick,cursor })
         borderRadius: 2,
         padding: 2,
         wordBreak: "break-all",
+        // '&:hover': {
+        //   cursor: 'pointer'
+        // }
       }}
+      style={style}
     >
       {children}
     </Grid>
