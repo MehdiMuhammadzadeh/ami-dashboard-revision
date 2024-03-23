@@ -12,5 +12,12 @@ export const StyledTextarea = styled.textarea`
     font-size: 1rem;
     height: 100px;
     font-family: inherit;
+    ::placeholder,
+    ::-webkit-input-placeholder {
+      color: #000;
+    }
+    :-ms-input-placeholder {
+       color: #000;
+    }
 
 `

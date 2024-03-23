@@ -8,7 +8,6 @@ const Container = ({children,xs,sx}) => {
     component={"div"}
     container 
     gap={2}
-   
     sx={{sx, padding: "10px" }}
   >
     {children}
