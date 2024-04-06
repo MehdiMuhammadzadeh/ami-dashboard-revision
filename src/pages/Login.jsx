@@ -1,42 +1,104 @@
 import React, { useState } from "react";
 import Wrapper from "../components/wrapper/Wrapper";
-import { Grid, Paper, Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import RegisterContainer from "../components/registerContainer/RegisterContainer";
 import { StyledInput } from "../components/input/Input.styles";
 import { StyledButton } from "../components/button/Button.styles";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { StyledLink } from "../components/link/Link.styles";
+import { collection, getDocs } from "firebase/firestore";
+import { auth, db } from "../auth/Firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 const Login = () => {
-  const [emailBorderColor, setEmailBorderColor] = useState(true);
-  const [passwordBorderColor, setPasswordBorderColor] = useState(true);
+  const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate();
   const email_pattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,6}$/;
-  const password_pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]{8,}$/;
-
+  const password_pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]{5,}$/;
   const [values, setValues] = useState({
-    email: "",
-    password: "",
+    email: { value: "", isValid: true },
+    password: { value: "", isValid: true },
   });
 
+  /*
+  Password must contain one digit from 1 to 9, 
+  one lowercase letter, 
+  one uppercase letter, one special character, 
+  no space, and it must be 8-16 characters long.
+
+  */
   const handleInput = (event) => {
-    const newObject = { ...values, [event.target.name]: event.target.value };
-    setValues(newObject);
+    if (values.email.value === "" || !email_pattern.test(values.email.value)) {
+      const newObject = {
+        ...values,
+        [event.target.name]: { value: event.target.value, isValid: false },
+      };
+      setValues(newObject);
+      setErrorMessage("Email is incorrect:(");
+      // return;
+    } else {
+      const newObject = {
+        ...values,
+        [event.target.name]: { value: event.target.value, isValid: true },
+      };
+      setValues(newObject);
+      setErrorMessage("");
+    }
+
+    if (
+      values.password.value === "" ||
+      !password_pattern.test(values.password.value)
+    ) {
+      const newObject = {
+        ...values,
+        [event.target.name]: { value: event.target.value, isValid: false },
+      };
+      setErrorMessage("Password is incorrect:(");
+      setValues(newObject);
+      // return;
+    } else {
+      const newObject = {
+        ...values,
+        [event.target.name]: { value: event.target.value, isValid: true },
+      };
+      setErrorMessage("");
+      setValues(newObject);
+    }
   };
 
-  const navigate = useNavigate();
+  const doctorCollectionRef = collection(db, "Doctors");
+  const getDoctorList = async () => {
+    const data = await getDocs(doctorCollectionRef);
+
+    const filteredDoctorData = data.docs.map((doc) => {
+      if (doc.data().email === "doctor@gmail.com") {
+        localStorage.setItem("doctor", JSON.stringify(doc.data()));
+        // save the doctors data in somewhere like localStorage coz i will be needing them in dashboard
+        navigate("/dashboard");
+      }
+      // ...doc.data(),
+      // id: doc.id,
+    });
+    console.log(filteredDoctorData);
+  };
   const handleSubmit = () => {
-    console.log('Login Form Submitted!')
-    if (values.email === "" && !email_pattern.test(values.email)) {
-      setEmailBorderColor(false);
-    } else {
-      setEmailBorderColor(true);
+    console.log('Handle SingIn')
+    getDoctorList();
+    // if(values.email.value && values.password.value) {
+    if("doctor@gmail.com") {
+      signInWithEmailAndPassword(
+        auth,
+        values.email.value,
+        values.password.value
+      ).then((userCredential)=>{
+          const user = userCredential.user;
+          console.log("UserCredintional", user.email);
+          navigate('/dashboard')
+      });
+    }else {
+      navigate('/signup')
     }
 
-    if (values.password === "" && !password_pattern.test(values.password)) {
-      setPasswordBorderColor(false);
-    } else {
-      setPasswordBorderColor(true);
-    }
   };
 
   return (
@@ -52,54 +114,58 @@ const Login = () => {
             Login
           </Typography>
         </Grid>
-          <Grid
-            item
-            container
-            alignContent={"center"}
-            spacing={2}
-            sx={{ marginTop: { xs: 3, sm: 4, md: 5 }, textAlign: "center" }}
+        <Grid
+          item
+          container
+          alignContent={"center"}
+          spacing={2}
+          sx={{ marginTop: { xs: 3, sm: 4, md: 5 }, textAlign: "center" }}
+        >
+          <Grid item xs={12}>
+            <StyledInput
+              // onChange={(e) => setEmail(e.target.value)}
+              style={
+                values.email.isValid
+                  ? { border: "1px solid #dddddd" }
+                  : { border: "1px solid red" }
+              }
+              onChange={handleInput}
+              placeholder="Email"
+              value={values.email.value}
+              type="email"
+              name="email"
+            ></StyledInput>
+          </Grid>
+          <Grid item xs={12}>
+            <StyledInput
+              // onChange={(e) => setPassword(e.target.value)}
+              style={
+                values.password.isValid
+                  ? { border: "1px solid #dddddd" }
+                  : { border: "1px solid red" }
+              }
+              onChange={handleInput}
+              placeholder="Password"
+              value={values.password.value}
+              type="password"
+              name="password"
+            ></StyledInput>
+          </Grid>
+        </Grid>
+        <Grid
+          item
+          xs={11}
+          sx={{ marginTop: { xs: 3, sm: 4, md: 5 }, textAlign: "center" }}
+        >
+          <StyledButton
+            type="submit"
+            onClick={handleSubmit}
+            variant="radius"
+            buttons="buttons"
           >
-            <Grid item xs={12}>
-              <StyledInput
-                // onChange={(e) => setEmail(e.target.value)}
-                style={
-                  emailBorderColor
-                    ? { border: "1px solid #dddddd" }
-                    : { border: "1px solid red" }
-                }
-                onChange={handleInput}
-                placeholder="Email"
-                value={values.email}
-                type="email"
-                name="email"
-              ></StyledInput>
-            </Grid>
-            <Grid item xs={12}>
-              <StyledInput
-                // onChange={(e) => setPassword(e.target.value)}
-                style={
-                  passwordBorderColor
-                    ? { border: "1px solid #dddddd" }
-                    : { border: "1px solid red" }
-                }
-                onChange={handleInput}
-                placeholder="Password"
-                value={values.password}
-                type="password"
-                name="password"
-              ></StyledInput>
-            </Grid>
-          </Grid>
-          <Grid item xs={11} sx={{ marginTop: { xs: 3, sm: 4, md: 5 }, textAlign:'center' }}>
-            <StyledButton
-              type="submit"
-              onClick={handleSubmit}
-              variant="radius"
-              buttons="buttons"
-            >
-              Login
-            </StyledButton>
-          </Grid>
+            Login
+          </StyledButton>
+        </Grid>
         <Grid
           item
           container

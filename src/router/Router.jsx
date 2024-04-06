@@ -11,6 +11,7 @@ import MyNotes from "../components/myNotes/MyNotes";
 import Tickets from "../components/tickets/Tickets";
 import PatientDiary from "../components/patientDiary/PatientDiary";
 import Statistics from "../components/statistics/Statistics";
+import Doctor from "../pages/Doctor";
 const Router = () => {
   return (
     <>
@@ -28,6 +29,7 @@ const Router = () => {
        </Route>
 
         <Route path="/login" element={<Login />} />
+        <Route path="/doctor" element={<Doctor />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/forget-password" element={<ForgetPassword />} />
        <Route path="*" element={<NotFound />} />
