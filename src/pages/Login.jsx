@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import Wrapper from "../components/wrapper/Wrapper";
-import { Grid, Typography } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import RegisterContainer from "../components/registerContainer/RegisterContainer";
 import { StyledInput } from "../components/input/Input.styles";
 import { StyledButton } from "../components/button/Button.styles";
-import { useNavigate } from "react-router-dom";
 import { StyledLink } from "../components/link/Link.styles";
+import Wrapper from "../components/wrapper/Wrapper";
+import { Grid, Typography } from "@mui/material";
 import { collection, getDocs } from "firebase/firestore";
 import { auth, db } from "../auth/Firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
@@ -13,30 +13,27 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 const Login = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
-  const email_pattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,6}$/;
+  const email_pattern = /^[\w.%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   const password_pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]{5,}$/;
   const [values, setValues] = useState({
     email: { value: "", isValid: true },
     password: { value: "", isValid: true },
   });
 
-  /*
-  Password must contain one digit from 1 to 9, 
-  one lowercase letter, 
-  one uppercase letter, one special character, 
-  no space, and it must be 8-16 characters long.
-
-  */
   const handleInput = (event) => {
-    if (values.email.value === "" || !email_pattern.test(values.email.value)) {
+    // console.log("Emaillll===>", values.email.value, values.password.value);
+    if (values.email.value === "") {
+      // console.log(email_pattern.test(values.email.value));
+      // console.log("Iffff");
       const newObject = {
         ...values,
-        [event.target.name]: { value: event.target.value, isValid: false },
+        [event.target.name]: { value: event.target.value, isValid: true },
       };
       setValues(newObject);
       setErrorMessage("Email is incorrect:(");
       // return;
     } else {
+      // console.log('Elseeeeeeeeee')
       const newObject = {
         ...values,
         [event.target.name]: { value: event.target.value, isValid: true },
@@ -47,7 +44,7 @@ const Login = () => {
 
     if (
       values.password.value === "" ||
-      !password_pattern.test(values.password.value)
+      !password_pattern.test(values.email.value)
     ) {
       const newObject = {
         ...values,
@@ -67,38 +64,34 @@ const Login = () => {
   };
 
   const doctorCollectionRef = collection(db, "Doctors");
-  const getDoctorList = async () => {
-    const data = await getDocs(doctorCollectionRef);
 
-    const filteredDoctorData = data.docs.map((doc) => {
-      if (doc.data().email === "doctor@gmail.com") {
+  const getDoctorList = async () => {
+    console.log("hi");
+    const data = await getDocs(doctorCollectionRef);
+    data.docs.map((doc) => {
+      if (doc.data().email === values.email.value) {
         localStorage.setItem("doctor", JSON.stringify(doc.data()));
-        // save the doctors data in somewhere like localStorage coz i will be needing them in dashboard
-        navigate("/dashboard");
       }
       // ...doc.data(),
       // id: doc.id,
     });
-    console.log(filteredDoctorData);
   };
-  const handleSubmit = () => {
-    console.log('Handle SingIn')
-    getDoctorList();
-    // if(values.email.value && values.password.value) {
-    if("doctor@gmail.com") {
-      signInWithEmailAndPassword(
-        auth,
-        values.email.value,
-        values.password.value
-      ).then((userCredential)=>{
-          const user = userCredential.user;
-          console.log("UserCredintional", user.email);
-          navigate('/dashboard')
-      });
-    }else {
-      navigate('/signup')
-    }
 
+  const handleSubmit = () => {
+    getDoctorList();
+    signInWithEmailAndPassword(auth, values.email.value, values.password.value)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log("UserCredintional", user.email);
+        navigate("/dashboard");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log("Error Code", errorCode);
+        console.log("Error Message", errorMessage);
+        navigate("/signup");
+      });
   };
 
   return (
