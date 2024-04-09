@@ -200,12 +200,11 @@ const Signup = () => {
           addDoc(doctorCollectionRef, {
             description: values.description.value,
             email: values.email.value,
-            firstName: values.f_name.value,
-            lastName: values.l_name.value,
+            f_name: values.f_name.value,
+            l_name: values.l_name.value,
             speciality: values.speciality.value,
             username: values.username.value,
             password: values.password.value,
-            confirmPassword: values.confirmPassword.value,
           }).then(() => {
             navigate("/login");
           });

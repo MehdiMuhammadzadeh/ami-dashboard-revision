@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Container from "../common/Container";
 import { Divider, Grid } from "@mui/material";
 import SubContainer from "../common/SubContainer";
@@ -9,21 +9,29 @@ import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../auth/Firebase";
 
 const PatientDiary = () => {
-  const patientRecords = [1, 2, 3, 4, 5];
-  const [records, setRecords] = useState([])
+
+  const [records, setRecords] = useState([]);
   const patientRecordsRef = collection(db, "records");
-  console.log(patientRecordsRef);
-  const getPatientsRecords = async () => {
-    const recordsData = await getDocs(patientRecordsRef);
-    console.log(recordsData);
-    const filteredRecordsData = recordsData.docs.map((doc) => ({
-      ...doc.data(),
-      id: doc.id,
-    }));
-    console.log(filteredRecordsData);
-    setRecords(filteredRecordsData);
+  const userRecords = JSON.parse(localStorage.getItem("records"));
+  const [singleRecord, setSingleRecord] = useState({});
+  // const getPatientsRecords = async () => {
+  //   const recordsData = await getDocs(patientRecordsRef);
+
+  //   const filteredRecordsData = recordsData.docs.map((doc) => ({
+  //     ...doc.data(),
+  //     id: doc.id,
+  //   }));
+
+  //   setRecords(filteredRecordsData);
+  //   console.log("Filterede Recoreds",filteredRecordsData);
+  // };
+  // getPatientsRecords();
+
+  const propTestHandler = (event) => {
+    setSingleRecord(event);
+    console.log('Event', event)
   };
-  getPatientsRecords();
+
   return (
     <Container>
       <Grid component={"div"} item container sx={{ display: "flex" }} gap={2}>
@@ -50,8 +58,22 @@ const PatientDiary = () => {
           </Grid>
 
           <Grid item container gap={1}>
-            {records.map((record, index) => {
-              return <PatientRecords key={index} />;
+            {userRecords.map((record, index) => {
+              return (
+                <PatientRecords
+                  key={index}
+                  record={record}
+                  userRecords={userRecords}
+                  dayName={record.dayName}
+                  description={record.description}
+                  feeling={record.feeling}
+                  feelingDescription={record.feelingDescription}
+                  feelingReason={record.feelingReason}
+                  propTest={propTestHandler}
+                  date={record.date}
+                  photos={record.photoIds}
+                />
+              );
             })}
           </Grid>
         </Grid>
@@ -66,9 +88,12 @@ const PatientDiary = () => {
           />
         </Grid>
         <Grid item component={"div"} xs={12} md={7} lg={8.7}>
-          <SubContainer boxShadow={"2px 4px 4px rgba(0,0,0,0.5)"}>
-            <PatientRecordsDescription />
-          </SubContainer>
+         
+            <PatientRecordsDescription
+              propDesDetail={singleRecord}
+          
+            />
+        
         </Grid>
       </Grid>
     </Container>

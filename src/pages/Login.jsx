@@ -69,6 +69,7 @@ const Login = () => {
     console.log("hi");
     const data = await getDocs(doctorCollectionRef);
     data.docs.map((doc) => {
+      // if (doc.data().email === values.email.value) {
       if (doc.data().email === values.email.value) {
         localStorage.setItem("doctor", JSON.stringify(doc.data()));
       }
@@ -76,7 +77,7 @@ const Login = () => {
       // id: doc.id,
     });
   };
-
+  getDoctorList();
   const handleSubmit = () => {
     getDoctorList();
     signInWithEmailAndPassword(auth, values.email.value, values.password.value)
