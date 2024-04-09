@@ -66,7 +66,6 @@ const Login = () => {
   const doctorCollectionRef = collection(db, "Doctors");
 
   const getDoctorList = async () => {
-    console.log("hi");
     const data = await getDocs(doctorCollectionRef);
     data.docs.map((doc) => {
       // if (doc.data().email === values.email.value) {
