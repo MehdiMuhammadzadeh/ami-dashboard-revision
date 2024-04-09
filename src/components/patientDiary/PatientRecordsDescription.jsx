@@ -80,16 +80,52 @@ const PatientRecordsDescription = ({ propDesDetail }) => {
               {/* {questions.map((item, index) => {
           return ( */}
               <Grid item container component={"div"}>
-                <StyledText variant="textTitle">Description:</StyledText>
+                <StyledText variant="textTitle">How Do You Feel?</StyledText>
+                <Grid item component={"div"} sx={{ paddingLeft: 2 }} xs={12}>
+                  <StyledText component={"p"}>
+                    {propDesDetail.feeling}
+                  </StyledText>
+                </Grid>
+              </Grid>
+              <Grid item container component={"div"}>
+                <StyledText variant="textTitle">How is the Weather?</StyledText>
+                <Grid item component={"div"} sx={{ paddingLeft: 2 }} xs={12}>
+                  <StyledText component={"p"}>
+                    {propDesDetail.weather}
+                  </StyledText>
+                </Grid>
+              </Grid>
+              <Grid item container component={"div"}>
+                <StyledText variant="textTitle">Name of the Day:</StyledText>
+                <Grid item component={"div"} sx={{ paddingLeft: 2 }} xs={12}>
+                  <StyledText component={"p"}>
+                    {propDesDetail.dayName}
+                  </StyledText>
+                </Grid>
+              </Grid>
+
+              <Grid item container component={"div"}>
+                <StyledText variant="textTitle">Sleep Time:</StyledText>
+                <Grid item component={"div"} sx={{ paddingLeft: 2 }} xs={12}>
+                  <StyledText component={"p"}>
+                    {propDesDetail.sleepEnd}:{propDesDetail.sleepStart}
+                  </StyledText>
+                </Grid>
+              </Grid>
+
+              <Grid item container component={"div"}>
+                <StyledText variant="textTitle">Describe Your Day:</StyledText>
                 <Grid item component={"div"} sx={{ paddingLeft: 2 }} xs={12}>
                   <StyledText component={"p"}>
                     {propDesDetail.description}
                   </StyledText>
                 </Grid>
               </Grid>
+
+
               <Grid item container component={"div"}>
                 <StyledText variant="textTitle">
-                  Feeling Description:
+                   Describe Your Feelings:
                 </StyledText>
                 <Grid item component={"div"} sx={{ paddingLeft: 2 }} xs={12}>
                   <StyledText component={"p"}>
@@ -97,9 +133,11 @@ const PatientRecordsDescription = ({ propDesDetail }) => {
                   </StyledText>
                 </Grid>
               </Grid>
+
+
               <Grid item container component={"div"}>
                 <StyledText variant="textTitle">
-                  Did anything make you feel bad?
+                  Describe the reason of the Feeling:
                 </StyledText>
                 <Grid item component={"div"} sx={{ paddingLeft: 2 }} xs={12}>
                   <StyledText component={"p"}>
@@ -107,13 +145,48 @@ const PatientRecordsDescription = ({ propDesDetail }) => {
                   </StyledText>
                 </Grid>
               </Grid>
+
               <Grid item container component={"div"}>
                 <StyledText variant="textTitle">
-                  if you had Drugs or Peels or Alcohol? how did it feel?
+                  Todays Photos:
                 </StyledText>
                 <Grid item component={"div"} sx={{ paddingLeft: 2 }} xs={12}>
                   <StyledText component={"p"}>
-                    {propDesDetail.feelingReason}
+                   {/* {propDesDetail.photoIds} */}
+                   import photo here later 
+                  </StyledText>
+                </Grid>
+              </Grid>
+
+              <Grid item container component={"div"}>
+                <StyledText variant="textTitle">
+                  Select Your Activities:
+                </StyledText>
+                <Grid item component={"div"} sx={{ paddingLeft: 2 }} xs={12}>
+                  <StyledText component={"p"}>
+                    {propDesDetail.activityIds}           
+                  </StyledText>
+                </Grid>
+              </Grid>
+              <Grid item container component={"div"}>
+                <StyledText variant="textTitle">
+                  Select You had Today:
+                </StyledText>
+                <Grid item component={"div"} sx={{ paddingLeft: 2 }} xs={12}>
+                  <StyledText component={"p"}>
+                    {propDesDetail.foodIds}           
+                  </StyledText>
+                </Grid>
+              </Grid>
+
+              <Grid item container component={"div"}>
+                <StyledText variant="textTitle">
+                 Did you have Drugs or Alchohol? how did it Feel?
+                </StyledText>
+                <Grid item component={"div"} sx={{ paddingLeft: 2 }} xs={12}>
+                  <StyledText component={"p"}>
+                    {propDesDetail.drugIds}
+                    {propDesDetail.drugReason}
                   </StyledText>
                 </Grid>
               </Grid>
