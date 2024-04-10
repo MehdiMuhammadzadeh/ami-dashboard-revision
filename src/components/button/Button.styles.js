@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-
+import {COLORS} from '../../styles/colors'
 export const StyledButton = styled.button`
   background-color: #fff;
   color: #000;
@@ -14,8 +14,8 @@ export const StyledButton = styled.button`
   transition: all 0.5s ease-out;
   &:hover {
   /* background-color: ${(props)=> (props.variant === 'radius') ? ' #474790' : '#fff'};
-  color: ${(props)=> props.variant === 'radius' ? ' #fff' : '#000'}; */
-  background-color: ${(props)=>props.buttons ==="buttons" ? "#353455" : "#fff"};
+  color: ${(props)=> props.variant === 'radius' ?  COLORS.primary:  COLORS.white}; */
+  background-color: ${(props)=>props.buttons ==="buttons" ? COLORS.primary:  COLORS.white};
   color: ${(props)=> props.buttons === 'buttons' ?"#fff" : "#000"}; 
   }
 `;

@@ -3,12 +3,15 @@ import React from "react";
 import { StyledText } from "../text/Text.styles";
 import SubContainer from "../common/SubContainer";
 
-const Note = ({ note, medicine, homework }) => {
-  console.log("Props ===>",note, medicine, homework )
+
+const Note = ({ note, medicine, homework, date }) => {
+  console.log("Date..", date);
+
+
   return (
     <Grid item xs={12} container>
       <Grid item xs={12} sx={{ marginBottom: 1 }}>
-        <StyledText>02/10/2023</StyledText>
+        <StyledText>{new Date(date.seconds * 1000).toDateString()}</StyledText>
       </Grid>
       <SubContainer xs={12}>
         <Grid item component={"div"} xs={12}>

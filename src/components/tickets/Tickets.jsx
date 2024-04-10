@@ -5,7 +5,7 @@ import Container from "../common/Container";
 import { Grid } from "@mui/material";
 // import SubContainer from "../common/SubContainer";
 import Ticket from "./Ticket";
-import { collection, getDocs, orderBy, query } from "firebase/firestore";
+import { collection, doc, getDocs, orderBy, query, updateDoc } from "firebase/firestore";
 import { db } from "../../auth/Firebase";
 // import { StyledText } from "../text/Text.styles";
 
@@ -16,25 +16,25 @@ const Tickets = () => {
   const ticketsCollectionRef = collection(db, "Tickets");
   const doctor = JSON.parse(localStorage.getItem("doctor"));
 
-  // const getTickets = (username) => {
   let answeredTickets = [];
   let pendingTickets = [];
-  useEffect(() => {
+  const getTickets = (username) => {
+    answeredTickets=[];
+    pendingTickets=[];
     getDocs(query(ticketsCollectionRef, orderBy("updated_at", "desc")))
       .then((data) => {
         data.docs.map((doc, index) => {
           if (doc.data().receiverUsername === doctor.username) {
             if (doc.data().status === "pending") {
-              pendingTickets.push(doc.data());
+              pendingTickets.push({docId:doc.id, ...doc.data()});
             } else {
               answeredTickets.push(doc.data());
             }
           }
         });
         setPending(pendingTickets);
+        console.log("Pending Dataaaaaaaaaa",pendingTickets);
         setAnswered(answeredTickets);
-        console.log("A", pendingTickets);
-        console.log("P", answeredTickets);
       })
       // .then(() => {
       //   console.log("User Records", userRecords);
@@ -44,10 +44,31 @@ const Tickets = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+    };
 
-  // };
-  // getTickets();
+    useEffect(() => {
+
+      getTickets();
+    }, []);
+
+
+
+  const handelUpdateAnswer = async (id, answer) => {
+    console.log("ID", id, answer);
+ 
+      try {
+        await updateDoc(doc(db, "Tickets", id), {
+          answer: answer,
+          status:"answered"
+        });
+        getTickets();
+      } catch (error) {
+        console.log(error);
+      }
+  };
+
+
+
 
   return (
     <Container>
@@ -55,12 +76,12 @@ const Tickets = () => {
         <>There is Nothing to display</>
       ) : (
         <>
-          <Grid xs={12}>
+          <Grid item xs={12}>
             {pending.map((note, index) => {
-              return <Ticket key={index} note={note} />;
+              return <Ticket  key={index} updater={handelUpdateAnswer} note={note} />;
             })}
           </Grid>
-          <Grid xs={12}>
+          <Grid item xs={12}>
             {answered.map((note, index) => {
               return <Ticket key={index} note={note} />;
             })}

@@ -1,25 +1,31 @@
 import React, { useEffect, useState } from "react";
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 import { Box, Grid } from "@mui/material";
 import Divider from "@mui/material/Divider";
 import DeleteIcon from "@mui/icons-material/Delete";
 import NewspaperSharpIcon from "@mui/icons-material/NewspaperSharp";
 import { StyledText } from "../components/text/Text.styles";
 import Image from "../components/avatar/Image";
-import { getDocs, collection, onSnapshot, query, orderBy } from "firebase/firestore";
+import {
+  getDocs,
+  collection,
+  onSnapshot,
+  query,
+  orderBy,
+} from "firebase/firestore";
 import { db } from "../auth/Firebase";
-import SimpleDateTime from "react-simple-timestamp-to-date";
+import { getAnalytics , logEvent, } from "firebase/analytics";
+import { app } from "../auth/Firebase";
 
 const Dashboard = () => {
-  // const [patients, setPatients] = useState([]);
+  const analytics = getAnalytics(app);
+  logEvent(analytics,'Dashboard Log event succesfull')
   const [myPatients, setMyPatients] = useState([]);
-  const navigate = useNavigate()
-  // const getMYPatients = async ()=>{
-  //   const data = await getDocs(usersCollectionRef)
-  // }
+  const navigate = useNavigate();
+
   const usersCollectionRef = collection(db, "Users");
   const recordsCollectionRef = collection(db, "records");
-   console.log('record-collection', recordsCollectionRef)
+  console.log("record-collection", recordsCollectionRef);
   useEffect(() => {
     const doctor = JSON.parse(localStorage.getItem("doctor"));
     let patients = doctor.patientsUsernames;
@@ -28,7 +34,7 @@ const Dashboard = () => {
       .then((data) => {
         data.docs.map((doc) => {
           if (patients.includes(doc.data().username)) {
-            myPatients.push(doc.data());
+            myPatients.push({ docId: doc.id, ...doc.data() });
           }
         });
       })
@@ -40,22 +46,26 @@ const Dashboard = () => {
       .catch((error) => {
         console.log("Error Message:", error);
       });
+    localStorage.removeItem("userdata");
   }, []);
 
-  const getUsersRecords = (username) => {
+  const getUsersRecords = (item) => {
+    console.log("31923148452184694691264789");
+    const itemUserData = localStorage.setItem("userdata", JSON.stringify(item));
+
     let userRecords = [];
-    getDocs(query(recordsCollectionRef, orderBy('date', 'desc')))
+    getDocs(query(recordsCollectionRef, orderBy("date", "desc")))
       .then((data) => {
         data.docs.map((doc, index) => {
-          if (doc.data().username === username) {
+          if (doc.data().username === item.email) {
             userRecords.push(doc.data());
           }
         });
       })
       .then(() => {
         console.log("User Records", userRecords);
-        localStorage.setItem('records', JSON.stringify(userRecords));
-        navigate('/patient-diary')
+        localStorage.setItem("records", JSON.stringify(userRecords));
+        navigate("/patient-diary");
       })
       .catch((error) => {
         console.log(error);
@@ -73,7 +83,7 @@ const Dashboard = () => {
               xs={12}
               md={6}
               lg={3}
-              onClick={()=>getUsersRecords(item.email)}
+              onClick={() => getUsersRecords(item)}
             >
               <Box
                 bgcolor="#353455"

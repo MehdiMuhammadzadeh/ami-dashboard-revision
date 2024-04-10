@@ -20,7 +20,7 @@ const firebaseConfig = {
   measurementId: "G-RM8LBBNXTZ",
 };
 
-const app = initializeApp(firebaseConfig);
+export const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
 
@@ -46,14 +46,3 @@ export const createUser = async (auth, email, password) => {
     });
 };
 
-// export const signInWithGoogle = () => {
-//   signInWithPopup(auth, provider)
-//     .then((result) => {
-//       const name = result.user.displayName;
-//       const email = result.user.email;
-//       const profileAvatar = result.user.photoURL;
-//     })
-//     .catch((error) => {
-//       console.log(error);
-//     });
-// };

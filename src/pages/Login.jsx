@@ -70,7 +70,7 @@ const Login = () => {
     data.docs.map((doc) => {
       // if (doc.data().email === values.email.value) {
       if (doc.data().email === values.email.value) {
-        localStorage.setItem("doctor", JSON.stringify(doc.data()));
+        localStorage.setItem("doctor", JSON.stringify({docId:doc.id, ...doc.data()}));
       }
       // ...doc.data(),
       // id: doc.id,
