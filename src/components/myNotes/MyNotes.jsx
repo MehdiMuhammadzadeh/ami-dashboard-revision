@@ -1,52 +1,91 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Grid } from "@mui/material";
 import Note from "./Note";
 import Container from "../common/Container";
 import { StyledText } from "../text/Text.styles";
 import { StyledTextarea } from "../textarea/Textarea.styles";
 import { StyledButton } from "../button/Button.styles";
+import { addDoc, collection, getDocs, query } from "firebase/firestore";
+import { db } from "../../auth/Firebase";
 
 const MyNotes = () => {
-  const notes = [1, 2, 3, 4, 5];
   const [isOpen, setIsopen] = useState(false);
   const [myNotes, setMynotes] = useState([]);
+
   const [note, setNote] = useState("");
   const [medicine, setMedicine] = useState("");
   const [homework, setHomework] = useState("");
 
-  const HandleSubmit = (e) => {
-    e.preventDefault();
-    const newNote = {
-      id: Math.round(1 + Math.random()),
-      note: note,
-      medicine: medicine,
-      homework: homework,
-    };
-    // setMynotes([...myNotes, newNote]);
-    if (
-      newNote.note &&
-      newNote.medicine &&
-      newNote.homework &&
-      !myNotes.includes(newNote.note, newNote.medicine, newNote.homework)
-    ) {
-      myNotes.push(newNote);
-      setMynotes([...myNotes]);
-    }
-    // setNote("");
-    // setMedicine("");
-    // setHomework("");
+  const notesCollectionRef = collection(db, "Notes");
+  const userCollectionRef = collection(db, "users");
 
-    setIsopen(false);
+  const doctorData = JSON.parse(localStorage.getItem("doctor"));
+  const userData = JSON.parse(localStorage.getItem("userdata"));
+  console.log("Userrrr Data", userData);
+  console.log("Doctor Data", doctorData);
+
+    let notes =[];
+  const getNotesList = async () => {
+    try {
+      // getDocs(query(notesCollectionRef, orderBy("updated_at", "desc")))
+      const noteData = await getDocs(notesCollectionRef);
+      const filteredNotes = noteData.docs.map((doc) => {
+        if (
+          doc.data().doctorsUsername === doctorData.username &&
+          doc.data().patientUsername === userData.username
+        ) {
+          notes.push({docId:doc.id, ...doc.data()})
+        }
+      });
+      setMynotes(notes);
+      console.log(notes, 'nootes')
+    } catch (error) {
+      console.log(error);
+    }
   };
+
+  useEffect(() => {
+    getNotesList();
+  }, []);
+
+  console.log(myNotes);
 
   const handleAddNoteBtn = () => {
     setIsopen(!isOpen);
   };
 
+  const handleSendNote = async (event) => {
+    // console.log(doctorData.email);
+    // console.log("", doctorData.username);
+
+    event.preventDefault();
+    console.log(new Date());
+    try {
+      await addDoc(notesCollectionRef, {
+        created_at: new Date(),
+        updated_at:'',
+        note: note,
+        medicine: medicine,
+        homework: homework,
+        doctorsUsername:doctorData.username,
+        doctorId:doctorData.docId,
+        patientId:userData.docId,
+        patientUsername:userData.username,
+      });
+      getNotesList();
+    } catch (error) {}
+
+    setNote("");
+    setMedicine("");
+    setHomework("");
+
+    handleAddNoteBtn();
+  };
+
   return (
     <Container sx={{ position: "relative" }}>
       {isOpen ? (
-        <form onSubmit={HandleSubmit}>
+        <form onSubmit={handleSendNote}>
           <Grid
             component={"div"}
             item
@@ -177,16 +216,21 @@ const MyNotes = () => {
           +
         </StyledText>
       </Grid>
-      {myNotes.map((index) => {
-        return (
-          <Note
-            note={note}
-            medicine={medicine}
-            homework={homework}
-            key={index}
-          />
-        );
-      })}
+      {isOpen ? (
+        <></>
+      ) : (
+        myNotes.map((item, index) => {
+          return (
+            <Note
+              date={item.created_at}
+              note={item.note}
+              medicine={item.medicine}
+              homework={item.homework}
+              key={index}
+            />
+          );
+        })
+      )}
     </Container>
   );
 };

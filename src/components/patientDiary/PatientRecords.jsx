@@ -9,6 +9,7 @@ import AcUnitSharpIcon from "@mui/icons-material/AcUnitSharp";
 import LocalPizzaSharpIcon from "@mui/icons-material/LocalPizzaSharp";
 import SportsRugbySharpIcon from "@mui/icons-material/SportsRugbySharp";
 import RollerSkatingSharpIcon from "@mui/icons-material/RollerSkatingSharp";
+import turtle from '../../assets/turtle.png';
 import Icon from '@mui/material/Icon';
 import './PatientsRecord.css';
 const PatientRecords = ({
@@ -24,7 +25,11 @@ const PatientRecords = ({
 }) => {
 
   const [recordDetail, setRecordDetail] = useState({});
-
+  // let feelingIcon = findIcon(item.feeling, feelingIcons) 
+  // let weatherIcon = findIcon(item.weather, weathers) 
+  // let badHabitIcon = item.drugIds.length > 0 ? findIcon(item.drugIds[0], badHabits) : null 
+  // let edibleIcon = item.foodIds.length > 0 ? findIcon(item.foodIds[0], edibles) : null 
+  // let activityIcon = item.activityIds.length > 0 ? findIcon(item.activityIds[0], activities) : null
 
   useEffect(()=>{
     propTest(recordDetail);
@@ -71,7 +76,8 @@ const PatientRecords = ({
           <Grid item component={"div"}>
             <TagFacesSharpIcon style={{ color: "#98a86a" }} />
             <AcUnitSharpIcon />
-            <RollerSkatingSharpIcon style={{ color: "#f5b869" }} />
+              <RollerSkatingSharpIcon style={{ color: "#f5b869" }} />
+              <img  src={turtle} style={{ tintColor:'red'}} alt="fireSpot"/>
           </Grid>
           <Grid item component={"div"}>
             <SnoozeSharpIcon style={{ color: "#49e600" }} />
@@ -79,6 +85,9 @@ const PatientRecords = ({
           <Grid item component={"div"}>
             <LocalPizzaSharpIcon style={{ color: "#f03e11" }} />
             {/* <Icon>add_circle</Icon> */}
+            {/* {
+              feelingIcon ? <Icon name={feelingIcon.icon} color={feelingIcon.color} /> :null
+            } */}
             <SportsRugbySharpIcon style={{ color: "#b95c04" }} />
           </Grid>
         </Grid>

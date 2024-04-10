@@ -1,12 +1,23 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import SubContainer from "../common/SubContainer";
 import { Divider, Grid } from "@mui/material";
 import { StyledText } from "../text/Text.styles";
 import Image from "../avatar/Image";
 import { StyledTextarea } from "../textarea/Textarea.styles";
 import SendSharpIcon from "@mui/icons-material/SendSharp";
-const Ticket = ({ note }) => {
-  console.log("Note", note);
+
+const Ticket = ({ note,updater }) => {
+
+
+  const [answer, setAnswer] = useState("");
+
+
+  const onSubmitHandler = (docId)=>{
+    if(answer.trim() !== "") {
+      updater(docId, answer);
+      setAnswer("");
+    }
+  }
 
   return (
     <Grid item xs={12} container>
@@ -25,7 +36,7 @@ const Ticket = ({ note }) => {
             <Image src={"https://picsum.photos/200"} />
           </Grid>
           <Grid item>
-            <StyledText variant="textTitle">{note.doctorsName}</StyledText>
+            <StyledText variant="textTitle">{note.senderUsername}</StyledText>
           </Grid>
           <Divider
             style={{
@@ -40,7 +51,7 @@ const Ticket = ({ note }) => {
             <StyledText variant="textTitle">Question:</StyledText>
           </Grid>
           <Grid item xs={12} sx={{ paddingLeft: 2 }}>
-            <StyledText>{note.description}</StyledText>
+            <StyledText>{note.title}</StyledText>
           </Grid>
         </Grid>
         {note.status === "pending" ? (
@@ -48,11 +59,11 @@ const Ticket = ({ note }) => {
             <StyledTextarea
               disabled={note.status === "pending" ? false : true}
               placeholder="Type some answers"
+              onChange={(e) => setAnswer(e.target.value)}
+              value={answer}
             />
             <SendSharpIcon
-              onClick={() => {
-                console.log("hi");
-              }}
+              onClick={() => onSubmitHandler(note.docId)}
               sx={{
                 position: "absolute",
                 top: 60,
@@ -68,7 +79,10 @@ const Ticket = ({ note }) => {
             />
           </Grid>
         ) : (
-          <></>
+          <Grid>
+            <StyledText variant="textTitle">Answer:</StyledText>
+            <StyledText style={{ marginTop: "10px" }}>{note.answer}</StyledText>
+          </Grid>
         )}
       </SubContainer>
     </Grid>

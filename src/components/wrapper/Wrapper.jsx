@@ -1,13 +1,19 @@
 import { Grid } from "@mui/material";
 import React from "react";
-
-const Wrapper = ({children,justifyItems,alignItems,justifyContent,alignContent}) => {
+import { COLORS } from "../../styles/colors";
+const Wrapper = ({
+  children,
+  justifyItems,
+  alignItems,
+  justifyContent,
+  alignContent,
+}) => {
   return (
     <Grid
       container
       sx={{
         minHeight: "100vh",
-        backgroundColor: "#182631",
+        backgroundColor: COLORS.darkBackground,
       }}
       justifyItems={justifyItems}
       alignItems={alignItems}
