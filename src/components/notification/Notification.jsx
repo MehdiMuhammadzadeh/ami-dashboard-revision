@@ -111,8 +111,8 @@ const Notification = () => {
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
           username: "Notif@gmail.com", // this is the patient's username that you entered or searched
-          title: `Ticket Answered`,
-          message: `Your ticket has been answered by ${doctorData.username}`,
+          title: `Connection Request`,
+          message: `New Connectrion Request From ${doctorData.username}`,
         })
       }).then((response) => {
         console.log(response)
