@@ -12,6 +12,8 @@ import Tickets from "../components/tickets/Tickets";
 import PatientDiary from "../components/patientDiary/PatientDiary";
 import Statistics from "../components/statistics/Statistics";
 import Doctor from "../pages/Doctor";
+import Notification from "../components/notification/Notification";
+
 const Router = () => {
   return (
     <>
@@ -25,6 +27,7 @@ const Router = () => {
         <Route path="tickets" element={<Tickets />} />
         <Route path="patient-diary" element={<PatientDiary />} />
         <Route path="statistics" element={<Statistics />} />
+        <Route path="notification" element={<Notification />} />
 
        </Route>
 

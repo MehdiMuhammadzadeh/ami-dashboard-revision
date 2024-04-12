@@ -11,11 +11,14 @@ import React, { useEffect, useRef, useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import IconButton from "@mui/material/IconButton";
 import NotificationsActiveSharpIcon from "@mui/icons-material/NotificationsActiveSharp";
+import { useNavigate } from "react-router-dom";
+
+
 const drawerWidth = 250;
 
 const Header = ({ isClosing, setMobileOpen, mobileOpen }) => {
   const [isAlertOpened, setIsAlertOpend] = useState(false);
-
+  const navigate = useNavigate();
  
   const handleDrawerToggle = () => {
     if (!isClosing) {
@@ -26,9 +29,9 @@ const Header = ({ isClosing, setMobileOpen, mobileOpen }) => {
   useEffect(()=>{
     console.log('rendering')
     userData = JSON.parse(localStorage.getItem('userdata'));
+    console.log("userdata", userData)
   },[])
   
-  console.log("userdata", userData)
 
   return (
     <AppBar
@@ -49,39 +52,11 @@ const Header = ({ isClosing, setMobileOpen, mobileOpen }) => {
         >
           <MenuIcon />
         </IconButton>
-        {isAlertOpened ? (
-          <Alert
-            severity="success"
-            color="warning"
-            sx={{
-              width: { xs: "85%", lg: "95%" },
-              height: "150px",
-              position: "absolute",
-              top: "10px",
-              right: { xs: "45px", lg: "60px" },
-              // backgroundColor:'#203342',
-              // boxShadow:'1px 2px 3px rgba(255,255,255,0.5)'
-            }}
-            action={
-              <Button
-                onClick={() => setIsAlertOpend(!isAlertOpened)}
-                color="inherit"
-                size="small"
-              >
-                UNDO
-              </Button>
-            }
-          >
-            <Grid item>This Alert uses a Button component for its action.</Grid>
-            <Grid item>This Alert uses a Button component for its action.</Grid>
-          </Alert>
-        ) : (
-          ""
-        )}
-             <h5>{userData ? userData.username : 'no user selected'}</h5>
+        
+        <h5>{userData ? userData.username : 'no user selected'}</h5>
         <NotificationsActiveSharpIcon
           onClick={() => {
-            setIsAlertOpend(!isAlertOpened);
+            navigate("/notification")
           }}
           sx={{
             justifyContent: "flex-end",
