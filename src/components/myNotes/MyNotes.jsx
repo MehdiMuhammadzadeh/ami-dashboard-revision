@@ -7,6 +7,7 @@ import { StyledTextarea } from "../textarea/Textarea.styles";
 import { StyledButton } from "../button/Button.styles";
 import { addDoc, collection, getDocs, query } from "firebase/firestore";
 import { db } from "../../auth/Firebase";
+import { COLORS } from "../../styles/colors";
 
 const MyNotes = () => {
   const [isOpen, setIsopen] = useState(false);
@@ -24,7 +25,7 @@ const MyNotes = () => {
   console.log("Userrrr Data", userData);
   console.log("Doctor Data", doctorData);
 
-    let notes =[];
+  let notes = [];
   const getNotesList = async () => {
     try {
       // getDocs(query(notesCollectionRef, orderBy("updated_at", "desc")))
@@ -34,11 +35,11 @@ const MyNotes = () => {
           doc.data().doctorsUsername === doctorData.username &&
           doc.data().patientUsername === userData.username
         ) {
-          notes.push({docId:doc.id, ...doc.data()})
+          notes.push({ docId: doc.id, ...doc.data() });
         }
       });
       setMynotes(notes);
-      console.log(notes, 'nootes')
+      console.log(notes, "nootes");
     } catch (error) {
       console.log(error);
     }
@@ -63,14 +64,14 @@ const MyNotes = () => {
     try {
       await addDoc(notesCollectionRef, {
         created_at: new Date(),
-        updated_at:'',
+        updated_at: "",
         note: note,
         medicine: medicine,
         homework: homework,
-        doctorsUsername:doctorData.username,
-        doctorId:doctorData.docId,
-        patientId:userData.docId,
-        patientUsername:userData.username,
+        doctorsUsername: doctorData.username,
+        doctorId: doctorData.docId,
+        patientId: userData.docId,
+        patientUsername: userData.username,
       });
       getNotesList();
     } catch (error) {}
@@ -93,7 +94,7 @@ const MyNotes = () => {
             sx={{
               position: "fixed",
               width: { xs: "95%", lg: "60%" },
-              backgroundColor: "#faddb7",
+              backgroundColor: `${COLORS.darkCard}`,
               top: { xs: "100px", lg: "150px" },
               left: { xs: "10px", lg: "400px" },
               borderRadius: "10px",
@@ -111,14 +112,13 @@ const MyNotes = () => {
                 display: "flex",
                 justifyContent: "space-between",
                 alignItems: "center",
-                // backgroundColor: "red",
                 marginBottom: "1rem",
               }}
             >
               <Grid item component={"div"}>
                 <StyledText
                   variant="textTitle"
-                  style={{ color: "#000", fontSize: "1.5rem" }}
+                  style={{ color: `${COLORS.warning}`, fontSize: "1.5rem" }}
                 >
                   Add Note
                 </StyledText>
@@ -128,13 +128,14 @@ const MyNotes = () => {
                   variant="textTitle"
                   onClick={() => setIsopen(!isOpen)}
                   style={{
-                    color: "#ff0000",
+                    color: `${COLORS.white}`,
                     fontWeight: "bold",
                     cursor: "pointer",
                     boxShadow: "2px 2px 5px rgba(0,0,0,0.5)",
                     paddingBlock: "0.5rem",
                     paddingInline: "1.2rem",
                     borderRadius: "5px",
+                    backgroundColor: `${COLORS.danger}`,
                   }}
                 >
                   close
@@ -148,7 +149,6 @@ const MyNotes = () => {
                   onChange={(e) => setNote(e.target.value)}
                   placeholder="Note ..."
                   style={{
-                    backgroundColor: "#63619e",
                     boxShadow: "2px 2px 5px rgba(0,0,0,0.5)",
                   }}
                 />
@@ -159,7 +159,6 @@ const MyNotes = () => {
                   onChange={(e) => setMedicine(e.target.value)}
                   placeholder="Medicine ..."
                   style={{
-                    backgroundColor: "#63619e",
                     boxShadow: "2px 2px 5px rgba(0,0,0,0.5)",
                   }}
                 />
@@ -170,7 +169,6 @@ const MyNotes = () => {
                   onChange={(e) => setHomework(e.target.value)}
                   placeholder="Homework ..."
                   style={{
-                    backgroundColor: "#63619e",
                     boxShadow: "2px 2px 5px rgba(0,0,0,0.5)",
                   }}
                 />
@@ -197,7 +195,7 @@ const MyNotes = () => {
         width={"50px"}
         height={"50px"}
         sx={{
-          backgroundColor: "#f5b869",
+          backgroundColor: `${COLORS.primary}`,
           borderRadius: "50%",
           display: "flex",
           justifyContent: "center",
@@ -221,13 +219,13 @@ const MyNotes = () => {
       ) : (
         myNotes.map((item, index) => {
           return (
-            <Note
-              date={item.created_at}
-              note={item.note}
-              medicine={item.medicine}
-              homework={item.homework}
-              key={index}
-            />
+              <Note
+                date={item.created_at}
+                note={item.note}
+                medicine={item.medicine}
+                homework={item.homework}
+                key={index}
+              />
           );
         })
       )}

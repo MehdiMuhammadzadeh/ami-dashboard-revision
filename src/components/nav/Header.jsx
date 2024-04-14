@@ -12,7 +12,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import IconButton from "@mui/material/IconButton";
 import NotificationsActiveSharpIcon from "@mui/icons-material/NotificationsActiveSharp";
 import { useNavigate } from "react-router-dom";
-
+import {COLORS} from '../../styles/colors'
 
 const drawerWidth = 250;
 
@@ -35,7 +35,7 @@ const Header = ({ isClosing, setMobileOpen, mobileOpen }) => {
 
   return (
     <AppBar
-      style={{ backgroundColor: "#182631" }}
+      style={{ backgroundColor: `${COLORS.darkCard}` }}
       position="fixed"
       sx={{
         width: { sm: `calc(100% - ${drawerWidth}px)` },

@@ -7,26 +7,29 @@ import SnoozeSharpIcon from "@mui/icons-material/SnoozeSharp";
 import Image from "../avatar/Image";
 import PatientGalary from "./PatientGalary";
 import SubContainer from "../common/SubContainer";
+import { COLORS } from "../../styles/colors";
 
 const PatientRecordsDescription = ({ propDesDetail }) => {
   console.log("Props Descriptopn Detail", propDesDetail);
   const [detailRecord, setDetailRecord] = useState({});
   const [showDetail, setShowDetail] = useState(false);
-  // const questions = [
-  //   "Description:",
-  //   "Feeling Description:",
-  //   "Did anything make you feel bad?",
-  //   "if you had Drugs or Peels or Alcohol? how did it feel?",
-  // ];
 
-
-  console.log('Teeeeeeeeeeest',propDesDetail.description === "");
   return (
     <>
       {propDesDetail?.description == null || undefined ? (
-        <>Please Select a Record from the list</>
+        <Grid item sx={{ textAlign: "center", marginTop: 20 }}>
+          <StyledText
+            variant="textTitle"
+            style={{
+              fontSize: "2rem",
+              color: `${COLORS.danger}`,
+            }}
+          >
+            Please Select a Record from the Patient Records List
+          </StyledText>
+        </Grid>
       ) : (
-        <SubContainer boxShadow={"2px 4px 4px rgba(0,0,0,0.5)"}>
+        <SubContainer enableHover boxShadow={"2px 4px 4px rgba(0,0,0,0.5)"}>
           <Grid item container component={"div"} gap={2}>
             <Grid item container component={"div"}>
               <Grid
@@ -122,10 +125,9 @@ const PatientRecordsDescription = ({ propDesDetail }) => {
                 </Grid>
               </Grid>
 
-
               <Grid item container component={"div"}>
                 <StyledText variant="textTitle">
-                   Describe Your Feelings:
+                  Describe Your Feelings:
                 </StyledText>
                 <Grid item component={"div"} sx={{ paddingLeft: 2 }} xs={12}>
                   <StyledText component={"p"}>
@@ -133,7 +135,6 @@ const PatientRecordsDescription = ({ propDesDetail }) => {
                   </StyledText>
                 </Grid>
               </Grid>
-
 
               <Grid item container component={"div"}>
                 <StyledText variant="textTitle">
@@ -147,13 +148,11 @@ const PatientRecordsDescription = ({ propDesDetail }) => {
               </Grid>
 
               <Grid item container component={"div"}>
-                <StyledText variant="textTitle">
-                  Todays Photos:
-                </StyledText>
+                <StyledText variant="textTitle">Todays Photos:</StyledText>
                 <Grid item component={"div"} sx={{ paddingLeft: 2 }} xs={12}>
                   <StyledText component={"p"}>
-                   {/* {propDesDetail.photoIds} */}
-                   import photo here later 
+                    {/* {propDesDetail.photoIds} */}
+                    import photo here later
                   </StyledText>
                 </Grid>
               </Grid>
@@ -164,7 +163,7 @@ const PatientRecordsDescription = ({ propDesDetail }) => {
                 </StyledText>
                 <Grid item component={"div"} sx={{ paddingLeft: 2 }} xs={12}>
                   <StyledText component={"p"}>
-                    {propDesDetail.activityIds}           
+                    {propDesDetail.activityIds}
                   </StyledText>
                 </Grid>
               </Grid>
@@ -174,14 +173,14 @@ const PatientRecordsDescription = ({ propDesDetail }) => {
                 </StyledText>
                 <Grid item component={"div"} sx={{ paddingLeft: 2 }} xs={12}>
                   <StyledText component={"p"}>
-                    {propDesDetail.foodIds}           
+                    {propDesDetail.foodIds}
                   </StyledText>
                 </Grid>
               </Grid>
 
               <Grid item container component={"div"}>
                 <StyledText variant="textTitle">
-                 Did you have Drugs or Alchohol? how did it Feel?
+                  Did you have Drugs or Alchohol? how did it Feel?
                 </StyledText>
                 <Grid item component={"div"} sx={{ paddingLeft: 2 }} xs={12}>
                   <StyledText component={"p"}>

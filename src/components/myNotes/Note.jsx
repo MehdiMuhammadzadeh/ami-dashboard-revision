@@ -13,7 +13,7 @@ const Note = ({ note, medicine, homework, date }) => {
       <Grid item xs={12} sx={{ marginBottom: 1 }}>
         <StyledText>{new Date(date.seconds * 1000).toDateString()}</StyledText>
       </Grid>
-      <SubContainer xs={12}>
+      <SubContainer xs={12} enableHover>
         <Grid item component={"div"} xs={12}>
           <StyledText variant="textTitle">Note:</StyledText>
         </Grid>

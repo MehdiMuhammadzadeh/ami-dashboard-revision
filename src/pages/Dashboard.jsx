@@ -16,6 +16,7 @@ import {
 import { db } from "../auth/Firebase";
 import { getAnalytics , logEvent, } from "firebase/analytics";
 import { app } from "../auth/Firebase";
+import {COLORS} from '../styles/colors'
 
 const Dashboard = () => {
   const analytics = getAnalytics(app);
@@ -73,7 +74,7 @@ const Dashboard = () => {
   };
 
   return (
-    <Grid container sx={{ height: "", backgroundColor: "#353455" }}>
+    <Grid container sx={{ height: "", backgroundColor: `${COLORS.darkBackground}` }}>
       <Grid container spacing={4} flex={1} height="100%">
         {myPatients.map((item, index) => {
           return (
@@ -86,11 +87,10 @@ const Dashboard = () => {
               onClick={() => getUsersRecords(item)}
             >
               <Box
-                bgcolor="#353455"
                 width="100%"
                 height="250px"
                 borderRadius={2}
-                sx={{ boxShadow: "2px 2px 5px rgba(0,0,0,0.5)" }}
+                sx={{ boxShadow: "2px 2px 5px rgba(0,0,0,0.5)", backgroundColor:`${COLORS.darkCard}`}}
               >
                 <Grid item container sx={{ padding: 2 }}>
                   <Grid
