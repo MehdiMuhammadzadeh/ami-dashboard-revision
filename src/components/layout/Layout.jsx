@@ -21,6 +21,11 @@ const Layout = () => {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [isClosing, setIsClosing] = React.useState(false);
   const [isNavActive, setIsNavActive] = React.useState(false);
+  const [isActive, setIsActive] = React.useState(false);
+
+  const selected =
+  { title: "Home", to: "/dashboard" }
+
   const test= [
     { title: "Statistics", to: "statistics"},
     {title: "PatientDiary",to: "patient-diary"},
@@ -38,54 +43,42 @@ const Layout = () => {
   };
 
   const drawer = (
-    <div>
+    <Grid>
       <Toolbar style={{ backgroundColor: `${COLORS.darkCard}` }}>
         <StyledText variant="textTitle" style={{cursor:'pointer'}} onClick={() => navigate("/")}>
           AMI Dashboard
         </StyledText>
       </Toolbar>
       <Divider />
-      <Grid
-        container
-        gap={1}
-        sx={{ justifyContent: "center", alignItems: "center" }}
-      >
-        <Grid
-          item
-          xs={12}
-          sx={{ display: "flex", paddingTop: 1, paddingLeft: "10px" }}
-        >
-          <Image
-            src={
-              "https://picsum.photos/200"
-            }
-          />
+      <Grid container gap={1} sx={{ justifyContent: "center", alignItems: "center" }}>
+        <Grid item xs={12} sx={{ display: "flex", paddingTop: 1, paddingLeft: "10px" }}>
+          <Image src={"https://picsum.photos/200"}/>
         </Grid>
-        <Grid
-          item
-          xs={12}
-          sx={{ textAlign: "left", paddingLeft: "10px", paddingBottom: "5px" }}
-        >
+        <Grid item xs={12} sx={{ textAlign: "left", paddingLeft: "10px", paddingBottom: "5px" }}>
           <StyledText variant="textTitle">John Dou</StyledText>
           <StyledText component={"p"}>john.dou@gmail.com</StyledText>
         </Grid>
       </Grid>
       <Divider style={{ backgroundColor: "#fff" }} />
+        <ListItemButton onClick={() => setIsActive(false)}>
+            <StyledNavLink to={selected.to}>{selected.title}</StyledNavLink>
+        </ListItemButton>
       <List
         // component="span"
         // width="100%"
         // cursor="pointer"
         // onMouseOver={() => setIsNavActive(true)}
         // onMouseOut={() => setIsNavActive(false)}
-        onClick={() => setIsNavActive(!isNavActive)}
+        onClick={() => {
+            setIsNavActive(!isNavActive);
+                setIsActive(!isActive);
+        }}
       >
         <ListItem sx={{ paddingBottom: 0, margin: 0 }}>
           <ListItemText
             primary={"Patients"}
-            // color: isNavActive ? "#f5b869" : "#fff"
-            sx={{ cursor: "pointer", padding: 0, margin: 0}}
-          /> 
-   
+            sx={{color: isActive ? "#f5b869" : "#fff", cursor: "pointer", padding: 0, margin: 0}}
+          />
         </ListItem>
       </List>
       <Collapse
@@ -96,7 +89,7 @@ const Layout = () => {
           {test.map((item, index) => {
             return (
               <ListItem key={index} disablePadding>
-                <ListItemButton>
+                <ListItemButton onClick={() => setIsActive(false)}>
                   {/* <ListItemIcon>
                 {index % 2 === 0 ? <LogoutSharpIcon /> : <HomeSharpIcon />}
               </ListItemIcon> */}
@@ -104,7 +97,7 @@ const Layout = () => {
                     primary={item.title}
                     onClick={() => {
                       navigate(item.to);
-                      
+
                     }}
                     sx={{color:item.isSelected ? 'red' : 'blue'}}
                   /> */}
@@ -118,12 +111,11 @@ const Layout = () => {
       {/* "Tickets", "Home", "Logout" */}
       <List>
         {[
-          { title: "Tickets", to: "/tickets" },
-          { title: "Home", to: "/dashboard" },
+          { title: "Tickets", to: "tickets" },
           { title: "Logout", to: "/" },
         ].map((item, index) => (
           <ListItem key={index} disablePadding>
-            <ListItemButton>
+            <ListItemButton onClick={() => setIsActive(false)}>
               {/* <ListItemIcon>
                 {index % 2 === 0 ? <LogoutSharpIcon /> : <HomeSharpIcon />}
               </ListItemIcon> */}
@@ -136,7 +128,7 @@ const Layout = () => {
           </ListItem>
         ))}
       </List>
-    </div>
+    </Grid>
   );
   // Remove this const when copying and pasting into your project.
   //   const container = window !== undefined ? () => window().document.body : undefined;
