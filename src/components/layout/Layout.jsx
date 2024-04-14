@@ -14,7 +14,7 @@ import { Collapse, Grid } from "@mui/material";
 import { StyledText } from "../text/Text.styles";
 import Image from "../avatar/Image";
 import { StyledNavLink } from "../navLink/NavLink.styles";
-
+import {COLORS} from '../../styles/colors'
 const drawerWidth = 250;
 
 const Layout = () => {
@@ -44,7 +44,7 @@ const Layout = () => {
 
   const drawer = (
     <Grid>
-      <Toolbar style={{ backgroundColor: "#182631" }}>
+      <Toolbar style={{ backgroundColor: `${COLORS.darkCard}` }}>
         <StyledText variant="textTitle" style={{cursor:'pointer'}} onClick={() => navigate("/")}>
           AMI Dashboard
         </StyledText>
@@ -83,7 +83,7 @@ const Layout = () => {
       </List>
       <Collapse
         in={isNavActive}
-        sx={{ backgroundColor: "#25343f", paddingLeft: 3 }}
+        sx={{ backgroundColor: `${COLORS.darkCard}`, paddingLeft: 3 }}
       >
         <List>
           {test.map((item, index) => {
@@ -136,7 +136,7 @@ const Layout = () => {
   return (
     <>
       {/* <Header /> */}
-      <Box sx={{ display: "flex", backgroundColor: "#203342" }}>
+      <Box sx={{ display: "flex", backgroundColor: `${COLORS.darkBackground}` }}>
         <CssBaseline />
         <Header
           isClosing={isClosing}
@@ -153,7 +153,7 @@ const Layout = () => {
             //   container={container}
             PaperProps={{
               sx: {
-                backgroundColor: "#2a4052",
+                backgroundColor: `${COLORS.darkCard}`,
                 color: "#fff",
               },
             }}
@@ -177,7 +177,7 @@ const Layout = () => {
           <Drawer
             PaperProps={{
               sx: {
-                backgroundColor: "#101920",
+                backgroundColor: `${COLORS.darkCard}`,
                 boxShadow:'3px 10px 5px rgba(0,0,0,0.3)',
                 color: "#fff",
               },

@@ -47,7 +47,7 @@ const series = [
 const Statistics = () => {
   return (
     <Container>
-      <SubContainer xs={12}>
+      <SubContainer xs={12} enableHover={true}>
         {[1, 2, 3, 4, 5,6].map((item, index) => {
           return (
             <ChartWrapper key={index} xs={12} sx={{ margin: 1 }}>
