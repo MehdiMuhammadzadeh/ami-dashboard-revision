@@ -22,6 +22,15 @@ const Layout = () => {
   const [isClosing, setIsClosing] = React.useState(false);
   const [isNavActive, setIsNavActive] = React.useState(false);
   const [isActive, setIsActive] = React.useState(false);
+  const [userName, setUserName] = React.useState(null);
+  const adr = window.location.href
+
+    React.useEffect(() => {
+        const userdata = JSON.parse(localStorage.getItem("userdata"));
+        setUserName(userdata);
+        console.log(userdata)
+    }, [adr]);
+
 
   const selected =
   { title: "Home", to: "/dashboard" }
@@ -75,10 +84,10 @@ const Layout = () => {
         }}
       >
         <ListItem sx={{ paddingBottom: 0, margin: 0 }}>
-          <ListItemText
-            primary={"Patients"}
-            sx={{color: isActive ? "#f5b869" : "#fff", cursor: "pointer", padding: 0, margin: 0}}
-          />
+            <ListItemText
+                primary={userName ? userName.username : 'Patients'}
+                sx={{color: isActive ? "#f5b869" : "#fff", cursor: "pointer", padding: 0, margin: 0}}
+                />
         </ListItem>
       </List>
       <Collapse
