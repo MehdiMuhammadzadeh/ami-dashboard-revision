@@ -65,7 +65,6 @@ const PatientDiary = () => {
 
           <Grid
             item
-            container
             gap={1}
             height={"83vh !important"}
             sx={{
@@ -73,12 +72,12 @@ const PatientDiary = () => {
               "&::-webkit-scrollbar": {
                 width: "8px",
                 backgroundColor: "#000",
-            
+
               },
               "&::-webkit-scrollbar-thumb": {
                 backgroundColor: COLORS.darkBorder,
                 borderRadius: "4px",
-        
+
               },
             }}
           >
