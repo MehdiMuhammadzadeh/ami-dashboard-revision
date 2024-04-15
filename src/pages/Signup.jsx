@@ -188,7 +188,7 @@ const Signup = () => {
   const doctorCollectionRef = collection(db, "Doctors");
 
   const hanldeSubmit = async () => {
-    console.log(values);
+   
 
     try {
       await createUserWithEmailAndPassword(
@@ -211,8 +211,6 @@ const Signup = () => {
         } catch (error) {
           const errorCode = error.code;
           const errorMessage = error.message;
-          console.log("Error Code", errorCode);
-          console.log("Error Message", errorMessage);
           navigate('/signup')
 
         }
@@ -222,7 +220,6 @@ const Signup = () => {
     }
   };
 
-  // console.log(auth?.currentUser?.email)
   return (
     <Wrapper alignContent={"center"} justifyContent={"center"}>
       <RegisterContainer

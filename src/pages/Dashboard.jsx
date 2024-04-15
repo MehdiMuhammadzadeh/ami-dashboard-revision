@@ -14,13 +14,13 @@ import {
   orderBy,
 } from "firebase/firestore";
 import { db } from "../auth/Firebase";
-import { getAnalytics , logEvent, } from "firebase/analytics";
+import { getAnalytics, logEvent } from "firebase/analytics";
 import { app } from "../auth/Firebase";
-import {COLORS} from '../styles/colors'
+import { COLORS } from "../styles/colors";
 
 const Dashboard = () => {
   const analytics = getAnalytics(app);
-  logEvent(analytics,'Dashboard Log event succesfull')
+  logEvent(analytics, "Dashboard Log event succesfull");
   const [myPatients, setMyPatients] = useState([]);
   const navigate = useNavigate();
 
@@ -74,7 +74,10 @@ const Dashboard = () => {
   };
 
   return (
-    <Grid container sx={{ height: "", backgroundColor: `${COLORS.darkBackground}` }}>
+    <Grid
+      container
+      sx={{ height: "", backgroundColor: `${COLORS.darkBackground}` }}
+    >
       <Grid container spacing={4} flex={1} height="100%">
         {myPatients.map((item, index) => {
           return (
@@ -90,7 +93,15 @@ const Dashboard = () => {
                 width="100%"
                 height="250px"
                 borderRadius={2}
-                sx={{ boxShadow: "2px 2px 5px rgba(0,0,0,0.5)", backgroundColor:`${COLORS.darkCard}`}}
+                sx={{
+                  boxShadow: "2px 2px 5px rgba(0,0,0,0.5)",
+                  backgroundColor: `${COLORS.darkCard}`,
+                  "&:hover": {
+                    backgroundColor:"#1d1e2f",
+                    cursor:"pointer",
+                    transition: "background-color 0.5s ease-in-out",
+                  },
+                }}
               >
                 <Grid item container sx={{ padding: 2 }}>
                   <Grid
