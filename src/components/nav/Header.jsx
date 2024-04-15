@@ -1,13 +1,8 @@
 import {
-  Alert,
   AppBar,
-  Box,
-  Button,
-  Grid,
   Toolbar,
-  Typography,
 } from "@mui/material";
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import IconButton from "@mui/material/IconButton";
 import NotificationsActiveSharpIcon from "@mui/icons-material/NotificationsActiveSharp";
@@ -17,21 +12,13 @@ import {COLORS} from '../../styles/colors'
 const drawerWidth = 250;
 
 const Header = ({ isClosing, setMobileOpen, mobileOpen }) => {
-  const [isAlertOpened, setIsAlertOpend] = useState(false);
   const navigate = useNavigate();
- 
+
   const handleDrawerToggle = () => {
     if (!isClosing) {
       setMobileOpen(!mobileOpen);
     }
   };
-  let userData;
-  useEffect(()=>{
-    console.log('rendering')
-    userData = JSON.parse(localStorage.getItem('userdata'));
-    console.log("userdata", userData)
-  },[])
-  
 
   return (
     <AppBar
@@ -52,8 +39,6 @@ const Header = ({ isClosing, setMobileOpen, mobileOpen }) => {
         >
           <MenuIcon />
         </IconButton>
-        
-        <h5>{userData ? userData.username : 'no user selected'}</h5>
         <NotificationsActiveSharpIcon
           onClick={() => {
             navigate("/notification")
@@ -67,7 +52,7 @@ const Header = ({ isClosing, setMobileOpen, mobileOpen }) => {
             },
           }}
         />
-   
+
       </Toolbar>
     </AppBar>
   );
