@@ -4,12 +4,16 @@ import {COLORS} from '../../styles/colors'
 const SubContainer = ({
   children,
   xs,
+  sx,
+  sm,
+  md,
   gap,
   spacing,
   boxShadow,
   onclick,
   style,
   enableHover,
+  marginTop
 }) => {
   return (
     <Grid
@@ -17,9 +21,12 @@ const SubContainer = ({
       boxShadow={boxShadow}
       spacing={spacing}
       gap={gap}
+      marginTop={marginTop}
       item
       container
       xs={xs}
+      sm={sm}
+      md={md}
       sx={{
         backgroundColor: `${COLORS.darkCard}`,
         color: "#fff",
@@ -29,7 +36,7 @@ const SubContainer = ({
         "&:hover": {
           backgroundColor: enableHover ? `${COLORS.darkCard}` : "#1d1e2f",
           cursor: enableHover ? "pointer" : "pointer",
-          transition: "background-color 0.3s ease-in-out",
+          transition: "background-color 0.5s ease-in-out",
         },
       }}
       style={style}

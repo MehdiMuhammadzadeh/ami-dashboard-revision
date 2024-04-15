@@ -7,9 +7,8 @@ import PatientRecords from "./PatientRecords";
 import PatientRecordsDescription from "./PatientRecordsDescription";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../auth/Firebase";
-
+import { COLORS } from "../../styles/colors";
 const PatientDiary = () => {
-
   const [records, setRecords] = useState([]);
   const patientRecordsRef = collection(db, "records");
   const userRecords = JSON.parse(localStorage.getItem("records"));
@@ -29,13 +28,20 @@ const PatientDiary = () => {
 
   const propTestHandler = (event) => {
     setSingleRecord(event);
-    console.log('Event', event)
+    console.log("Event", event);
   };
 
   return (
-    <Container>
-      <Grid component={"div"} item container sx={{ display: "flex" }} gap={2}>
-        <Grid item container component={"div"} xs={12} md={3}>
+    <Container height={"90vh"}>
+      <Grid component={"div"} item container sx={{display: "flex"}} gap={2}>
+        <Grid
+          item
+          container
+          component={"div"}
+          xs={12}
+          md={3}
+          height={"83vh !important"}
+        >
           <Grid
             item
             component={"div"}
@@ -57,7 +63,25 @@ const PatientDiary = () => {
             </Grid>
           </Grid>
 
-          <Grid item container gap={1}>
+          <Grid
+            item
+            container
+            gap={1}
+            height={"83vh !important"}
+            sx={{
+              overflowY: "auto",
+              "&::-webkit-scrollbar": {
+                width: "8px",
+                backgroundColor: "#000",
+            
+              },
+              "&::-webkit-scrollbar-thumb": {
+                backgroundColor: COLORS.darkBorder,
+                borderRadius: "4px",
+        
+              },
+            }}
+          >
             {userRecords.map((record, index) => {
               return (
                 <PatientRecords
@@ -77,23 +101,26 @@ const PatientDiary = () => {
             })}
           </Grid>
         </Grid>
-        <Grid item component={"div"}>
-          <Divider
-            orientation="vertical"
-            style={{
-              height: "",
-              marginBlock: "auto",
-              backgroundColor: "#acacac",
-            }}
-          />
-        </Grid>
-        <Grid item component={"div"} xs={12} md={7} lg={8.7}>
-         
-            <PatientRecordsDescription
-              propDesDetail={singleRecord}
-          
-            />
-        
+        <Grid
+          item
+          component={"div"}
+          xs={12}
+          md={7}
+          lg={8.8}
+          height={"87.5vh"}
+          sx={{
+            overflowY: "auto",
+            "&::-webkit-scrollbar": {
+              width: "8px",
+              backgroundColor: "#000",
+            },
+            "&::-webkit-scrollbar-thumb": {
+              backgroundColor: COLORS.darkBorder,
+              borderRadius: "4px",
+            },
+          }}
+        >
+          <PatientRecordsDescription propDesDetail={singleRecord} />
         </Grid>
       </Grid>
     </Container>
