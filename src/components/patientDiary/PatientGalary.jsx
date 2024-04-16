@@ -2,8 +2,6 @@ import { Box, Grid } from "@mui/material";
 import React from "react";
 
 const PatientGalary = ({ photos }) => {
-  console.log("photos", photos);
-
   return (
     <Grid item container component={"div"}>
       {photos.map((item) => {

@@ -9,7 +9,6 @@ import Image from "../components/avatar/Image";
 import {
   getDocs,
   collection,
-  onSnapshot,
   query,
   orderBy,
 } from "firebase/firestore";
@@ -26,7 +25,6 @@ const Dashboard = () => {
 
   const usersCollectionRef = collection(db, "Users");
   const recordsCollectionRef = collection(db, "records");
-  console.log("record-collection", recordsCollectionRef);
   useEffect(() => {
     const doctor = JSON.parse(localStorage.getItem("doctor"));
     let patients = doctor.patientsUsernames;
@@ -40,9 +38,7 @@ const Dashboard = () => {
         });
       })
       .then(() => {
-        console.log(myPatients);
         setMyPatients(myPatients);
-        console.log(myPatients, "Mypa");
       })
       .catch((error) => {
         console.log("Error Message:", error);
@@ -64,7 +60,6 @@ const Dashboard = () => {
         });
       })
       .then(() => {
-        console.log("User Records", userRecords);
         localStorage.setItem("records", JSON.stringify(userRecords));
         navigate("/patient-diary");
       })

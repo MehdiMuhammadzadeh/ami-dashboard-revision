@@ -11,33 +11,29 @@ import MyNotes from "../components/myNotes/MyNotes";
 import Tickets from "../components/tickets/Tickets";
 import PatientDiary from "../components/patientDiary/PatientDiary";
 import Statistics from "../components/statistics/Statistics";
-import Doctor from "../pages/Doctor";
 import Notification from "../components/notification/Notification";
 
 const Router = () => {
   return (
     <>
-    <BrowserRouter>
-      <Routes>
-       <Route path="/" element={<Home />}/>
-       <Route path="/" element={<Layout />}>
-        <Route path="users" element={<span>gkldfjgkldjgfkl</span>} />
-        <Route path="dashboard" element={<Dashboard />} />
-        <Route path="my-notes" element={<MyNotes />} />
-        <Route path="tickets" element={<Tickets />} />
-        <Route path="patient-diary" element={<PatientDiary />} />
-        <Route path="statistics" element={<Statistics />} />
-        <Route path="notification" element={<Notification />} />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Layout />}>
+            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="my-notes" element={<MyNotes />} />
+            <Route path="tickets" element={<Tickets />} />
+            <Route path="patient-diary" element={<PatientDiary />} />
+            <Route path="statistics" element={<Statistics />} />
+            <Route path="notification" element={<Notification />} />
+          </Route>
 
-       </Route>
-
-        <Route path="/login" element={<Login />} />
-        <Route path="/doctor" element={<Doctor />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/forget-password" element={<ForgetPassword />} />
-       <Route path="*" element={<NotFound />} />
-      </Routes>
-    </BrowserRouter>
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/forget-password" element={<ForgetPassword />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
     </>
   );
 };

@@ -3,11 +3,7 @@ import React from "react";
 import { StyledText } from "../text/Text.styles";
 import SubContainer from "../common/SubContainer";
 
-
 const Note = ({ note, medicine, homework, date }) => {
-  console.log("Date..", date);
-
-
   return (
     <Grid item xs={12} container>
       <Grid item xs={12} sx={{ marginBottom: 1 }}>

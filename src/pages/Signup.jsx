@@ -4,7 +4,7 @@ import { Grid, Typography } from "@mui/material";
 import RegisterContainer from "../components/registerContainer/RegisterContainer";
 import Wrapper from "../components/wrapper/Wrapper";
 import { StyledButton } from "../components/button/Button.styles";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import SignupIcons from "../components/icons/SignupIcons";
 import { StyledLink } from "../components/link/Link.styles";
 import { auth, db } from "../auth/Firebase";
@@ -18,14 +18,13 @@ const Signup = () => {
   const text_pattern = /^[(a-zA-Z)+(\!\@\#\$\%\^\&\*\(\))+]/;
   const password_pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]{8,}$/;
 
-
   const navigate = useNavigate();
 
-  const [values, setValues] = useState({  
+  const [values, setValues] = useState({
     description: { value: "", isValid: true },
     email: { value: "", isValid: true },
     f_name: { value: "", isValid: true },
-    l_name: { value: "", isValid: true }, 
+    l_name: { value: "", isValid: true },
     speciality: { value: "", isValid: true },
     username: { value: "", isValid: true },
     password: { value: "", isValid: true },
@@ -33,17 +32,18 @@ const Signup = () => {
   });
 
   const handleInput = (event) => {
-
-    if (values.description.value === "" || !text_pattern.test(values.description.value)) {
+    if (
+      values.description.value === "" ||
+      !text_pattern.test(values.description.value)
+    ) {
       const newObject = {
         ...values,
         [event.target.name]: { value: event.target.value, isValid: false },
       };
-      setValues({newObject});
+      setValues({ newObject });
       setErrorMessage("Description cannot be empty!");
       // return;
-    } 
-    else {
+    } else {
       const newObject = {
         ...values,
         [event.target.name]: { value: event.target.value, isValid: true },
@@ -154,8 +154,7 @@ const Signup = () => {
       setErrorMessage("Password is incorrect:(");
       setValues(newObject);
       // return;
-    } 
-    else {
+    } else {
       const newObject = {
         ...values,
         [event.target.name]: { value: event.target.value, isValid: true },
@@ -163,7 +162,7 @@ const Signup = () => {
       setValues(newObject);
       setErrorMessage("");
     }
-    
+
     if (
       values.confirmPassword.value === "" ||
       !password_pattern.test(values.confirmPassword.value)
@@ -188,8 +187,6 @@ const Signup = () => {
   const doctorCollectionRef = collection(db, "Doctors");
 
   const hanldeSubmit = async () => {
-   
-
     try {
       await createUserWithEmailAndPassword(
         auth,
@@ -211,8 +208,7 @@ const Signup = () => {
         } catch (error) {
           const errorCode = error.code;
           const errorMessage = error.message;
-          navigate('/signup')
-
+          navigate("/signup");
         }
       });
     } catch (error) {
@@ -234,7 +230,7 @@ const Signup = () => {
           </Typography>
         </Grid>
 
-              {/* <p>{errorMessage}</p> */}
+        {/* <p>{errorMessage}</p> */}
         <Grid
           item
           container
@@ -252,7 +248,7 @@ const Signup = () => {
               style={
                 values.description.isValid
                   ? { border: "1px solid #dddddd" }
-                  : { border: "1px solid red" }
+                  : { border: "1px solid #dddddd" }
               }
             ></StyledInput>
           </Grid>
@@ -266,7 +262,7 @@ const Signup = () => {
               style={
                 values.email.isValid
                   ? { border: "1px solid #dddddd" }
-                  : { border: "1px solid red" }
+                  : { border: "1px solid #dddddd" }
               }
             ></StyledInput>
           </Grid>
@@ -280,7 +276,7 @@ const Signup = () => {
               style={
                 values.f_name.isValid
                   ? { border: "1px solid #dddddd" }
-                  : { border: "1px solid red" }
+                  : { border: "1px solid #dddddd" }
               }
             ></StyledInput>
           </Grid>
@@ -294,7 +290,7 @@ const Signup = () => {
               style={
                 values.l_name.isValid
                   ? { border: "1px solid #dddddd" }
-                  : { border: "1px solid red" }
+                  : { border: "1px solid #dddddd" }
               }
             ></StyledInput>
           </Grid>
@@ -308,7 +304,7 @@ const Signup = () => {
               style={
                 values.speciality.isValid
                   ? { border: "1px solid #dddddd" }
-                  : { border: "1px solid red" }
+                  : { border: "1px solid #dddddd" }
               }
             ></StyledInput>
           </Grid>
@@ -322,7 +318,7 @@ const Signup = () => {
               style={
                 values.username.isValid
                   ? { border: "1px solid #dddddd" }
-                  : { border: "1px solid red" }
+                  : { border: "1px solid #dddddd" }
               }
             ></StyledInput>
           </Grid>
@@ -337,7 +333,7 @@ const Signup = () => {
               style={
                 values.password.isValid
                   ? { border: "1px solid #dddddd" }
-                  : { border: "1px solid red" }
+                  : { border: "1px solid #dddddd" }
               }
             ></StyledInput>
           </Grid>
@@ -351,7 +347,7 @@ const Signup = () => {
               style={
                 values.confirmPassword.isValid
                   ? { border: "1px solid #dddddd" }
-                  : { border: "1px solid red" }
+                  : { border: "1px solid #dddddd" }
               }
             ></StyledInput>
           </Grid>

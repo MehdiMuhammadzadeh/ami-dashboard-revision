@@ -9,9 +9,7 @@ const RegisterContainer = ({children,sx}) => {
     alignContent={"flex-start"}
     justifyContent={"center"}
     border={'1px solid rgba(255,255,255,0.5)'}
-    // boxShadow={'1px 2px 10px 0px rgba(255, 255, 255, 0.5)'}
     borderRadius={3}
-    // sx={{ width: {xs:320, sm:350, md: 380 }, height: {xs:360,sm:390, md: 430 } }}
     sx={sx}
   >
     {children}

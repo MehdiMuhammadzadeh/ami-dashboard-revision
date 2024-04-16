@@ -19,5 +19,3 @@ export const StyledButton = styled.button`
   color: ${(props)=> props.buttons === 'buttons' ?"#fff" : "#000"}; 
   }
 `;
-
-// background-color: #353455;

@@ -5,19 +5,17 @@ import { StyledText } from "../text/Text.styles";
 import Image from "../avatar/Image";
 import { StyledTextarea } from "../textarea/Textarea.styles";
 import SendSharpIcon from "@mui/icons-material/SendSharp";
+import { COLORS } from "../../styles/colors";
 
-const Ticket = ({ note,updater }) => {
-
-
+const Ticket = ({ note, updater }) => {
   const [answer, setAnswer] = useState("");
 
-
-  const onSubmitHandler = (docId)=>{
-    if(answer.trim() !== "") {
+  const onSubmitHandler = (docId) => {
+    if (answer.trim() !== "") {
       updater(docId, answer);
       setAnswer("");
     }
-  }
+  };
 
   return (
     <Grid item xs={12} container>
@@ -48,10 +46,10 @@ const Ticket = ({ note,updater }) => {
         </Grid>
         <Grid item container sx={{ marginTop: 1 }}>
           <Grid item>
-            <StyledText variant="textTitle">Question:</StyledText>
+            <StyledText variant="textTitle">{note.title}</StyledText>
           </Grid>
-          <Grid item xs={12} sx={{ paddingLeft: 2 }}>
-            <StyledText>{note.title}</StyledText>
+          <Grid item xs={12} sx={{ paddingLeft: 2, marginBlock: "15px" }}>
+            <StyledText>{note.description}</StyledText>
           </Grid>
         </Grid>
         {note.status === "pending" ? (
@@ -68,7 +66,7 @@ const Ticket = ({ note,updater }) => {
                 position: "absolute",
                 top: 60,
                 right: 20,
-                color: "#f5b869",
+                color: `${COLORS.info}`,
                 cursor: "pointer",
                 "&:hover": {
                   color: "#f19720",

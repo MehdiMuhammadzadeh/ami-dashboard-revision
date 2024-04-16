@@ -120,7 +120,7 @@ const Login = () => {
               style={
                 values.email.isValid
                   ? { border: "1px solid #dddddd" }
-                  : { border: "1px solid red" }
+                  : { border: "1px solid #dddddd" }
               }
               onChange={handleInput}
               placeholder="Email"
@@ -135,7 +135,7 @@ const Login = () => {
               style={
                 values.password.isValid
                   ? { border: "1px solid #dddddd" }
-                  : { border: "1px solid red" }
+                  : { border: "1px solid #dddddd" }
               }
               onChange={handleInput}
               placeholder="Password"
