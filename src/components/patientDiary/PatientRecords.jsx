@@ -46,33 +46,13 @@ const PatientRecords = ({
 
 
   return (
-    <Grid
-      item
-      container
-      component={"div"}
-      className="patients-records"
-    >
-      <Grid item component={"div"} xs={12} marginBlock={1}>
-        <Grid
-          item
-          component={"div"}
-          xs={12}
-          sx={{ display: "flex", justifyContent: "center" }}
-        >
-          <Box sx={{ marginRight: 2 }}>
+    <Grid container style={{alignItems:'start'}} className="patients-records">
+      <Grid item xs={12} marginBlock={1} sx={{ display: "flex", justifyContent: "center" }}>
             <StyledText style={{ fontSize: "0.7rem" }}>
               {new Date(date.seconds * 1000).toDateString()}
             </StyledText>
-          </Box>
-        </Grid>
       </Grid>
-      <SubContainer
-      enableHover={false}
-        boxShadow={"2px 4px 4px rgba(0,0,0,0.5)"}
-        onclick={() => recordShowDetailHandler(dayName)}
-
-       
-      >
+      <SubContainer enableHover={false} boxShadow={"2px 4px 4px rgba(0,0,0,0.5)"} onclick={() => recordShowDetailHandler(dayName)}>
         <Grid
           item
           container
@@ -82,7 +62,7 @@ const PatientRecords = ({
             justifyContent: "space-between",
             alignItems: "center",
             cursor: "pointer",
-            
+
           }}
         >
           <Grid item component={"div"}>
