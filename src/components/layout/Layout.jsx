@@ -14,7 +14,7 @@ import { Collapse, Grid } from "@mui/material";
 import { StyledText } from "../text/Text.styles";
 import Image from "../avatar/Image";
 import { StyledNavLink } from "../navLink/NavLink.styles";
-import {COLORS} from '../../styles/colors'
+import { COLORS } from "../../styles/colors";
 const drawerWidth = 250;
 
 const Layout = () => {
@@ -23,22 +23,19 @@ const Layout = () => {
   const [isNavActive, setIsNavActive] = React.useState(false);
   const [isActive, setIsActive] = React.useState(false);
   const [userName, setUserName] = React.useState(null);
-  const adr = window.location.href
+  const adr = window.location.href;
 
-    React.useEffect(() => {
-        const userdata = JSON.parse(localStorage.getItem("userdata"));
-        setUserName(userdata);
-        console.log(userdata)
-    }, [adr]);
+  React.useEffect(() => {
+    const userdata = JSON.parse(localStorage.getItem("userdata"));
+    setUserName(userdata);
+  }, [adr]);
 
+  const selected = { title: "Home", to: "/dashboard" };
 
-  const selected =
-  { title: "Home", to: "/dashboard" }
-
-  const test= [
-    { title: "Statistics", to: "statistics"},
-    {title: "PatientDiary",to: "patient-diary"},
-    { title: "My Notes", to: "my-notes"},
+  const test = [
+    { title: "Statistics", to: "statistics" },
+    { title: "PatientDiary", to: "patient-diary" },
+    { title: "My Notes", to: "my-notes" },
   ];
   const navigate = useNavigate();
 
@@ -54,40 +51,56 @@ const Layout = () => {
   const drawer = (
     <Grid>
       <Toolbar style={{ backgroundColor: `${COLORS.darkCard}` }}>
-        <StyledText variant="textTitle" style={{cursor:'pointer'}} onClick={() => navigate("/")}>
+        <StyledText
+          variant="textTitle"
+          style={{ cursor: "pointer" }}
+          onClick={() => navigate("/")}
+        >
           AMI Dashboard
         </StyledText>
       </Toolbar>
       <Divider />
-      <Grid container gap={1} sx={{ justifyContent: "center", alignItems: "center" }}>
-        <Grid item xs={12} sx={{ display: "flex", paddingTop: 1, paddingLeft: "10px" }}>
-          <Image src={"https://picsum.photos/200"}/>
+      <Grid
+        container
+        gap={1}
+        sx={{ justifyContent: "center", alignItems: "center" }}
+      >
+        <Grid
+          item
+          xs={12}
+          sx={{ display: "flex", paddingTop: 1, paddingLeft: "10px" }}
+        >
+          <Image src={"https://picsum.photos/200"} />
         </Grid>
-        <Grid item xs={12} sx={{ textAlign: "left", paddingLeft: "10px", paddingBottom: "5px" }}>
+        <Grid
+          item
+          xs={12}
+          sx={{ textAlign: "left", paddingLeft: "10px", paddingBottom: "5px" }}
+        >
           <StyledText variant="textTitle">John Dou</StyledText>
           <StyledText component={"p"}>john.dou@gmail.com</StyledText>
         </Grid>
       </Grid>
       <Divider style={{ backgroundColor: "#fff" }} />
-        <ListItemButton onClick={() => setIsActive(false)}>
-            <StyledNavLink to={selected.to}>{selected.title}</StyledNavLink>
-        </ListItemButton>
+      <ListItemButton onClick={() => setIsActive(false)}>
+        <StyledNavLink to={selected.to}>{selected.title}</StyledNavLink>
+      </ListItemButton>
       <List
-        // component="span"
-        // width="100%"
-        // cursor="pointer"
-        // onMouseOver={() => setIsNavActive(true)}
-        // onMouseOut={() => setIsNavActive(false)}
         onClick={() => {
-            setIsNavActive(!isNavActive);
-                setIsActive(!isActive);
+          setIsNavActive(!isNavActive);
+          setIsActive(!isActive);
         }}
       >
         <ListItem sx={{ paddingBottom: 0, margin: 0 }}>
-            <ListItemText
-                primary={userName ? userName.username : 'Patients'}
-                sx={{color: isActive ? "#f5b869" : "#fff", cursor: "pointer", padding: 0, margin: 0}}
-                />
+          <ListItemText
+            primary={userName ? userName.username : "Patients"}
+            sx={{
+              color: isActive ? "#f5b869" : "#fff",
+              cursor: "pointer",
+              padding: 0,
+              margin: 0,
+            }}
+          />
         </ListItem>
       </List>
       <Collapse
@@ -99,17 +112,6 @@ const Layout = () => {
             return (
               <ListItem key={index} disablePadding>
                 <ListItemButton onClick={() => setIsActive(false)}>
-                  {/* <ListItemIcon>
-                {index % 2 === 0 ? <LogoutSharpIcon /> : <HomeSharpIcon />}
-              </ListItemIcon> */}
-                  {/* <ListItemText
-                    primary={item.title}
-                    onClick={() => {
-                      navigate(item.to);
-
-                    }}
-                    sx={{color:item.isSelected ? 'red' : 'blue'}}
-                  /> */}
                   <StyledNavLink to={item.to}>{item.title}</StyledNavLink>
                 </ListItemButton>
               </ListItem>
@@ -117,7 +119,6 @@ const Layout = () => {
           })}
         </List>
       </Collapse>
-      {/* "Tickets", "Home", "Logout" */}
       <List>
         {[
           { title: "Tickets", to: "tickets" },
@@ -125,13 +126,6 @@ const Layout = () => {
         ].map((item, index) => (
           <ListItem key={index} disablePadding>
             <ListItemButton onClick={() => setIsActive(false)}>
-              {/* <ListItemIcon>
-                {index % 2 === 0 ? <LogoutSharpIcon /> : <HomeSharpIcon />}
-              </ListItemIcon> */}
-              {/* <ListItemText
-                primary={item.title}
-                onClick={() => navigate(item.to)}
-              /> */}
               <StyledNavLink to={item.to}>{item.title}</StyledNavLink>
             </ListItemButton>
           </ListItem>
@@ -139,13 +133,12 @@ const Layout = () => {
       </List>
     </Grid>
   );
-  // Remove this const when copying and pasting into your project.
-  //   const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
     <>
-      {/* <Header /> */}
-      <Box sx={{ display: "flex", backgroundColor: `${COLORS.darkBackground}` }}>
+      <Box
+        sx={{ display: "flex", backgroundColor: `${COLORS.darkBackground}` }}
+      >
         <CssBaseline />
         <Header
           isClosing={isClosing}
@@ -157,9 +150,7 @@ const Layout = () => {
           sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
           aria-label="mailbox folders"
         >
-          {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
           <Drawer
-            //   container={container}
             PaperProps={{
               sx: {
                 backgroundColor: `${COLORS.darkCard}`,
@@ -171,7 +162,7 @@ const Layout = () => {
             onTransitionEnd={handleDrawerTransitionEnd}
             onClose={handleDrawerClose}
             ModalProps={{
-              keepMounted: true, // Better open performance on mobile.
+              keepMounted: true,
             }}
             sx={{
               display: { xs: "block", sm: "none" },
@@ -187,7 +178,7 @@ const Layout = () => {
             PaperProps={{
               sx: {
                 backgroundColor: `${COLORS.darkCard}`,
-                boxShadow:'3px 10px 5px rgba(0,0,0,0.3)',
+                boxShadow: "3px 10px 5px rgba(0,0,0,0.3)",
                 color: "#fff",
               },
             }}

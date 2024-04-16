@@ -27,19 +27,8 @@ const PatientRecordsDescription = ({ propDesDetail }) => {
           </StyledText>
         </Grid>
       ) : (
-        <SubContainer
-          enableHover
-          boxShadow={"2px 4px 4px rgba(0,0,0,0.5)"}
-       
-
-        >
-          <Grid
-            item
-            container
-            component={"div"}
-            gap={2}
-   
-          >
+        <SubContainer enableHover boxShadow={"2px 4px 4px rgba(0,0,0,0.5)"}>
+          <Grid item container component={"div"} gap={2}>
             <Grid item container component={"div"}>
               <Grid
                 item

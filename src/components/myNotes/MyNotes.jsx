@@ -5,7 +5,7 @@ import Container from "../common/Container";
 import { StyledText } from "../text/Text.styles";
 import { StyledTextarea } from "../textarea/Textarea.styles";
 import { StyledButton } from "../button/Button.styles";
-import { addDoc, collection, getDocs, query } from "firebase/firestore";
+import { addDoc, collection, getDocs } from "firebase/firestore";
 import { db } from "../../auth/Firebase";
 import { COLORS } from "../../styles/colors";
 
@@ -22,8 +22,6 @@ const MyNotes = () => {
 
   const doctorData = JSON.parse(localStorage.getItem("doctor"));
   const userData = JSON.parse(localStorage.getItem("userdata"));
-  console.log("Userrrr Data", userData);
-  console.log("Doctor Data", doctorData);
 
   let notes = [];
   const getNotesList = async () => {
@@ -49,18 +47,13 @@ const MyNotes = () => {
     getNotesList();
   }, []);
 
-  console.log(myNotes);
-
   const handleAddNoteBtn = () => {
     setIsopen(!isOpen);
   };
 
   const handleSendNote = async (event) => {
-    // console.log(doctorData.email);
-    // console.log("", doctorData.username);
-
     event.preventDefault();
-    console.log(new Date());
+
     try {
       await addDoc(notesCollectionRef, {
         created_at: new Date(),
@@ -219,13 +212,13 @@ const MyNotes = () => {
       ) : (
         myNotes.map((item, index) => {
           return (
-              <Note
-                date={item.created_at}
-                note={item.note}
-                medicine={item.medicine}
-                homework={item.homework}
-                key={index}
-              />
+            <Note
+              date={item.created_at}
+              note={item.note}
+              medicine={item.medicine}
+              homework={item.homework}
+              key={index}
+            />
           );
         })
       )}
