@@ -20,6 +20,46 @@ import { StyledText } from "../text/Text.styles";
 import SubContainer from "../common/SubContainer";
 import Container from "../common/Container";
 
+
+
+
+export const requestPDF = () => {
+  const doctorData = JSON.parse(localStorage.getItem("doctor"));
+  const userData = JSON.parse(localStorage.getItem("userdata"));
+
+  console.log(doctorData, userData);
+
+  fetch("http://localhost:3000/api/v1/users/report", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/pdf",
+    },
+    body: JSON.stringify({
+      doctorUsername: doctorData.username,
+      patientUsername: userData.username,
+    }),
+  })
+    .then((response) => {
+      console.log(response);
+      return response.blob();
+    })
+    .then((blob) => {
+      const url = window.URL.createObjectURL(new Blob([blob]));
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", userData.username + "-report.pdf");
+      document.body.appendChild(link);
+      link.click();
+      link.parentNode.removeChild(link);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+
+
 const Notification = () => {
   const notifsCollectionRef = collection(db, "Notifs");
 
@@ -71,40 +111,6 @@ const Notification = () => {
   };
 
   // request a pdf report for the patient -> select the patient from the list and then click on the button -> patient needs to be selected first
-  const requestPDF = () => {
-    const doctorData = JSON.parse(localStorage.getItem("doctor"));
-    const userData = JSON.parse(localStorage.getItem("userdata"));
-
-    console.log(doctorData, userData);
-
-    fetch("http://localhost:3000/api/v1/users/report", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/pdf",
-      },
-      body: JSON.stringify({
-        doctorUsername: doctorData.username,
-        patientUsername: userData.username,
-      }),
-    })
-      .then((response) => {
-        console.log(response);
-        return response.blob();
-      })
-      .then((blob) => {
-        const url = window.URL.createObjectURL(new Blob([blob]));
-        const link = document.createElement("a");
-        link.href = url;
-        link.setAttribute("download", userData.username + "-report.pdf");
-        document.body.appendChild(link);
-        link.click();
-        link.parentNode.removeChild(link);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
 
   // search a username and send a connection request to the patient - this connection request will be shown in the patient's notification list
   const connectionRequest = async () => {

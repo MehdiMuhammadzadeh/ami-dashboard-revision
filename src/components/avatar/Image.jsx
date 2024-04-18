@@ -1,10 +1,12 @@
 import { Box, Grid } from "@mui/material";
 import React from "react";
 
-const Image = ({ src }) => {
+const Image = ({ src,height,width }) => {
   return (
     <Grid
       component="img"
+      // height={height}
+      // width={width}
       sx={{
         height: 32,
         width: 32,
