@@ -9,37 +9,42 @@ import AcUnitSharpIcon from "@mui/icons-material/AcUnitSharp";
 import LocalPizzaSharpIcon from "@mui/icons-material/LocalPizzaSharp";
 import SportsRugbySharpIcon from "@mui/icons-material/SportsRugbySharp";
 import RollerSkatingSharpIcon from "@mui/icons-material/RollerSkatingSharp";
+import { Icons } from "../../components/fontIcons/index";
 import "./PatientsRecord.css";
+import {
+  feelingIcons,
+  weathers,
+  badHabits,
+  edibles,
+  activities,
+} from "../../utils/utils";
 
-const PatientRecords = ({
-  dayName,
-  description,
-  feeling,
-  feelingDescription,
-  feelingReason,
-  userRecords,
-  propTest,
-  date,
-  photos,
-}) => {
+const PatientRecords = ({ propTest, record , userRecords}) => {
   const [recordDetail, setRecordDetail] = useState({});
   const [isClicked, setIsClicked] = useState(false);
-  // let feelingIcon = findIcon(item.feeling, feelingIcons)
-  // let weatherIcon = findIcon(item.weather, weathers)
-  // let badHabitIcon = item.drugIds.length > 0 ? findIcon(item.drugIds[0], badHabits) : null
-  // let edibleIcon = item.foodIds.length > 0 ? findIcon(item.foodIds[0], edibles) : null
-  // let activityIcon = item.activityIds.length > 0 ? findIcon(item.activityIds[0], activities) : null
+
+  let feelingIcon = findIcon(record.feeling, feelingIcons);
+  let weatherIcon = findIcon(record.weather, weathers);
+  let badHabitIcon =record.drugIds.length > 0 ? findIcon(record.drugIds[0], badHabits) : null;
+  let edibleIcon = record.foodIds.length > 0 ? findIcon(record.foodIds[0], edibles) : null;
+  let activityIcon =record.activityIds.length > 0? findIcon(record.activityIds[0], activities): null;
+
+  function findIcon(id, arr) {
+    const foundItem = arr.find((item) => item.id === id);
+    return foundItem ? foundItem : null;
+  }
 
   useEffect(() => {
     propTest(recordDetail);
   }, [recordDetail]);
+
   const recordShowDetailHandler = (dayName) => {
+    console.log('hiiiiiiiiiiiiiiiiiiiii')
     const detail = userRecords.find((item) => {
       return item.dayName === dayName;
     });
     localStorage.setItem("record-description-detail", JSON.stringify(detail));
     setRecordDetail(detail);
-    console.log("Detaiiiiiiil=>", detail);
   };
 
   return (
@@ -55,13 +60,13 @@ const PatientRecords = ({
         sx={{ display: "flex", justifyContent: "center" }}
       >
         <StyledText style={{ fontSize: "0.7rem" }}>
-          {new Date(date.seconds * 1000).toDateString()}
+          {new Date(record.date.seconds * 1000).toDateString()}
         </StyledText>
       </Grid>
       <SubContainer
         enableHover={false}
         boxShadow={"2px 4px 4px rgba(0,0,0,0.5)"}
-        onclick={() => recordShowDetailHandler(dayName)}
+        onClick={() => recordShowDetailHandler(record.dayName)}
       >
         <Grid
           item
@@ -74,23 +79,44 @@ const PatientRecords = ({
             cursor: "pointer",
           }}
         >
-          <Grid item component={"div"}>
-            <TagFacesSharpIcon style={{ color: "#98a86a" }} />
-
-            <AcUnitSharpIcon />
-            <RollerSkatingSharpIcon style={{ color: "#f5b869" }} />
-         
+          <Grid item component={"div"} display={"flex"}>
+            {feelingIcon ? (
+              <Icons
+                iconColor={feelingIcon.color}
+                name={feelingIcon.icon}
+                size={28}
+              />
+            ) : null}
+            {weatherIcon ? (
+              <Icons
+                iconColor={weatherIcon.color}
+                name={weatherIcon.icon}
+                size={28}
+              />
+            ) : null}
           </Grid>
-          <Grid item component={"div"}>
-            <SnoozeSharpIcon style={{ color: "#49e600" }} />
-          </Grid>
-          <Grid item component={"div"}>
-            <LocalPizzaSharpIcon style={{ color: "#f03e11" }} />
-            {/* <Icon>add_circle</Icon> */}
-            {/* {
-              feelingIcon ? <Icon name={feelingIcon.icon} color={feelingIcon.color} /> :null
-            } */}
-            <SportsRugbySharpIcon style={{ color: "#b95c04" }} />
+          <Grid item component={"div"} display={'flex'}>
+            {badHabitIcon ? (
+              <Icons
+                iconColor={badHabitIcon.color}
+                name={badHabitIcon.icon}
+                size={28}
+              />
+            ) : null}
+            {edibleIcon ? (
+              <Icons
+                iconColor={edibleIcon.color}
+                name={edibleIcon.icon}
+                size={28}
+              />
+            ) : null}
+            {activityIcon ? (
+              <Icons
+                iconColor={activityIcon.color}
+                name={activityIcon.icon}
+                size={28}
+              />
+            ) : null}
           </Grid>
         </Grid>
         <Divider style={{ width: "100%", backgroundColor: "#acacac" }} />
@@ -102,17 +128,14 @@ const PatientRecords = ({
           sx={{ marginBlock: 1.5 }}
         >
           <Grid item component={"div"} xs={12}>
-            <StyledText variant="textTitle">{dayName}</StyledText>
+            <StyledText variant="textTitle">{record.dayName}</StyledText>
           </Grid>
-          {/* <Grid item component={"div"} xs={12}>
-            <StyledText variant="textTitle">{feelingDescription}</StyledText>
-          </Grid> */}
         </Grid>
         <Grid item component={"div"} xs={12} sx={{ marginBottom: 1 }}>
-          <StyledText>{description}</StyledText>
+          <StyledText>{record.description}</StyledText>
         </Grid>
         <Grid item display={"flex"} flexDirection={"row"}>
-          {photos.map((item, index) => {
+          {record.photoIds.map((item, index) => {
             return (
               <Grid
                 item

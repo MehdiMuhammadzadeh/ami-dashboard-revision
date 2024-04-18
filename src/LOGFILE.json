@@ -112,7 +112,8 @@
     "value": 2
   }
 ]
- LOG  activities ---->  [
+ LOG  activities ---->  
+ [
   {
     "color": undefined,
     "icon": 80,

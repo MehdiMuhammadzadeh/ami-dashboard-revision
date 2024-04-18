@@ -6,7 +6,7 @@ import { COLORS } from '../styles/colors';
 // Initialize Highcharts modules
 // require('highcharts/modules/exporting')(Highcharts);
 
-const Highchart = () => {
+const Highchart = ({data}) => {
   const options = {
     chart: {
       type: 'pie',
@@ -22,13 +22,8 @@ const Highchart = () => {
     },
     series: [{
       name: 'Categories',
-      innerSize: '50%', // Set innerSize to create a donut chart
-      data: [
-        { name: 'Category 1', y: 400 },
-        { name: 'Category 2', y: 300 },
-        { name: 'Category 3', y: 300 },
-        { name: 'Category 4', y: 200 },
-      ],
+      innerSize: '50%',
+      data:data,
     }],
     plotOptions: {
       pie: {

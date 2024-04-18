@@ -8,9 +8,33 @@ import Image from "../avatar/Image";
 import PatientGalary from "./PatientGalary";
 import SubContainer from "../common/SubContainer";
 import { COLORS } from "../../styles/colors";
+import {
+  feelingIcons,
+  weathers,
+  badHabits,
+  edibles,
+  activities,
+} from "../../utils/utils";
+import { Icons } from "../fontIcons";
 
 const PatientRecordsDescription = ({ propDesDetail }) => {
   const [detailRecord, setDetailRecord] = useState({});
+  console.log("PropsD", propDesDetail);
+
+  let feelingIcon = findIcon(propDesDetail.feeling, feelingIcons);
+  let weatherIcon = findIcon(propDesDetail.weather, weathers);
+  // let badHabitIcon =record.drugIds.length > 0 ? findIcon(record.drugIds[0], badHabits) : null;
+  // let edibleIcon = record.foodIds.length > 0 ? findIcon(record.foodIds[0], edibles) : null;
+  // let activityIcon =record.activityIds.length > 0? findIcon(record.activityIds[0], activities): null;
+
+  function findIcon(id, arr) {
+    const foundItem = arr.find((item) => item.id === id);
+    return foundItem ? foundItem : null;
+  }
+
+  function isIncluded(item, itemsList) {
+    return itemsList.includes(item);
+  }
 
   return (
     <>
@@ -42,10 +66,21 @@ const PatientRecordsDescription = ({ propDesDetail }) => {
                 }}
               >
                 <Grid item sx={{ display: "flex", alignContent: "center" }}>
-                  <Grid item component={"div"}>
-                    <SentimentDissatisfiedSharpIcon
-                      style={{ color: "crimson", fontSize: "1.8rem" }}
-                    />
+                  <Grid item component={"div"} display={"flex"}>
+                    {feelingIcon ? (
+                      <Icons
+                        iconColor={feelingIcon.color}
+                        name={feelingIcon.icon}
+                        size={28}
+                      />
+                    ) : null}
+                    {weatherIcon ? (
+                      <Icons
+                        iconColor={weatherIcon.color}
+                        name={weatherIcon.icon}
+                        size={28}
+                      />
+                    ) : null}
                   </Grid>
                   <StyledText
                     variant="textTitle"
@@ -80,22 +115,6 @@ const PatientRecordsDescription = ({ propDesDetail }) => {
             <Grid item container component={"div"} xs={12} gap={3}>
               {/* {questions.map((item, index) => {
           return ( */}
-              <Grid item container component={"div"}>
-                <StyledText variant="textTitle">How Do You Feel?</StyledText>
-                <Grid item component={"div"} sx={{ paddingLeft: 2 }} xs={12}>
-                  <StyledText component={"p"}>
-                    {propDesDetail.feeling}
-                  </StyledText>
-                </Grid>
-              </Grid>
-              <Grid item container component={"div"}>
-                <StyledText variant="textTitle">How is the Weather?</StyledText>
-                <Grid item component={"div"} sx={{ paddingLeft: 2 }} xs={12}>
-                  <StyledText component={"p"}>
-                    {propDesDetail.weather}
-                  </StyledText>
-                </Grid>
-              </Grid>
               <Grid item container component={"div"}>
                 <StyledText variant="textTitle">Name of the Day:</StyledText>
                 <Grid item component={"div"} sx={{ paddingLeft: 2 }} xs={12}>
@@ -156,23 +175,51 @@ const PatientRecordsDescription = ({ propDesDetail }) => {
               </Grid>
 
               <Grid item container component={"div"}>
-                <StyledText variant="textTitle">
-                  Select Your Activities:
-                </StyledText>
-                <Grid item component={"div"} sx={{ paddingLeft: 2 }} xs={12}>
-                  <StyledText component={"p"}>
-                    {propDesDetail.activityIds}
-                  </StyledText>
+                <StyledText variant="textTitle">Your Activities:</StyledText>
+                <Grid
+                  item
+                  component={"div"}
+                  sx={{ paddingLeft: 2, display: "flex" }}
+                  xs={12}
+                >
+                  {activities.map((item,index) => {
+                    return (
+                      <Icons
+                      key={index}
+                        iconColor={
+                          isIncluded(item.id, propDesDetail.activityIds)
+                            ? item.color
+                            : "gray"
+                        }
+                        name={item.icon}
+                        size={28}
+                      />
+                    );
+                  })}
                 </Grid>
               </Grid>
               <Grid item container component={"div"}>
-                <StyledText variant="textTitle">
-                  Select You had Today:
-                </StyledText>
-                <Grid item component={"div"} sx={{ paddingLeft: 2 }} xs={12}>
-                  <StyledText component={"p"}>
-                    {propDesDetail.foodIds}
-                  </StyledText>
+                <StyledText variant="textTitle">What You had Today:</StyledText>
+                <Grid
+                  item
+                  component={"div"}
+                  sx={{ paddingLeft: 2, display: "flex" }}
+                  xs={12}
+                >
+                  {edibles.map((item,index) => {
+                    return (
+                      <Icons
+                      key={index}
+                        iconColor={
+                          isIncluded(item.id, propDesDetail.foodIds)
+                            ? item.color
+                            : "gray"
+                        }
+                        name={item.icon}
+                        size={28}
+                      />
+                    );
+                  })}
                 </Grid>
               </Grid>
 
@@ -180,11 +227,27 @@ const PatientRecordsDescription = ({ propDesDetail }) => {
                 <StyledText variant="textTitle">
                   Did you have Drugs or Alchohol? how did it Feel?
                 </StyledText>
-                <Grid item component={"div"} sx={{ paddingLeft: 2 }} xs={12}>
-                  <StyledText component={"p"}>
-                    {propDesDetail.drugIds}
-                    {propDesDetail.drugReason}
-                  </StyledText>
+                <Grid
+                  item
+                  component={"div"}
+                  sx={{ paddingLeft: 2, display: "flex" }}
+                  xs={12}
+                >
+                  {badHabits.map((item, index) => {
+                    return (
+                      <Icons
+                      key={index}
+                        iconColor={
+                          isIncluded(item.id, propDesDetail.drugIds)
+                            ? item.color
+                            : "gray"
+                        }
+                        name={item.icon}
+                        size={28}
+                      />
+                    );
+                  })}
+                  {propDesDetail.drugReason}
                 </Grid>
               </Grid>
               {/* );

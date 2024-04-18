@@ -11,8 +11,11 @@ const PatientDiary = () => {
   const [singleRecord, setSingleRecord] = useState({});
 
   const propTestHandler = (event) => {
+    console.log('Clicked')
     setSingleRecord(event);
   };
+
+  console.log("Single Record",singleRecord)
 
   return (
     <Container height={"90vh"}>
@@ -62,20 +65,13 @@ const PatientDiary = () => {
               },
             }}
           >
-            {userRecords.map((record, index) => {
+            {userRecords?.map((record, index) => {
               return (
                 <PatientRecords
                   key={index}
                   record={record}
                   userRecords={userRecords}
-                  dayName={record.dayName}
-                  description={record.description}
-                  feeling={record.feeling}
-                  feelingDescription={record.feelingDescription}
-                  feelingReason={record.feelingReason}
                   propTest={propTestHandler}
-                  date={record.date}
-                  photos={record.photoIds}
                 />
               );
             })}
