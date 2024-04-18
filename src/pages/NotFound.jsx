@@ -8,6 +8,9 @@ import Apple from "../components/avatar/Apple";
 import { useState } from "react";
 import park from "../assets/svg/park.svg";
 import AllIcons from "../components/svg/AllIcons";
+import {Icons} from "../components/fontIcons/index.jsx";
+import {feelingIcons} from '../utils/utils.js'
+
 const NotFound = () => {
   const [changeColor, setChangeColor] = useState(true);
 
@@ -31,7 +34,7 @@ const NotFound = () => {
           variant="textTitle"
           style={{ color: `${COLORS.danger}`, fontSize: "2rem" }}
         >
-          PAGE NOT FOUND :(
+          PAGE NOT FOUND :( <Icons iconColor={'red'} name={''} size={100} />
         </StyledText>
       </Grid>
       <Grid backgroundColor={"yellow"}>

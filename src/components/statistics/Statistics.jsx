@@ -1,210 +1,239 @@
 import { Grid } from "@mui/material";
-import { BarChart, PieChart } from "@mui/x-charts";
-import React from "react";
+import { PieChart } from "@mui/x-charts";
+import React, { useEffect, useState } from "react";
 import Container from "../common/Container";
 import SubContainer from "../common/SubContainer";
-import { BarPlot } from "@mui/x-charts/BarChart";
-import { LinePlot } from "@mui/x-charts/LineChart";
-import { ChartContainer } from "@mui/x-charts/ChartContainer";
-
-import { ChartsXAxis } from "@mui/x-charts/ChartsXAxis";
-import { ChartsYAxis } from "@mui/x-charts/ChartsYAxis";
-import ChartWrapper from "./ChartWrapper";
-import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
-// --------------------
-
-import Stack from "@mui/material/Stack";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import IconButton from "@mui/material/IconButton";
-import UndoOutlinedIcon from "@mui/icons-material/UndoOutlined";
-import { StyledText } from "../text/Text.styles";
+import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import { COLORS } from "../../styles/colors";
 import Highchart from "../../pages/Highchart";
 import { requestPDF } from "../notification/Notification";
-
-// import HighlightedCode from 'docs/src/modules/components/HighlightedCode
-
-const data1 = [
-  { label: "Group A", value: 400 },
-  { label: "Group B", value: 300 },
-  { label: "Group C", value: 300 },
-  { label: "Group D", value: 200 },
-];
-
-const data2 = [
-  { label: "A1", value: 100 },
-  { label: "A2", value: 300 },
-  { label: "B1", value: 100 },
-  { label: "B2", value: 80 },
-  { label: "B3", value: 40 },
-  { label: "B4", value: 30 },
-  { label: "B5", value: 50 },
-  { label: "C1", value: 100 },
-  { label: "C2", value: 200 },
-  { label: "D1", value: 150 },
-  { label: "D2", value: 50 },
-];
-const series1 = [
-  {
-    innerRadius: 100,
-    outerRadius: 120,
-    id: "series-2",
-    data: data2,
-  },
-];
-
-const series = [
-  {
-    type: "line",
-    yAxisKey: "pib",
-    color: "blue",
-    data: [1000, 1500, 3000, 5000, 100000],
-  },
-  {
-    type: "line",
-    yAxisKey: "pib",
-    color: "red",
-    data: [1000, 1500, 3000, 5000, 100000],
-  },
-  {
-    type: "line",
-    yAxisKey: "pib",
-    color: "red",
-    data: [1000, 1500, 3000, 5000, 100000],
-  },
-];
-
-const data = [
-  { id: 0, value: 10, label: "series A" },
-  { id: 1, value: 15, label: "series B" },
-  { id: 2, value: 20, label: "series C" },
-];
-
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+} from "recharts";
 
 const Statistics = () => {
+  const [sleepDurations, setSleepDurations] = useState([]);
+  const [chartData, setChartData] = useState([]);
+  const [moodPieChartData, setMoodPieChartData] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const records = JSON.parse(localStorage.getItem("records"));
+  const moodScaler = (mood) => {
+    if (mood === 1) return 5;
+    if (mood === 2) return 4;
+    if (mood === 3) return 3;
+    if (mood === 4) return 2;
+    if (mood === 5) return 1;
+  };
+  const moodScalerTwo = (mood) => {
+    if (mood === 1) return "very good";
+    if (mood === 2) return "good";
+    if (mood === 3) return "neutral";
+    if (mood === 4) return "bad";
+    if (mood === 5) return "very bad";
+  };
+  console.log("records", records);
 
+  const moodPieChart = (data) => {
+    console.log("DAAAAta", data["1"]);
+    return [
+      { id: 1, color: COLORS.primary, label: "Very Good", value: data["1"] },
+      { id: 2, color: COLORS.lime, label: "Good", value: data["2"] },
+      { id: 3, color: COLORS.yellow, label: "Neutral", value: data["3"] },
+      { id: 4, color: COLORS.warning, label: "Bad", value: data["4"] },
+      { id: 5, color: COLORS.danger, label: "Very Bad", value: data["5"] },
+    ];
+  };
 
+  const sumValues = (numbers) => {
+    console.log("Numbers", numbers);
+    let sum = 0;
+    for (const key in numbers) {
+      sum += numbers[key];
+    }
+    return sum;
+  };
 
+  const extractStats = (data) => {
+    let chartData = [];
+    let sleepTimes = [];
+    let tempMoodsSeries = [];
+    const counts = {
+      activityIds: {},
+      drugIds: {},
+      feeling: {},
+      foodIds: {},
+      weather: {},
+    };
+
+    data.forEach((item) => {
+      let tempPoint = {};
+      Object.entries(item).forEach(([key, value]) => {
+        if (key === "sleepStart" && value) {
+          sleepTimes.push(
+            item.sleepEnd.split(":")[0] - item.sleepStart.split(":")[0]
+          );
+          tempPoint.sleep =
+            item.sleepEnd.split(":")[0] - item.sleepStart.split(":")[0];
+        }
+        if (key === "feeling") {
+          tempMoodsSeries.push(moodScaler(value));
+          tempPoint.feeling = moodScaler(value);
+          tempPoint.name = moodScalerTwo(value);
+        }
+        if (Array.isArray(value) && key !== "photoIds") {
+          value.forEach((id) => {
+            if (!counts[key][id]) {
+              counts[key][id] = 1;
+            } else {
+              counts[key][id]++;
+            }
+          });
+        } else {
+          if (!counts[key]) {
+            return;
+          }
+          if (!counts[key][value]) {
+            counts[key][value] = 1;
+          } else {
+            counts[key][value]++;
+          }
+        }
+      });
+      chartData.push(tempPoint);
+    });
+    setMoodPieChartData(moodPieChart(counts.feeling));
+    setCategories([
+      {
+        id: 1,
+        name: "Activities",
+        y: sumValues(counts.activityIds),
+        color: "#49BABE",
+      },
+      {
+        id: 2,
+        name: "Bad Habits",
+        y: sumValues(counts.drugIds),
+        color: "#AE48D9",
+      },
+      {
+        id: 3,
+        name: "Edibles",
+        y: sumValues(counts.foodIds),
+        color: "#D6538A",
+      },
+    ]);
+    setChartData(chartData);
+    setSleepDurations(sleepTimes.reverse());
+    // setStateData(counts);
+    // setMoodSeries(tempMoodsSeries.reverse());
+    console.log("Sleep", sleepTimes.reverse());
+    console.log("Counts", counts);
+    console.log("TempMoodsSeries", tempMoodsSeries.reverse());
+    console.log("chartData", chartData);
+    console.log("MooooodPie", moodPieChart(counts.feeling));
+    console.log("moodPieChartData", moodPieChartData);
+    return counts;
+  };
+
+  useEffect(() => {
+    extractStats(records);
+  }, []);
 
   return (
     <Container>
-      <SubContainer xs={12} enableHover={true}>
-      <Grid
-        item
-        component={"div"}
-        width={"50px"}
-        height={"50px"}
-        sx={{
-          backgroundColor: `${COLORS.danger}`,
-          borderRadius: "50%",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          position: "fixed",
-          top: 110,
-          right:30,
-          boxShadow: "2px 2px 5px rgba(0,0,0,0.5)",
-          cursor: "pointer",
-        }}
-        // onClick={handleAddNoteBtn}
-      >
-        {/* <StyledText
+      <SubContainer xs={12}>
+        <Grid
+          item
+          component={"div"}
+          width={"50px"}
+          height={"50px"}
+          sx={{
+            backgroundColor: `${COLORS.danger}`,
+            borderRadius: "50%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            position: "fixed",
+            top: 110,
+            right: 30,
+            boxShadow: "2px 2px 5px rgba(0,0,0,0.5)",
+            cursor: "pointer",
+          }}
+          // onClick={handleAddNoteBtn}
+        >
+          {/* <StyledText
           style={{ fontSize: "1.5rem", color: "#000", cursor: "pointer" }}
         >
           +
         </StyledText> */}
-        <PictureAsPdfIcon onClick={requestPDF} />
-        
-      </Grid>
+          <PictureAsPdfIcon onClick={requestPDF} />
+        </Grid>
         <h4>Mood Flow</h4>
-        <Grid item display={"flex"}>
-          {[1, 2, 3].map((item, index) => {
-            return (
-              <ChartWrapper key={index} xs={12} sx={{ margin: 1 }}>
-                <ChartContainer
-                  series={series}
-                  // series={[{ ...series.data, color: '#fff'}]}
-                  // sx={{width:{xs:'350px', md:'500px'}}}
-
-                  width={500}
-                  height={360}
-                  xAxis={[
-                    {
-                      id: "years",
-                      data: Array.from({ length: 10 }, (_, index) => index + 1),
-                      scaleType: "band",
-                      valueFormatter: (value) => value.toString(),
-                    },
-                  ]}
-                  yAxis={[
-                    {
-                      id: "eco",
-                      scaleType: "linear",
-                    },
-                    {
-                      id: "pib",
-                      scaleType: "log",
-                    },
-                  ]}
-                >
-                  {/* <BarPlot /> */}
-                  <LinePlot />
-                  <ChartsXAxis
-                    label="Period"
-                    position="bottom"
-                    axisId="years"
-                  />
-                  <ChartsYAxis label="Mood" position="left" axisId="eco" />
-                  {/* <ChartsYAxis label="PIB" position="right" axisId="pib" /> */}
-                </ChartContainer>
-              </ChartWrapper>
-            );
-          })}
+        <Grid
+          item
+          display={"flex"}
+          xs={12}
+          borderRadius={5}
+        >
+          <LineChart width={1500} height={400} data={chartData}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Line
+              type="monotone"
+              dataKey="sleep"
+              stroke={COLORS.primary}
+              strokeWidth={3}
+            />
+            <Line
+              type="monotone"
+              dataKey="feeling"
+              stroke={COLORS.yellow}
+              strokeWidth={3}
+            />
+          </LineChart>
+        </Grid>
+        <Grid item display={"flex"} xs={12}>
+          <LineChart width={1500} height={400} data={chartData}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Line
+              type="monotone"
+              dataKey="feeling"
+              stroke={COLORS.yellow}
+              strokeWidth={3}
+            />
+          </LineChart>
+        </Grid>
+        <Grid item display={"flex"} xs={12} >
+          <LineChart width={1500} height={400} data={chartData}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Line
+              type="monotone"
+              dataKey="sleep"
+              stroke={COLORS.primary}
+              strokeWidth={3}
+            />
+          </LineChart>
         </Grid>
         <h4>Sleep Flow</h4>
         <Grid item xs={12} display={"flex"}>
-          {[1, 2, 3].map((item, index) => {
-            return (
-              <ChartWrapper key={index} xs={12} sx={{ margin: 1 }}>
-                <ChartContainer
-                  series={series}
-                  // sx={{width:{xs:'350px', md:'500px'}}}
-
-                  width={500}
-                  height={360}
-                  xAxis={[
-                    {
-                      id: "years",
-                      data: Array.from({ length: 10 }, (_, index) => index + 1),
-                      scaleType: "band",
-                      valueFormatter: (value) => value.toString(),
-                    },
-                  ]}
-                  yAxis={[
-                    {
-                      id: "eco",
-                      scaleType: "linear",
-                    },
-                    {
-                      id: "pib",
-                      scaleType: "log",
-                    },
-                  ]}
-                >
-                  {/* <BarPlot /> */}
-                  <LinePlot />
-                  <ChartsXAxis
-                    label="Period"
-                    position="bottom"
-                    axisId="years"
-                  />
-                  <ChartsYAxis label="Mood" position="left" axisId="eco" />
-                  {/* <ChartsYAxis label="PIB" position="right" axisId="pib" /> */}
-                </ChartContainer>
-              </ChartWrapper>
-            );
-          })}
+          {/* <Chart /> */}
         </Grid>
         <Container gap={1} xs={12}>
           <Grid
@@ -233,7 +262,7 @@ const Statistics = () => {
               <PieChart
                 series={[
                   {
-                    data,
+                    data: moodPieChartData,
                     highlightScope: { faded: "global", highlighted: "item" },
                     faded: {
                       innerRadius: 30,
@@ -242,7 +271,17 @@ const Statistics = () => {
                       textAlign: "center",
                     },
                   },
+
+
                 ]}
+                slotProps = {{
+                  legend: {
+                    labelStyle: {
+                      fontSize: 14,
+                      fill: '#fff',
+                    },
+                  },
+                }}
                 height={200}
               />
             </Grid>
@@ -259,30 +298,9 @@ const Statistics = () => {
               marginLeft: "1rem",
             }}
           >
-            <Grid item textAlign={"center"}>
-              {/* <h4>Mood Pie</h4> */}
-            </Grid>
-            {/* <Grid
-              item
-              xs={12}
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                margin: "auto",
-                textAlign: "center",
-              }}
-            >
-              <PieChart
-                series={series1}
-                width={400}
-                height={300}
-                slotProps={{
-                  legend: { hidden: true },
-                }}
-                onItemClick={(event, d) => setItemData(d)}
-              />
-            </Grid> */}
-            <Highchart />
+            <Grid item textAlign={"center"}></Grid>
+
+            <Highchart data={categories} />
           </Grid>
         </Container>
       </SubContainer>
