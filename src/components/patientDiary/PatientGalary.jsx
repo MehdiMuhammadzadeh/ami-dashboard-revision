@@ -9,8 +9,9 @@ const PatientGalary = ({ photos }) => {
           <Box
             component="img"
             sx={{
-              height: 75,
-              width: 75,
+              borderRadius:'5px', 
+              height: 400,
+              width: 150,
               maxHeight: { xs: 75, md: 167 },
               maxWidth: { xs: 350, md: 250 },
               marginRight: 1,
@@ -27,9 +28,7 @@ const PatientGalary = ({ photos }) => {
         sx={{
           justifyContent: { xs: "center", md: "flex-start", lg: "flex-start" },
         }}
-      >
-
-      </Grid>
+      ></Grid>
     </Grid>
   );
 };

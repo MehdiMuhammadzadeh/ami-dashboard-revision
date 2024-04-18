@@ -50,7 +50,7 @@ const PatientDiary = () => {
             item
             gap={1}
             height={"83vh !important"}
-  sx={{
+            sx={{
               overflowY: "auto",
               "&::-webkit-scrollbar": {
                 width: "8px",

@@ -25,6 +25,10 @@ const Layout = () => {
   const [userName, setUserName] = React.useState(null);
   const adr = window.location.href;
 
+  const doctor = JSON.parse(localStorage.getItem('doctor'));
+  console.log('Doctor',doctor )
+
+
   React.useEffect(() => {
     const userdata = JSON.parse(localStorage.getItem("userdata"));
     setUserName(userdata);
@@ -77,8 +81,8 @@ const Layout = () => {
           xs={12}
           sx={{ textAlign: "left", paddingLeft: "10px", paddingBottom: "5px" }}
         >
-          <StyledText variant="textTitle">John Dou</StyledText>
-          <StyledText component={"p"}>john.dou@gmail.com</StyledText>
+          <StyledText variant="textTitle">{doctor.f_name} {doctor.l_name}</StyledText>
+          <StyledText component={"p"}>{doctor.username}</StyledText>
         </Grid>
       </Grid>
       <Divider style={{ backgroundColor: "#fff" }} />

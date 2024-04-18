@@ -12,6 +12,8 @@ import Tickets from "../components/tickets/Tickets";
 import PatientDiary from "../components/patientDiary/PatientDiary";
 import Statistics from "../components/statistics/Statistics";
 import Notification from "../components/notification/Notification";
+import Chart from "../pages/Chart";
+import Highchart from "../pages/Highchart";
 
 const Router = () => {
   return (
@@ -26,6 +28,8 @@ const Router = () => {
             <Route path="patient-diary" element={<PatientDiary />} />
             <Route path="statistics" element={<Statistics />} />
             <Route path="notification" element={<Notification />} />
+            <Route path="chart" element={<Chart />} />
+            <Route path="highchart" element={<Highchart />} />
           </Route>
 
           <Route path="/login" element={<Login />} />
