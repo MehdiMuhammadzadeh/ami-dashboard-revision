@@ -9,7 +9,6 @@ import AcUnitSharpIcon from "@mui/icons-material/AcUnitSharp";
 import LocalPizzaSharpIcon from "@mui/icons-material/LocalPizzaSharp";
 import SportsRugbySharpIcon from "@mui/icons-material/SportsRugbySharp";
 import RollerSkatingSharpIcon from "@mui/icons-material/RollerSkatingSharp";
-import turtle from "../../assets/turtle.png";
 import "./PatientsRecord.css";
 
 const PatientRecords = ({
@@ -80,7 +79,7 @@ const PatientRecords = ({
 
             <AcUnitSharpIcon />
             <RollerSkatingSharpIcon style={{ color: "#f5b869" }} />
-            {/* <img  src={turtle} style={{ tintColor:'red'}} alt="fireSpot"/> */}
+         
           </Grid>
           <Grid item component={"div"}>
             <SnoozeSharpIcon style={{ color: "#49e600" }} />

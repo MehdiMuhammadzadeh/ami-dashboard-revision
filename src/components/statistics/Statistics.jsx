@@ -21,6 +21,7 @@ import UndoOutlinedIcon from "@mui/icons-material/UndoOutlined";
 import { StyledText } from "../text/Text.styles";
 import { COLORS } from "../../styles/colors";
 import Highchart from "../../pages/Highchart";
+import { requestPDF } from "../notification/Notification";
 
 // import HighlightedCode from 'docs/src/modules/components/HighlightedCode
 
@@ -80,7 +81,12 @@ const data = [
   { id: 2, value: 20, label: "series C" },
 ];
 
+
 const Statistics = () => {
+
+
+
+
   return (
     <Container>
       <SubContainer xs={12} enableHover={true}>
@@ -108,7 +114,7 @@ const Statistics = () => {
         >
           +
         </StyledText> */}
-        <PictureAsPdfIcon />
+        <PictureAsPdfIcon onClick={requestPDF} />
         
       </Grid>
         <h4>Mood Flow</h4>
