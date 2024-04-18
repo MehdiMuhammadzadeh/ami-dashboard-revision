@@ -19,8 +19,8 @@ const PatientRecordsDescription = ({ propDesDetail }) => {
           <StyledText
             variant="textTitle"
             style={{
-              fontSize: "2rem",
-              color: `${COLORS.danger}`,
+              fontSize: "1rem",
+              color: `${COLORS.primary}`,
             }}
           >
             Please Select a Record from the Patient Records List

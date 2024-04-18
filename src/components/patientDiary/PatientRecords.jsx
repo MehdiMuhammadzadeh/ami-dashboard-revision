@@ -10,8 +10,8 @@ import LocalPizzaSharpIcon from "@mui/icons-material/LocalPizzaSharp";
 import SportsRugbySharpIcon from "@mui/icons-material/SportsRugbySharp";
 import RollerSkatingSharpIcon from "@mui/icons-material/RollerSkatingSharp";
 import turtle from "../../assets/turtle.png";
-import Icon from "@mui/material/Icon";
 import "./PatientsRecord.css";
+
 const PatientRecords = ({
   dayName,
   description,
@@ -43,16 +43,27 @@ const PatientRecords = ({
     console.log("Detaiiiiiiil=>", detail);
   };
 
-
-
   return (
-    <Grid container style={{alignItems:'start'}} className="patients-records">
-      <Grid item xs={12} marginBlock={1} sx={{ display: "flex", justifyContent: "center" }}>
-            <StyledText style={{ fontSize: "0.7rem" }}>
-              {new Date(date.seconds * 1000).toDateString()}
-            </StyledText>
+    <Grid
+      container
+      style={{ alignItems: "start" }}
+      className="patients-records"
+    >
+      <Grid
+        item
+        xs={12}
+        marginBlock={1}
+        sx={{ display: "flex", justifyContent: "center" }}
+      >
+        <StyledText style={{ fontSize: "0.7rem" }}>
+          {new Date(date.seconds * 1000).toDateString()}
+        </StyledText>
       </Grid>
-      <SubContainer enableHover={false} boxShadow={"2px 4px 4px rgba(0,0,0,0.5)"} onclick={() => recordShowDetailHandler(dayName)}>
+      <SubContainer
+        enableHover={false}
+        boxShadow={"2px 4px 4px rgba(0,0,0,0.5)"}
+        onclick={() => recordShowDetailHandler(dayName)}
+      >
         <Grid
           item
           container
@@ -62,11 +73,11 @@ const PatientRecords = ({
             justifyContent: "space-between",
             alignItems: "center",
             cursor: "pointer",
-
           }}
         >
           <Grid item component={"div"}>
             <TagFacesSharpIcon style={{ color: "#98a86a" }} />
+
             <AcUnitSharpIcon />
             <RollerSkatingSharpIcon style={{ color: "#f5b869" }} />
             {/* <img  src={turtle} style={{ tintColor:'red'}} alt="fireSpot"/> */}
@@ -84,30 +95,38 @@ const PatientRecords = ({
           </Grid>
         </Grid>
         <Divider style={{ width: "100%", backgroundColor: "#acacac" }} />
-        <Grid item container component={"div"} xs={12} sx={{ marginBottom: 1 }}>
+        <Grid
+          item
+          container
+          component={"div"}
+          xs={12}
+          sx={{ marginBlock: 1.5 }}
+        >
           <Grid item component={"div"} xs={12}>
             <StyledText variant="textTitle">{dayName}</StyledText>
           </Grid>
-          <Grid item component={"div"} xs={12}>
+          {/* <Grid item component={"div"} xs={12}>
             <StyledText variant="textTitle">{feelingDescription}</StyledText>
-          </Grid>
+          </Grid> */}
         </Grid>
         <Grid item component={"div"} xs={12} sx={{ marginBottom: 1 }}>
           <StyledText>{description}</StyledText>
         </Grid>
-        {photos.map((item, index) => {
-          return (
-            <Grid
-              item
-              key={index}
-              component={"div"}
-              xs={12}
-              sx={{ display: "flex", alignItems: "center" }}
-            >
-              <Image src={item} />
-            </Grid>
-          );
-        })}
+        <Grid item display={"flex"} flexDirection={"row"}>
+          {photos.map((item, index) => {
+            return (
+              <Grid
+                item
+                key={index}
+                component={"div"}
+                xs={12}
+                sx={{ display: "flex", alignItems: "center" }}
+              >
+                <Image src={item} />
+              </Grid>
+            );
+          })}
+        </Grid>
       </SubContainer>
     </Grid>
   );

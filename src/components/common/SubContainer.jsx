@@ -1,6 +1,6 @@
 import { Grid } from "@mui/material";
 import React from "react";
-import {COLORS} from '../../styles/colors'
+import { COLORS } from "../../styles/colors";
 const SubContainer = ({
   children,
   xs,
@@ -10,28 +10,36 @@ const SubContainer = ({
   gap,
   spacing,
   boxShadow,
-  onclick,
+  onClick,
   style,
   enableHover,
-  marginTop
+  marginTop,
+  marginBlock,
+  height,
+  enableOverflow,
+  notifBackground,
+  cleanPadding,
 }) => {
   return (
     <Grid
-      onClick={onclick}
+      onClick={onClick}
       boxShadow={boxShadow}
       spacing={spacing}
       gap={gap}
       marginTop={marginTop}
+      marginBlock={marginBlock}
       item
       container
+      height={height}
       xs={xs}
       sm={sm}
       md={md}
+      overflow={enableOverflow ? "scroll" : "auto"}
       sx={{
-        backgroundColor: `${COLORS.darkCard}`,
+        backgroundColor: notifBackground ? "#080912" : `${COLORS.darkCard}`,
         color: "#fff",
         borderRadius: 2,
-        padding: 2,
+        padding: cleanPadding ? 0 : 2,
         wordBreak: "break-all",
         "&:hover": {
           backgroundColor: enableHover ? `${COLORS.darkCard}` : "#1d1e2f",

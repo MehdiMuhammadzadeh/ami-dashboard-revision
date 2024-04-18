@@ -66,11 +66,11 @@ const Ticket = ({ note, updater }) => {
                 position: "absolute",
                 top: 60,
                 right: 20,
-                color: `${COLORS.info}`,
+                color: `${COLORS.warning}`,
                 cursor: "pointer",
                 "&:hover": {
-                  color: "#f19720",
-                  transition: "all 1s ease",
+                  color: `${COLORS.primary}`,
+                  transition: "all 0.5s ease",
                   transform: "scale(1.1)",
                 },
               }}
