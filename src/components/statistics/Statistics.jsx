@@ -7,6 +7,8 @@ import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import { COLORS } from "../../styles/colors";
 import Highchart from "../../pages/Highchart";
 import { requestPDF } from "../notification/Notification";
+import { activities, edibles, badHabits } from "../../utils/utils";
+import { Icons } from "../../components/fontIcons/index";
 import {
   LineChart,
   Line,
@@ -175,17 +177,13 @@ const Statistics = () => {
           <PictureAsPdfIcon onClick={requestPDF} />
         </Grid>
         <h4>Mood Flow</h4>
-        <Grid
-          item
-          display={"flex"}
-          xs={12}
-          borderRadius={5}
-        >
+        <Grid item display={"flex"} xs={12} borderRadius={5}>
           <LineChart width={1500} height={400} data={chartData}>
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis />
             <YAxis />
-            <Tooltip />
+            <Tooltip contentStyle={{ backgroundColor: "#000" }} />
+
             <Legend />
             <Line
               type="monotone"
@@ -206,7 +204,7 @@ const Statistics = () => {
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis />
             <YAxis />
-            <Tooltip />
+            <Tooltip contentStyle={{ backgroundColor: "#000" }} />
             <Legend />
             <Line
               type="monotone"
@@ -216,12 +214,12 @@ const Statistics = () => {
             />
           </LineChart>
         </Grid>
-        <Grid item display={"flex"} xs={12} >
+        <Grid item display={"flex"} xs={12}>
           <LineChart width={1500} height={400} data={chartData}>
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis />
             <YAxis />
-            <Tooltip />
+            <Tooltip contentStyle={{ backgroundColor: "#000" }} />
             <Legend />
             <Line
               type="monotone"
@@ -238,7 +236,7 @@ const Statistics = () => {
         <Container gap={1} xs={12}>
           <Grid
             item
-            xs={4}
+            xs={6}
             sx={{
               marginTop: "1.2rem",
               backgroundColor: "#27283f",
@@ -255,11 +253,17 @@ const Statistics = () => {
               sx={{
                 display: "flex",
                 justifyContent: "center",
-                margin: "auto",
+                // margin: "auto",
+                height:'full',
                 textAlign: "center",
+                // backgroundColor:'red',
+                // height:'30vh'
               }}
             >
               <PieChart
+                // width={'100%'}
+                // height={'100%'}
+                height={200}
                 series={[
                   {
                     data: moodPieChartData,
@@ -271,25 +275,22 @@ const Statistics = () => {
                       textAlign: "center",
                     },
                   },
-
-
                 ]}
-                slotProps = {{
+                slotProps={{
                   legend: {
                     labelStyle: {
                       fontSize: 14,
-                      fill: '#fff',
+                      fill: "#fff",
                     },
                   },
                 }}
-                height={200}
               />
             </Grid>
           </Grid>
 
           <Grid
             item
-            xs={7}
+            xs={5}
             sx={{
               marginTop: "1.2rem",
               backgroundColor: "#27283f",
@@ -298,9 +299,41 @@ const Statistics = () => {
               marginLeft: "1rem",
             }}
           >
-            <Grid item textAlign={"center"}></Grid>
-
             <Highchart data={categories} />
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            sx={{
+              marginTop: "1.2rem",
+              backgroundColor: "#27283f",
+              paddingBlock: "1rem",
+              borderRadius: "5px",
+              marginLeft: "1rem",
+              // display:'flex'
+            }}
+          >
+            <Grid item xs={12} display={"flex"}>
+              {activities.map((item) => {
+                return (
+                  <Icons iconColor={item.color} name={item.icon} size={28} />
+                );
+              })}
+            </Grid>
+            <Grid item xs={12} display={"flex"}>
+              {badHabits.map((item) => {
+                return (
+                  <Icons iconColor={item.color} name={item.icon} size={28} />
+                );
+              })}
+            </Grid>
+            <Grid item xs={12} display={"flex"}>
+              {edibles.map((item) => {
+                return (
+                  <Icons iconColor={item.color} name={item.icon} size={28} />
+                );
+              })}
+            </Grid>
           </Grid>
         </Container>
       </SubContainer>

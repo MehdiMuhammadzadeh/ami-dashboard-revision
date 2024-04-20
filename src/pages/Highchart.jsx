@@ -15,7 +15,7 @@ const Highchart = ({data}) => {
       borderRadius: 20,
     },
     title: {
-      text: 'Mood Pie',
+      text: 'Activity Pie',
       style: {
         color: `${COLORS.white}`,
       },
