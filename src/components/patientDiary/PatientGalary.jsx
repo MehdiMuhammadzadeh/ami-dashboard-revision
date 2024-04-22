@@ -7,6 +7,7 @@ const PatientGalary = ({ photos }) => {
       {photos.map((item) => {
         return (
           <Box
+          key={item}
             component="img"
             sx={{
               borderRadius:'5px', 

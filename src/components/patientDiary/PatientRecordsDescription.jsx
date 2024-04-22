@@ -23,9 +23,9 @@ const PatientRecordsDescription = ({ propDesDetail }) => {
 
   let feelingIcon = findIcon(propDesDetail.feeling, feelingIcons);
   let weatherIcon = findIcon(propDesDetail.weather, weathers);
-  // let badHabitIcon =record.drugIds.length > 0 ? findIcon(record.drugIds[0], badHabits) : null;
-  // let edibleIcon = record.foodIds.length > 0 ? findIcon(record.foodIds[0], edibles) : null;
-  // let activityIcon =record.activityIds.length > 0? findIcon(record.activityIds[0], activities): null;
+  // let badHabitIcon =propDesDetail.drugIds.length > 0 ? findIcon(record.drugIds[0], badHabits) : null;
+  // let edibleIcon = propDesDetail.foodIds.length > 0 ? findIcon(record.foodIds[0], edibles) : null;
+  // let activityIcon =propDesDetail.activityIds.length > 0? findIcon(record.activityIds[0], activities): null;
 
   function findIcon(id, arr) {
     const foundItem = arr.find((item) => item.id === id);
@@ -68,17 +68,20 @@ const PatientRecordsDescription = ({ propDesDetail }) => {
                 <Grid item sx={{ display: "flex", alignContent: "center" }}>
                   <Grid item component={"div"} display={"flex"}>
                     {feelingIcon ? (
+                     <>
                       <Icons
                         iconColor={feelingIcon.color}
                         name={feelingIcon.icon}
-                        size={28}
+                        size={24}
                       />
+                      <p>{feelingIcon.icon}</p>
+                     </>
                     ) : null}
                     {weatherIcon ? (
                       <Icons
                         iconColor={weatherIcon.color}
                         name={weatherIcon.icon}
-                        size={28}
+                        size={24}
                       />
                     ) : null}
                   </Grid>
@@ -179,7 +182,7 @@ const PatientRecordsDescription = ({ propDesDetail }) => {
                 <Grid
                   item
                   component={"div"}
-                  sx={{ paddingLeft: 2, display: "flex" }}
+                  sx={{ paddingLeft: 2, display: "flex", marginTop:'10px' }}
                   xs={12}
                 >
                   {activities.map((item,index) => {
@@ -192,7 +195,7 @@ const PatientRecordsDescription = ({ propDesDetail }) => {
                             : "gray"
                         }
                         name={item.icon}
-                        size={28}
+                        size={24}
                       />
                     );
                   })}
@@ -216,7 +219,7 @@ const PatientRecordsDescription = ({ propDesDetail }) => {
                             : "gray"
                         }
                         name={item.icon}
-                        size={28}
+                        size={24}
                       />
                     );
                   })}
@@ -243,7 +246,7 @@ const PatientRecordsDescription = ({ propDesDetail }) => {
                             : "gray"
                         }
                         name={item.icon}
-                        size={28}
+                        size={24}
                       />
                     );
                   })}

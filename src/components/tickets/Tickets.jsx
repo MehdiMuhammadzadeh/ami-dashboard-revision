@@ -22,6 +22,7 @@ const Tickets = () => {
 
   let answeredTickets = [];
   let pendingTickets = [];
+
   const getTickets = (username) => {
     answeredTickets = [];
     pendingTickets = [];
@@ -45,10 +46,12 @@ const Tickets = () => {
   };
 
   useEffect(() => {
-    getTickets();
+       getTickets();
+    console.log('pending', pending)
   }, []);
 
   const handelUpdateAnswer = async (id, answer) => {
+    console.log("Ticket Answered");
     try {
       await updateDoc(doc(db, "Tickets", id), {
         answer: answer,
@@ -58,7 +61,36 @@ const Tickets = () => {
     } catch (error) {
       console.log(error);
     }
+
+    sendNotificationToPhone();
   };
+
+  // send this when you answer a ticket - pay attention to the username and doctor
+  // message is as i wrote it, don't change it
+  function sendNotificationToPhone() {
+
+    console.log("Send Notification Called!");
+    const userData = JSON.parse(localStorage.getItem("userdata"));
+    const doctorData = JSON.parse(localStorage.getItem("doctor"));
+
+    console.log(doctorData.patientsUsernames, "Doooctor Data notif");
+    fetch("http://localhost:3000/api/v1/users/notif", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        username: userData.username,
+        title: `Ticket Answered`,
+        message: `Your ticket has been answered by ${doctorData.username}`,
+      }),
+    })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
 
   return (
     <Container>

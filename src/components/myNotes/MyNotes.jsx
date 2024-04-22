@@ -26,7 +26,7 @@ const MyNotes = () => {
   let notes = [];
   const getNotesList = async () => {
     try {
-      // getDocs(query(notesCollectionRef, orderBy("updated_at", "desc")))
+      getDocs(query(notesCollectionRef, orderBy("updated_at", "desc")))
       const noteData = await getDocs(notesCollectionRef);
       const filteredNotes = noteData.docs.map((doc) => {
         if (

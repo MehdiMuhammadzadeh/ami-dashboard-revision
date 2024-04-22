@@ -7,13 +7,7 @@ import {
   addDoc,
 } from "firebase/firestore";
 import { db } from "../../auth/Firebase";
-import {
-  Card,
-  CardActionArea,
-  CardContent,
-  Grid,
-  Typography,
-} from "@mui/material";
+import { Grid } from "@mui/material";
 import { COLORS } from "../../styles/colors";
 import { StyledButton } from "../button/Button.styles";
 import { StyledText } from "../text/Text.styles";
@@ -60,32 +54,13 @@ export const requestPDF = () => {
 
 
 
+
+
 const Notification = () => {
+
+  
   const notifsCollectionRef = collection(db, "Notifs");
-
   const [notifications, setNotifications] = useState([]);
-
-  // send this when you answer a ticket - pay attention to the username and doctor
-  // message is as i wrote it, don't change it
-  const sendNotificationToPhone = () => {
-    const doctorData = JSON.parse(localStorage.getItem("doctor"));
-    const userData = JSON.parse(localStorage.getItem("userdata"));
-    fetch("http://localhost:3000/api/v1/users/notif", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        username: userData.username,
-        title: `Ticket Answered`,
-        message: `Your ticket has been answered by ${doctorData.username}`,
-      }),
-    })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
 
   // get all notifications for the doctor -> only for this doctor - from all patients
   const NotifList = () => {
@@ -110,9 +85,11 @@ const Notification = () => {
     });
   };
 
-  // request a pdf report for the patient -> select the patient from the list and then click on the button -> patient needs to be selected first
+  // request a pdf report for the patient -> select the patient from the list and then click on 
+  // the button ->  patient needs to be selected first
 
-  // search a username and send a connection request to the patient - this connection request will be shown in the patient's notification list
+  // search a username and send a connection request to the patient - this connection request 
+  // will be shown in the patient's notification list
   const connectionRequest = async () => {
     const doctorData = JSON.parse(localStorage.getItem("doctor"));
     try {
@@ -175,8 +152,7 @@ const Notification = () => {
           textAlign: "center",
         }}
       >
-
-        <Grid item xs={12} md={5.5}>
+        {/* <Grid item xs={12} md={5.5}>
           <StyledButton
             variant="radius"
             buttons="buttons"
@@ -184,7 +160,7 @@ const Notification = () => {
           >
             Send Notification
           </StyledButton>
-        </Grid>
+        </Grid> */}
         <Grid item xs={12} md={5.5}>
           <StyledButton
             variant="radius"
