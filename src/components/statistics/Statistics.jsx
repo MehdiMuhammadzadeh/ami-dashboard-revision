@@ -134,12 +134,12 @@ const Statistics = () => {
     setSleepDurations(sleepTimes.reverse());
     // setStateData(counts);
     // setMoodSeries(tempMoodsSeries.reverse());
-    console.log("Sleep", sleepTimes.reverse());
+    // console.log("Sleep", sleepTimes.reverse());
     console.log("Counts", counts);
-    console.log("TempMoodsSeries", tempMoodsSeries.reverse());
-    console.log("chartData", chartData);
-    console.log("MooooodPie", moodPieChart(counts.feeling));
-    console.log("moodPieChartData", moodPieChartData);
+    // console.log("TempMoodsSeries", tempMoodsSeries.reverse());
+    // console.log("chartData", chartData);
+    // console.log("MooooodPie", moodPieChart(counts.feeling));
+    // console.log("moodPieChartData", moodPieChartData);
     return counts;
   };
 

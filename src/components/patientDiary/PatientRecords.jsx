@@ -29,6 +29,8 @@ const PatientRecords = ({ propTest, record , userRecords}) => {
   let edibleIcon = record.foodIds.length > 0 ? findIcon(record.foodIds[0], edibles) : null;
   let activityIcon =record.activityIds.length > 0? findIcon(record.activityIds[0], activities): null;
 
+  console.log(feelingIcon, 'Feeling Icon')
+
   function findIcon(id, arr) {
     const foundItem = arr.find((item) => item.id === id);
     return foundItem ? foundItem : null;
@@ -39,7 +41,6 @@ const PatientRecords = ({ propTest, record , userRecords}) => {
   }, [recordDetail]);
 
   const recordShowDetailHandler = (dayName) => {
-    console.log('hiiiiiiiiiiiiiiiiiiiii')
     const detail = userRecords.find((item) => {
       return item.dayName === dayName;
     });
@@ -77,6 +78,7 @@ const PatientRecords = ({ propTest, record , userRecords}) => {
             justifyContent: "space-between",
             alignItems: "center",
             cursor: "pointer",
+            marginBottom:'10px'
           }}
         >
           <Grid item component={"div"} display={"flex"}>
@@ -84,14 +86,14 @@ const PatientRecords = ({ propTest, record , userRecords}) => {
               <Icons
                 iconColor={feelingIcon.color}
                 name={feelingIcon.icon}
-                size={28}
+                size={24}
               />
             ) : null}
             {weatherIcon ? (
               <Icons
                 iconColor={weatherIcon.color}
                 name={weatherIcon.icon}
-                size={28}
+                size={24}
               />
             ) : null}
           </Grid>
@@ -100,21 +102,21 @@ const PatientRecords = ({ propTest, record , userRecords}) => {
               <Icons
                 iconColor={badHabitIcon.color}
                 name={badHabitIcon.icon}
-                size={28}
+                size={24}
               />
             ) : null}
             {edibleIcon ? (
               <Icons
                 iconColor={edibleIcon.color}
                 name={edibleIcon.icon}
-                size={28}
+                size={24}
               />
             ) : null}
             {activityIcon ? (
               <Icons
                 iconColor={activityIcon.color}
                 name={activityIcon.icon}
-                size={28}
+                size={24}
               />
             ) : null}
           </Grid>
