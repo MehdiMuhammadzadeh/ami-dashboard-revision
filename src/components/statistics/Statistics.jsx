@@ -18,12 +18,16 @@ import {
   Tooltip,
   Legend,
 } from "recharts";
+import { StyledText } from "../text/Text.styles";
+import { count } from "firebase/firestore";
 
 const Statistics = () => {
   const [sleepDurations, setSleepDurations] = useState([]);
   const [chartData, setChartData] = useState([]);
   const [moodPieChartData, setMoodPieChartData] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [countss, setCountss] = useState([]);
+
   const records = JSON.parse(localStorage.getItem("records"));
   const moodScaler = (mood) => {
     if (mood === 1) return 5;
@@ -39,10 +43,8 @@ const Statistics = () => {
     if (mood === 4) return "bad";
     if (mood === 5) return "very bad";
   };
-  console.log("records", records);
 
   const moodPieChart = (data) => {
-    console.log("DAAAAta", data["1"]);
     return [
       { id: 1, color: COLORS.primary, label: "Very Good", value: data["1"] },
       { id: 2, color: COLORS.lime, label: "Good", value: data["2"] },
@@ -52,8 +54,12 @@ const Statistics = () => {
     ];
   };
 
+  const findFromCounts = (id,list) => {
+    return list[id] ? list[id] : 0;
+    // return list[id] ? list[id] : 0;
+  };
+
   const sumValues = (numbers) => {
-    console.log("Numbers", numbers);
     let sum = 0;
     for (const key in numbers) {
       sum += numbers[key];
@@ -109,6 +115,7 @@ const Statistics = () => {
       });
       chartData.push(tempPoint);
     });
+    setCountss(counts);
     setMoodPieChartData(moodPieChart(counts.feeling));
     setCategories([
       {
@@ -134,12 +141,6 @@ const Statistics = () => {
     setSleepDurations(sleepTimes.reverse());
     // setStateData(counts);
     // setMoodSeries(tempMoodsSeries.reverse());
-    // console.log("Sleep", sleepTimes.reverse());
-    console.log("Counts", counts);
-    // console.log("TempMoodsSeries", tempMoodsSeries.reverse());
-    // console.log("chartData", chartData);
-    // console.log("MooooodPie", moodPieChart(counts.feeling));
-    // console.log("moodPieChartData", moodPieChartData);
     return counts;
   };
 
@@ -263,7 +264,7 @@ const Statistics = () => {
               <PieChart
                 // width={'100%'}
                 // height={'100%'}
-                height={200}
+                height={300}
                 series={[
                   {
                     data: moodPieChartData,
@@ -309,28 +310,58 @@ const Statistics = () => {
               backgroundColor: "#27283f",
               paddingBlock: "1rem",
               borderRadius: "5px",
-              marginLeft: "1rem",
+              // marginLeft: "1rem",
               // display:'flex'
             }}
           >
-            <Grid item xs={12} display={"flex"}>
-              {activities.map((item) => {
+            <Grid item xs={12} display={"flex"}
+            style={{justifyContent: "center",
+            alignItems: "center",
+            textAlign: "center",
+            margin: "auto"}}>
+              {activities.map((item, index) => {
                 return (
-                  <Icons iconColor={item.color} name={item.icon} size={28} />
+                  <Grid key={index} style={{ 
+                      margin:5, justifyContent:'center', 
+                      alignItems:'center', borderRadius: 50}} >
+                    <Icons iconColor={item.color} name={item.icon} size={28} />
+                    <StyledText>{item.icon}</StyledText>
+                    <StyledText>{countss.activityIds?findFromCounts(item.id, countss.activityIds):null}</StyledText>
+                  </Grid>
                 );
               })}
             </Grid>
-            <Grid item xs={12} display={"flex"}>
-              {badHabits.map((item) => {
+            <Grid item xs={12} display={"flex"}
+            style={{justifyContent: "center",
+            alignItems: "center",
+            textAlign: "center",
+            margin: "auto"}}>
+              {badHabits.map((item, index) => {
                 return (
-                  <Icons iconColor={item.color} name={item.icon} size={28} />
+                  <Grid key={index} style={{
+                    margin:5, justifyContent:'center', 
+                    alignItems:'center', borderRadius: 50}} >
+                    <Icons iconColor={item.color} name={item.icon} size={28} />
+                    <StyledText>{item.icon}</StyledText>
+                    <StyledText>{countss.drugIds?findFromCounts(item.id, countss.drugIds):null}</StyledText>
+                  </Grid>
                 );
               })}
             </Grid>
-            <Grid item xs={12} display={"flex"}>
-              {edibles.map((item) => {
+            <Grid item xs={12} display={"flex"}
+            style={{justifyContent: "center",
+            alignItems: "center",
+            textAlign: "center",
+            margin: "auto"}}>
+              {edibles.map((item, index) => {
                 return (
-                  <Icons iconColor={item.color} name={item.icon} size={28} />
+                  <Grid key={index} style={{
+                    margin:5, justifyContent:'center', 
+                    alignItems:'center', borderRadius: 50}} >
+                    <Icons iconColor={item.color} name={item.icon} size={28} />
+                    <StyledText>{item.icon}</StyledText>
+                    <StyledText>{countss.foodIds?findFromCounts(item.id, countss.foodIds):null}</StyledText>
+                  </Grid>
                 );
               })}
             </Grid>

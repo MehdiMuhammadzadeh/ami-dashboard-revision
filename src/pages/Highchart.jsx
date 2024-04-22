@@ -2,6 +2,8 @@ import React from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import { COLORS } from '../styles/colors';
+import { Height } from '@mui/icons-material';
+import { sizeWidth, sizing } from '@mui/system';
 
 // Initialize Highcharts modules
 // require('highcharts/modules/exporting')(Highcharts);
@@ -22,6 +24,8 @@ const Highchart = ({data}) => {
     },
     series: [{
       name: 'Categories',
+      sizeWidth: '50%',
+      sizeHeight: '100%',
       innerSize: '50%',
       data:data,
     }],

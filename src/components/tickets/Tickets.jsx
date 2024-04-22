@@ -1,7 +1,7 @@
 // import { Grid } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import Container from "../common/Container";
-import { Grid } from "@mui/material";
+import { Divider, Grid } from "@mui/material";
 import Ticket from "./Ticket";
 import {
   collection,
@@ -26,7 +26,7 @@ const Tickets = () => {
   const getTickets = (username) => {
     answeredTickets = [];
     pendingTickets = [];
-    getDocs(query(ticketsCollectionRef, orderBy("updated_at", "desc")))
+    getDocs(query(ticketsCollectionRef, orderBy("created_at", "desc")))
       .then((data) => {
         data.docs.map((doc, index) => {
           if (doc.data().receiverUsername === doctor.username) {
@@ -46,12 +46,10 @@ const Tickets = () => {
   };
 
   useEffect(() => {
-       getTickets();
-    console.log('pending', pending)
+    getTickets();
   }, []);
 
   const handelUpdateAnswer = async (id, answer) => {
-    console.log("Ticket Answered");
     try {
       await updateDoc(doc(db, "Tickets", id), {
         answer: answer,
@@ -69,11 +67,9 @@ const Tickets = () => {
   // message is as i wrote it, don't change it
   function sendNotificationToPhone() {
 
-    console.log("Send Notification Called!");
     const userData = JSON.parse(localStorage.getItem("userdata"));
     const doctorData = JSON.parse(localStorage.getItem("doctor"));
 
-    console.log(doctorData.patientsUsernames, "Doooctor Data notif");
     fetch("http://localhost:3000/api/v1/users/notif", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -105,6 +101,7 @@ const Tickets = () => {
               );
             })}
           </Grid>
+          <Divider style={{ width: "100%", backgroundColor: "#acacac", height:20, borderRadius:12 }} />
           <Grid item xs={12}>
             {answered.map((note, index) => {
               return <Ticket key={index} note={note} />;

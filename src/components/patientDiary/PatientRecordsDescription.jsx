@@ -19,13 +19,9 @@ import { Icons } from "../fontIcons";
 
 const PatientRecordsDescription = ({ propDesDetail }) => {
   const [detailRecord, setDetailRecord] = useState({});
-  console.log("PropsD", propDesDetail);
 
   let feelingIcon = findIcon(propDesDetail.feeling, feelingIcons);
   let weatherIcon = findIcon(propDesDetail.weather, weathers);
-  // let badHabitIcon =propDesDetail.drugIds.length > 0 ? findIcon(record.drugIds[0], badHabits) : null;
-  // let edibleIcon = propDesDetail.foodIds.length > 0 ? findIcon(record.foodIds[0], edibles) : null;
-  // let activityIcon =propDesDetail.activityIds.length > 0? findIcon(record.activityIds[0], activities): null;
 
   function findIcon(id, arr) {
     const foundItem = arr.find((item) => item.id === id);
@@ -74,7 +70,6 @@ const PatientRecordsDescription = ({ propDesDetail }) => {
                         name={feelingIcon.icon}
                         size={24}
                       />
-                      <p>{feelingIcon.icon}</p>
                      </>
                     ) : null}
                     {weatherIcon ? (
@@ -93,11 +88,10 @@ const PatientRecordsDescription = ({ propDesDetail }) => {
                   </StyledText>
                 </Grid>
                 <Grid item component={"div"}>
-                  <SportsRugbySharpIcon style={{ color: "orange" }} />
-                  <SnoozeSharpIcon style={{ color: "yellow" }} />
+                <StyledText style={{color:'gray'}}>{new Date(propDesDetail.date.seconds * 1000).toDateString()}</StyledText>
                 </Grid>
               </Grid>
-              <Grid
+              {/* <Grid
                 item
                 component={"div"}
                 xs={6}
@@ -105,14 +99,8 @@ const PatientRecordsDescription = ({ propDesDetail }) => {
                 lg={1.5}
                 sx={{ display: "flex", justifyContent: "space-between" }}
               >
-                <Box>
-                  <StyledText>02/10/2023</StyledText>
-                </Box>
-                <Box>
-                  <StyledText>10:22:45</StyledText>
-                </Box>
-              </Grid>
-              <Divider style={{ width: "100%", backgroundColor: "#acacac" }} />
+              </Grid> */}
+              <Divider style={{ width: "100%", backgroundColor: "#acacac", marginTop:5 }} />
             </Grid>
 
             <Grid item container component={"div"} xs={12} gap={3}>
@@ -130,8 +118,9 @@ const PatientRecordsDescription = ({ propDesDetail }) => {
               <Grid item container component={"div"}>
                 <StyledText variant="textTitle">Sleep Time:</StyledText>
                 <Grid item component={"div"} sx={{ paddingLeft: 2 }} xs={12}>
-                  <StyledText component={"p"}>
-                    {propDesDetail.sleepEnd}:{propDesDetail.sleepStart}
+                <StyledText component={"p"}>
+                  {/* item.sleepStart.slice(0,5) + ' - ' + item.sleepEnd.slice(0,5)) */}
+                    From: {propDesDetail.sleepEnd.slice(0,5)} - To: {propDesDetail.sleepStart.slice(0,5)}
                   </StyledText>
                 </Grid>
               </Grid>
@@ -168,21 +157,11 @@ const PatientRecordsDescription = ({ propDesDetail }) => {
               </Grid>
 
               <Grid item container component={"div"}>
-                <StyledText variant="textTitle">Todays Photos:</StyledText>
-                <Grid item component={"div"} sx={{ paddingLeft: 2 }} xs={12}>
-                  <StyledText component={"p"}>
-                    {/* {propDesDetail.photoIds} */}
-                    import photo here later
-                  </StyledText>
-                </Grid>
-              </Grid>
-
-              <Grid item container component={"div"}>
                 <StyledText variant="textTitle">Your Activities:</StyledText>
                 <Grid
                   item
                   component={"div"}
-                  sx={{ paddingLeft: 2, display: "flex", marginTop:'10px' }}
+                  sx={{ display: "flex", marginTop:'10px' }}
                   xs={12}
                 >
                   {activities.map((item,index) => {
@@ -206,7 +185,7 @@ const PatientRecordsDescription = ({ propDesDetail }) => {
                 <Grid
                   item
                   component={"div"}
-                  sx={{ paddingLeft: 2, display: "flex" }}
+                  sx={{  display: "flex" }}
                   xs={12}
                 >
                   {edibles.map((item,index) => {
@@ -233,7 +212,7 @@ const PatientRecordsDescription = ({ propDesDetail }) => {
                 <Grid
                   item
                   component={"div"}
-                  sx={{ paddingLeft: 2, display: "flex" }}
+                  sx={{  display: "flex" }}
                   xs={12}
                 >
                   {badHabits.map((item, index) => {
@@ -250,14 +229,21 @@ const PatientRecordsDescription = ({ propDesDetail }) => {
                       />
                     );
                   })}
-                  {propDesDetail.drugReason}
                 </Grid>
+                <StyledText variant="textTitle" style={{marginRight: 10, color: 'gray'}}>Drug Reason:</StyledText>
+                <StyledText variant="textTitle" style={{marginRight: 10, color: 'white'}}>{propDesDetail.drugReason} </StyledText>
+                  
               </Grid>
               {/* );
         })} */}
             </Grid>
             <Divider style={{ width: "100%" }} />
-            <PatientGalary photos={propDesDetail.photoIds} />
+            <Grid item container component={"div"}>
+                <StyledText variant="textTitle">Todays Photos:</StyledText>
+                <Grid item component={"div"} sx={{ paddingLeft: 2 }} xs={12}>
+                  <PatientGalary photos={propDesDetail.photoIds} />
+                </Grid>
+              </Grid>
           </Grid>
         </SubContainer>
       )}

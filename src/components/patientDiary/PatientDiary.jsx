@@ -11,11 +11,8 @@ const PatientDiary = () => {
   const [singleRecord, setSingleRecord] = useState({});
 
   const propTestHandler = (event) => {
-    console.log('Clicked')
     setSingleRecord(event);
   };
-
-  console.log("Single Record",singleRecord)
 
   return (
     <Container height={"90vh"}>

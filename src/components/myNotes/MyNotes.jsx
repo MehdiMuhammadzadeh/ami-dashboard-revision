@@ -5,7 +5,7 @@ import Container from "../common/Container";
 import { StyledText } from "../text/Text.styles";
 import { StyledTextarea } from "../textarea/Textarea.styles";
 import { StyledButton } from "../button/Button.styles";
-import { addDoc, collection, getDocs } from "firebase/firestore";
+import { addDoc, collection, getDocs, query, orderBy } from "firebase/firestore";
 import { db } from "../../auth/Firebase";
 import { COLORS } from "../../styles/colors";
 
@@ -26,21 +26,22 @@ const MyNotes = () => {
   let notes = [];
   const getNotesList = async () => {
     try {
-      getDocs(query(notesCollectionRef, orderBy("updated_at", "desc")))
-      const noteData = await getDocs(notesCollectionRef);
-      const filteredNotes = noteData.docs.map((doc) => {
-        if (
-          doc.data().doctorsUsername === doctorData.username &&
-          doc.data().patientUsername === userData.username
-        ) {
-          notes.push({ docId: doc.id, ...doc.data() });
-        }
+      getDocs(query(collection(db, "Notes"), orderBy("created_at", "desc"))).then((data) => {
+        data.docs.map((doc) => {
+          if (
+            doc.data().doctorsUsername === doctorData.username &&
+            doc.data().patientUsername === userData.username
+          ) {
+            notes.push({ docId: doc.id, ...doc.data() });
+          }
+        });
+        setMynotes(notes);
       });
-      setMynotes(notes);
-      console.log(notes, "nootes");
     } catch (error) {
       console.log(error);
     }
+       
+      
   };
 
   useEffect(() => {

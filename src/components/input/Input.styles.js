@@ -13,7 +13,7 @@ export const StyledInput = styled.input`
 
   &:focus {
         outline: none;
-        box-shadow: 1px 1px 3px 2px rgba(255,255,255,0.5);
+        box-shadow: 1px 1px 3px 2px rgba(0,186,135,.8);
         transition: all 0.5s ease;
     }
 

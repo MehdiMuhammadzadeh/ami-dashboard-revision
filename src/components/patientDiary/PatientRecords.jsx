@@ -29,8 +29,6 @@ const PatientRecords = ({ propTest, record , userRecords}) => {
   let edibleIcon = record.foodIds.length > 0 ? findIcon(record.foodIds[0], edibles) : null;
   let activityIcon =record.activityIds.length > 0? findIcon(record.activityIds[0], activities): null;
 
-  console.log(feelingIcon, 'Feeling Icon')
-
   function findIcon(id, arr) {
     const foundItem = arr.find((item) => item.id === id);
     return foundItem ? foundItem : null;

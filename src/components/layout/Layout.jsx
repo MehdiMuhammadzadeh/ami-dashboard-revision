@@ -26,7 +26,6 @@ const Layout = () => {
   const adr = window.location.href;
 
   const doctor = JSON.parse(localStorage.getItem('doctor'));
-  console.log('Doctor',doctor )
 
 
   React.useEffect(() => {

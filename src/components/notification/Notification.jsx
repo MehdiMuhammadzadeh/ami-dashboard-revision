@@ -5,6 +5,8 @@ import {
   onSnapshot,
   doc,
   addDoc,
+  orderBy,
+  query,
 } from "firebase/firestore";
 import { db } from "../../auth/Firebase";
 import { Grid } from "@mui/material";
@@ -20,8 +22,6 @@ import Container from "../common/Container";
 export const requestPDF = () => {
   const doctorData = JSON.parse(localStorage.getItem("doctor"));
   const userData = JSON.parse(localStorage.getItem("userdata"));
-
-  console.log(doctorData, userData);
 
   fetch("http://localhost:3000/api/v1/users/report", {
     method: "POST",
@@ -66,7 +66,11 @@ const Notification = () => {
   const NotifList = () => {
     const doctorData = JSON.parse(localStorage.getItem("doctor"));
     // const userData = JSON.parse(localStorage.getItem("userdata"));
-    onSnapshot(collection(db, "Notifs"), (snapshot) => {
+    const q = query(
+      collection(db, "Notifs"),
+      orderBy('created_at','desc') // Change "timestamp" to the field you want to order by
+    );
+    onSnapshot(q, (snapshot) => {
       let tempNotifs = [];
       snapshot.docs.map((doc) => {
         if (doc.data().receiverUsername === doctorData.username) {
@@ -171,7 +175,7 @@ const Notification = () => {
           </StyledButton>
         </Grid>
       </Grid>
-      <Grid item height={"75vh"} style={{ overflow: "scroll" }} xs={12}>
+      <Grid item height={"75vh"} style={{ overflow: "scroll"}} xs={12}>
         {notifications.map((notification) => {
           return (
             <SubContainer
@@ -180,7 +184,7 @@ const Notification = () => {
               enableHover={false}
               xs={12}
               marginBlock={1}
-            >
+              >
               <Container xs={12} md={6}>
                 <Grid item xs={12}>
                   <StyledText

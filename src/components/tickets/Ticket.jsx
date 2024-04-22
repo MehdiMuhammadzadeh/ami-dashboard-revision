@@ -20,7 +20,7 @@ const Ticket = ({ note, updater }) => {
   return (
     <Grid item xs={12} container>
       <Grid item xs={12} sx={{ marginBlock: 2 }}>
-        <StyledText>02/10/2023</StyledText>
+        <StyledText>{new Date(note.created_at).toDateString().slice(0, 10)}</StyledText>
       </Grid>
       <SubContainer xs={12}>
         <Grid

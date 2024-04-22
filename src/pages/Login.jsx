@@ -21,10 +21,7 @@ const Login = () => {
   });
 
   const handleInput = (event) => {
-    // console.log("Emaillll===>", values.email.value, values.password.value);
     if (values.email.value === "") {
-      // console.log(email_pattern.test(values.email.value));
-      // console.log("Iffff");
       const newObject = {
         ...values,
         [event.target.name]: { value: event.target.value, isValid: true },
@@ -33,7 +30,6 @@ const Login = () => {
       setErrorMessage("Email is incorrect:(");
       // return;
     } else {
-      // console.log('Elseeeeeeeeee')
       const newObject = {
         ...values,
         [event.target.name]: { value: event.target.value, isValid: true },

@@ -47,7 +47,6 @@ const Dashboard = () => {
   }, []);
 
   const getUsersRecords = (item) => {
-    console.log("31923148452184694691264789");
     const itemUserData = localStorage.setItem("userdata", JSON.stringify(item));
 
     let userRecords = [];
@@ -86,7 +85,7 @@ const Dashboard = () => {
             >
               <Box
                 width="100%"
-                height="250px"
+                height="200px"
                 borderRadius={2}
                 sx={{
                   boxShadow: "2px 2px 5px rgba(0,0,0,0.5)",
@@ -122,11 +121,8 @@ const Dashboard = () => {
                         {/* <Box component={"div"} style={{ color: "#bbbbbb" }}>
                           Last Entry:
                         </Box> */}
-                        <StyledText>Last Entry:</StyledText>
-                        <Box component={"div"} style={{ color: "#fff" }}>
-                          22/02/2024
-                          {/* <SimpleDateTime dateFormat="DMY" dateSeparator="/"  timeSeparator=":">{item}</SimpleDateTime> */}
-                        </Box>
+                        <StyledText style={{color:'gray', fontSize: 14, marginRight: 2}}>Last Entry:</StyledText>
+                        <StyledText style={{color:'gray', fontSize: 14}}>22/02/2024</StyledText>
                       </Grid>
                     </Grid>
                   </Grid>
