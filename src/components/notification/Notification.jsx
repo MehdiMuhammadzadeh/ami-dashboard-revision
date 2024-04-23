@@ -15,7 +15,7 @@ import { StyledButton } from "../button/Button.styles";
 import { StyledText } from "../text/Text.styles";
 import SubContainer from "../common/SubContainer";
 import Container from "../common/Container";
-
+import { StyledInput } from "../input/Input.styles";
 
 
 
@@ -58,7 +58,7 @@ export const requestPDF = () => {
 
 const Notification = () => {
 
-  
+  const [conectedUser, setConectedUserReq] = useState("");
   const notifsCollectionRef = collection(db, "Notifs");
   const [notifications, setNotifications] = useState([]);
 
@@ -104,7 +104,7 @@ const Notification = () => {
         updated_at: new Date().toISOString(),
         status: "unread",
         senderUsername: doctorData.username,
-        receiverUsername: "Notif@gmail.com", // this is the patient's username that you entered or searched
+        receiverUsername: conectedUser, // this is the patient's username that you entered or searched
         senderId: doctorData.docId,
         receiverId: "", // this is the patient's id that you entered or searched
       });
@@ -114,7 +114,7 @@ const Notification = () => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          username: "Notif@gmail.com", // this is the patient's username that you entered or searched
+          username: conectedUser, // this is the patient's username that you entered or searched
           title: `Connection Request`,
           message: `New Connectrion Request From ${doctorData.username}`,
         }),
@@ -165,15 +165,33 @@ const Notification = () => {
             Send Notification
           </StyledButton>
         </Grid> */}
-        <Grid item xs={12} md={5.5}>
-          <StyledButton
-            variant="radius"
-            buttons="buttons"
-            onClick={connectionRequest}
+      <Grid
+            item
+            container
+            xs={12}
+            gap={1}
+            textAlign={"center"}
+            sx={{
+              display: "flex",
+              justifyContent:"flex-end",
+            }}
           >
-            Connection Request
+            <Grid item xs={12} md={4}>
+              <StyledInput
+                onChange={(event) => {
+                  setConectedUserReq(event.target.value);
+                }}
+                placeholder={"Patient Email"}
+                value={conectedUser}
+                variant={"input-height"}
+              />
+            </Grid>
+        <Grid item xs={12} md={2}>
+          <StyledButton onClick={connectionRequest} variant={"radius"} buttons="buttons">
+            Connection Patients
           </StyledButton>
         </Grid>
+          </Grid>
       </Grid>
       <Grid item height={"75vh"} style={{ overflow: "scroll"}} xs={12}>
         {notifications.map((notification) => {
