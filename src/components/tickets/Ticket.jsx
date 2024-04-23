@@ -12,7 +12,7 @@ const Ticket = ({ note, updater }) => {
 
   const onSubmitHandler = (docId) => {
     if (answer.trim() !== "") {
-      updater(docId, answer);
+      updater(docId, answer, note.senderUsername);
       setAnswer("");
     }
   };
