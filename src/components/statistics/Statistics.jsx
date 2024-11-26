@@ -54,7 +54,7 @@ const Statistics = () => {
     ];
   };
 
-  const findFromCounts = (id,list) => {
+  const findFromCounts = (id, list) => {
     return list[id] ? list[id] : 0;
     // return list[id] ? list[id] : 0;
   };
@@ -68,6 +68,8 @@ const Statistics = () => {
   };
 
   const extractStats = (data) => {
+    if (data == null || data.length == 0)
+      return
     let chartData = [];
     let sleepTimes = [];
     let tempMoodsSeries = [];
@@ -168,7 +170,7 @@ const Statistics = () => {
             boxShadow: "2px 2px 5px rgba(0,0,0,0.5)",
             cursor: "pointer",
           }}
-          // onClick={handleAddNoteBtn}
+        // onClick={handleAddNoteBtn}
         >
           {/* <StyledText
           style={{ fontSize: "1.5rem", color: "#000", cursor: "pointer" }}
@@ -255,7 +257,7 @@ const Statistics = () => {
                 display: "flex",
                 justifyContent: "center",
                 // margin: "auto",
-                height:'full',
+                height: 'full',
                 textAlign: "center",
                 // backgroundColor:'red',
                 // height:'30vh'
@@ -315,52 +317,61 @@ const Statistics = () => {
             }}
           >
             <Grid item xs={12} display={"flex"}
-            style={{justifyContent: "center",
-            alignItems: "center",
-            textAlign: "center",
-            margin: "auto"}}>
+              style={{
+                justifyContent: "center",
+                alignItems: "center",
+                textAlign: "center",
+                margin: "auto"
+              }}>
               {activities.map((item, index) => {
                 return (
-                  <Grid key={index} style={{ 
-                      margin:5, justifyContent:'center', 
-                      alignItems:'center', borderRadius: 50}} >
+                  <Grid key={index} style={{
+                    margin: 5, justifyContent: 'center',
+                    alignItems: 'center', borderRadius: 50
+                  }} >
                     <Icons iconColor={item.color} name={item.icon} size={28} />
                     <StyledText>{item.icon}</StyledText>
-                    <StyledText>{countss.activityIds?findFromCounts(item.id, countss.activityIds):null}</StyledText>
+                    <StyledText>{countss.activityIds ? findFromCounts(item.id, countss.activityIds) : null}</StyledText>
                   </Grid>
                 );
               })}
             </Grid>
             <Grid item xs={12} display={"flex"}
-            style={{justifyContent: "center",
-            alignItems: "center",
-            textAlign: "center",
-            margin: "auto"}}>
+              style={{
+                justifyContent: "center",
+                alignItems: "center",
+                textAlign: "center",
+                margin: "auto"
+              }}>
               {badHabits.map((item, index) => {
                 return (
                   <Grid key={index} style={{
-                    margin:5, justifyContent:'center', 
-                    alignItems:'center', borderRadius: 50}} >
+                    margin: 5, justifyContent: 'center',
+                    alignItems: 'center', borderRadius: 50
+                  }} >
                     <Icons iconColor={item.color} name={item.icon} size={28} />
                     <StyledText>{item.icon}</StyledText>
-                    <StyledText>{countss.drugIds?findFromCounts(item.id, countss.drugIds):null}</StyledText>
+                    <StyledText>{countss.drugIds ? findFromCounts(item.id, countss.drugIds) : null}</StyledText>
                   </Grid>
                 );
               })}
             </Grid>
             <Grid item xs={12} display={"flex"}
-            style={{justifyContent: "center",
-            alignItems: "center",
-            textAlign: "center",
-            margin: "auto"}}>
+              style={{
+                justifyContent: "center",
+                alignItems: "center",
+                textAlign: "center",
+                margin: "auto"
+              }}>
               {edibles.map((item, index) => {
                 return (
                   <Grid key={index} style={{
-                    margin:5, justifyContent:'center', 
-                    alignItems:'center', borderRadius: 50}} >
+                    margin: 5, justifyContent: 'center',
+                    alignItems: 'center', borderRadius: 50
+                  }} >
                     <Icons iconColor={item.color} name={item.icon} size={28} />
                     <StyledText>{item.icon}</StyledText>
-                    <StyledText>{countss.foodIds?findFromCounts(item.id, countss.foodIds):null}</StyledText>
+                    <StyledText>{countss.foodIds ? findFromCounts(item.id, countss.foodIds) : null}</StyledText>
                   </Grid>
                 );
               })}

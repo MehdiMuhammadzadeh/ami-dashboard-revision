@@ -67,11 +67,11 @@ export const badHabits = [
     icon: "marijuana",
     color: COLORS.success,
   },
-  {
-    id: 3,
-    icon: "porn",
-    color: COLORS.danger,
-  },
+  // {
+  //   id: 3,
+  //   icon: "porn",
+  //   color: COLORS.danger,
+  // },
   {
     id: 4,
     icon: "cigar",

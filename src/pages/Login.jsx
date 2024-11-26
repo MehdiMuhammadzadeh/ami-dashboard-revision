@@ -16,8 +16,8 @@ const Login = () => {
   const email_pattern = /^[\w.%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   const password_pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]{5,}$/;
   const [values, setValues] = useState({
-    email: { value: "", isValid: true },
-    password: { value: "", isValid: true },
+    email: { value: "doctor@gmail.com", isValid: true },
+    password: { value: "123abc", isValid: true },
   });
 
   const handleInput = (event) => {
@@ -78,7 +78,7 @@ const Login = () => {
     signInWithEmailAndPassword(auth, values.email.value, values.password.value)
       .then((userCredential) => {
         const user = userCredential.user;
-        console.log("UserCredintional", user.email);
+        console.log("UserCredintional -----> ", user.email);
         navigate("/dashboard");
       })
       .catch((error) => {

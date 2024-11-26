@@ -188,7 +188,7 @@ const Notification = () => {
             </Grid>
         <Grid item xs={12} md={2}>
           <StyledButton onClick={connectionRequest} variant={"radius"} buttons="buttons">
-            Connection Patients
+            Connection Request
           </StyledButton>
         </Grid>
           </Grid>
